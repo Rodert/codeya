@@ -1,0 +1,77 @@
+<view class="page">
+  <view class="question-card">
+    <view class="question-header">
+      <text class="question-title">{{question.title}}</text>
+      <view class="question-meta">
+        <text class="difficulty difficulty-{{question.difficulty === '简单' ? 'easy' : question.difficulty === '中等' ? 'medium' : 'hard'}}">
+          {{question.difficulty}}
+        </text>
+        <text class="view-count">{{question.viewCount}}次学习</text>
+      </view>
+    </view>
+
+    <view class="question-content">
+      <rich-text nodes="{{question.description}}" class="rich-content"></rich-text>
+    </view>
+
+    <view class="solution-section">
+      <view class="solution-header" bindtap="toggleAnswer">
+        <text class="solution-title">解题思路</text>
+        <text class="toggle-icon">{{showAnswer ? '收起' : '展开'}}</text>
+      </view>
+      
+      <view class="solution-content" wx:if="{{showAnswer}}">
+        <block wx:for="{{question.solution}}" wx:key="index">
+          <view class="solution-item">
+            <!-- 文本内容 -->
+            <view class="solution-text" wx:if="{{item.type === 'text'}}">
+              <text>{{item.content}}</text>
+            </view>
+            
+            <!-- 图片内容 -->
+            <view class="solution-image" wx:if="{{item.type === 'image'}}">
+              <image src="{{item.url}}" mode="widthFix" />
+              <text class="image-description">{{item.description}}</text>
+            </view>
+          </view>
+        </block>
+
+        <view class="points-section" wx:if="{{!hasEarnedPoints}}">
+          <text class="points-text">+{{question.points}} 积分</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="code-section">
+      <view class="code-header">代码实现</view>
+      <view class="code-block">
+        <rich-text nodes="{{question.code}}" class="code-content"></rich-text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Navigation -->
+  <view class="navigation">
+    <view class="nav-button prev {{!prevQuestion ? 'disabled' : ''}}" 
+          bindtap="goToPrev" 
+          wx:if="{{prevQuestion}}">
+      <view class="nav-icon">←</view>
+      <view class="nav-info">
+        <view class="nav-label">上一题</view>
+        <view class="nav-title">{{prevQuestion.title}}</view>
+      </view>
+    </view>
+    <view class="nav-placeholder" wx:else></view>
+
+    <view class="nav-button next {{!nextQuestion ? 'disabled' : ''}}" 
+          bindtap="goToNext" 
+          wx:if="{{nextQuestion}}">
+      <view class="nav-info">
+        <view class="nav-label">下一题</view>
+        <view class="nav-title">{{nextQuestion.title}}</view>
+      </view>
+      <view class="nav-icon">→</view>
+    </view>
+    <view class="nav-placeholder" wx:else></view>
+  </view>
+</view>
