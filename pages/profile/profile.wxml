@@ -40,6 +40,6 @@
 
   <!-- 版本信息 -->
   <view class="version-info">
-    <text>当前版本 1.0.7</text>
+    <text>当前版本 1.0.8</text>
   </view>
 </view>
