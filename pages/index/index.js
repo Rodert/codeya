@@ -21,6 +21,12 @@ Page({
   onLoad: function() {
     this.loadCategories();
     this.loadRecentQuestions();
+    
+    // 分享朋友圈设置
+    wx.showShareMenu({
+          withShareTicket:true,
+          menus:['shareAppMessage','shareTimeline']
+      })
   },
 
   loadCategories: function() {

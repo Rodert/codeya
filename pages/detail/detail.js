@@ -13,6 +13,12 @@ Page({
   },
 
   onLoad: function(options) {
+    // 分享朋友圈设置
+    wx.showShareMenu({
+        withShareTicket:true,
+        menus:['shareAppMessage','shareTimeline']
+    })
+
     console.log('Detail page options:', options);
     const categoryKey = options.categoryKey;
     const questionId = parseInt(options.questionId);
