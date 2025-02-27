@@ -2,11 +2,17 @@
   <!-- 用户信息区域 -->
   <view class="user-info-section">
     <view class="avatar-wrapper">
-      <open-data type="userAvatarUrl" class="avatar"></open-data>
+      <button wx:if="{{!hasUserInfo}}" class="avatar-button" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+        <image src="/images/default-avatar.png" class="avatar"></image>
+      </button>
+      <open-data wx:else type="userAvatarUrl" class="avatar"></open-data>
     </view>
     <view class="user-info">
-      <open-data type="userNickName" class="nickname"></open-data>
-      <text class="sign">开启你的面试之旅</text>
+      <button wx:if="{{!hasUserInfo}}" class="login-button" open-type="getUserInfo" bindgetuserinfo="getUserInfo">点击登录</button>
+      <block wx:else>
+        <open-data type="userNickName" class="nickname"></open-data>
+        <text class="sign">开启你的面试之旅</text>
+      </block>
     </view>
   </view>
 
