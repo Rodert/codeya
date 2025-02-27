@@ -6,7 +6,7 @@ module.exports = {
       key: "mysql",
       description: "MySQL数据库相关面试题",
       questionCount: 2,
-      icon: "/images/mysql.png"
+      icon: "/images/list/mysql.png"
     },
     {
       id: 2,
@@ -14,7 +14,7 @@ module.exports = {
       key: "java",
       description: "Java编程语言相关面试题",
       questionCount: 2,
-      icon: "/images/java.png"
+      icon: "/images/list/java.png"
     },
     {
       id: 3,
@@ -22,7 +22,7 @@ module.exports = {
       key: "ds",
       description: "数据结构与算法相关面试题",
       questionCount: 1,
-      icon: "/images/data-structure.png"
+      icon: "/images/list/data-structure.png"
     },
     {
       id: 4,
@@ -30,7 +30,7 @@ module.exports = {
       key: "redis",
       description: "Redis缓存数据库相关面试题",
       questionCount: 1,
-      icon: "/images/redis.png"
+      icon: "/images/list/redis.png"
     },
     {
       id: 5,
@@ -38,7 +38,15 @@ module.exports = {
       key: "python",
       description: "Python编程语言相关面试题",
       questionCount: 1,
-      icon: "/images/python.png"
+      icon: "/images/list/python.png"
+    },
+    {
+      id: 6,
+      name: "GoLang",
+      key: "golang",
+      description: "GoLang编程语言相关面试题",
+      questionCount: 10,
+      icon: "/images/list/golang.png"
     }
   ]
 }

@@ -277,6 +277,59 @@ module.exports = {
         code: `# 装饰器定义\ndef log_execution_time(func):\n    def wrapper(*args, **kwargs):\n        import time\n        start = time.time()\n        result = func(*args, **kwargs)\n        end = time.time()\n        print(f\"{func.__name__} 执行时间: {end - start}秒\")\n        return result\n    return wrapper\n\n# 使用装饰器\n@log_execution_time\ndef calculate_sum(n):\n    return sum(range(n))\n\n# 调用函数\nresult = calculate_sum(1000000)\n# 输出：calculate_sum 执行时间: 0.1234秒`,
         tags: ["装饰器", "函数式编程", "性能统计"]
       }
+    ],
+    golang: [
+      {
+        id: 1,
+        categoryId: 6,
+        title: "GoLang Map 并发",
+        difficulty: "中等",
+        viewCount: 500,
+        description: "GoLang Map 是否并发安全?",
+        solution: [
+          {
+            type: "text",
+            content: "Go 语言中的原生 `map` 并不是并发安全的。在多 goroutine 并发读写同一个 `map` 时，可能会导致数据竞争（race condition），从而引发程序崩溃。"
+          },
+          {
+            type: "text",
+            content: "可以用 `sync.Map`"
+          },
+          {
+            type: "text",
+            content: "Go标准库中的 `sync.Map` 是一个并发安全的map实现。它内部通过读写分离的策略来减少锁争用，适用于读多写少的场景。"
+          }
+        ],
+        code: `var m sync.Map
+m.Store("key", 42) // 存储键值对
+value, ok := m.Load("key") // 获取值
+m.Delete("key") // 删除键值对`,
+        tags: ["golang", "map", "并发"]
+      },
+      {
+        id: 2,
+        categoryId: 6,
+        title: "GoLang 协程泄漏",
+        difficulty: "中等",
+        viewCount: 500,
+        description: "协程泄漏的原因可能是什么？",
+        solution: [
+          {
+            type: "text",
+            content: "在 Go 语言中，协程泄漏（Goroutine Leak）是指启动的协程无法正常退出，持续占用资源，最终可能导致程序崩溃或系统资源耗尽。"
+          },
+          {
+            type: "text",
+            content: "例如："
+          },
+          {
+            type: "text",
+            content: "协程中存在无限循环，且没有退出条件。多个协程之间存在死锁，导致无法正常退出。总的来说就是协程没有释放、不受控制。"
+          }
+        ],
+        code: `无`,
+        tags: ["golang", "Goroutine", "协程"]
+      }
     ]
   }
 }
