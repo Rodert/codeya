@@ -328,6 +328,21 @@
   color: #999;
 }
 
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+
+.tag {
+  background-color: #f0f2f5;
+  color: #666;
+  padding: 6rpx 20rpx;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
