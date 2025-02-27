@@ -343,6 +343,44 @@
   font-size: 24rpx;
 }
 
+.bottom-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  flex: 1;
+}
+
+.tag {
+  background-color: #f0f2f5;
+  color: #666;
+  padding: 6rpx 20rpx;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+}
+
+.share-btn {
+  margin-left: 20rpx;
+  padding: 0;
+  width: 48rpx !important;
+  height: 48rpx !important;
+  min-height: 0;
+  background: transparent !important;
+  color: #666;
+  font-size: 32rpx;
+  line-height: 48rpx !important;
+}
+
+.share-btn::after {
+  border: none;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

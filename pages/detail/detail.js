@@ -118,5 +118,12 @@ Page({
         url: '/pages/detail/detail?categoryKey=' + this.data.categoryKey + '&questionId=' + this.data.nextQuestion.id
       });
     }
+  },
+
+  onShareTimeline: function() {
+    return {
+      title: this.data.question.title,
+      query: `categoryKey=${this.data.categoryKey}&questionId=${this.data.questionId}`
+    }
   }
 });

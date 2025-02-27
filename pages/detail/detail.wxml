@@ -12,8 +12,11 @@
 
     <view class="question-content">
       <rich-text nodes="{{question.description}}" class="rich-content"></rich-text>
-      <view class="tags-container" wx:if="{{question.tags && question.tags.length > 0}}">
-        <view class="tag" wx:for="{{question.tags}}" wx:key="index">{{item}}</view>
+      <view class="bottom-actions">
+        <view class="tags-container" wx:if="{{question.tags && question.tags.length > 0}}">
+          <view class="tag" wx:for="{{question.tags}}" wx:key="index">{{item}}</view>
+        </view>
+        <button class="share-btn" open-type="share">↗</button>
       </view>
     </view>
 
