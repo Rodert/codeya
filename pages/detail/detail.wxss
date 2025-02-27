@@ -116,6 +116,26 @@
   font-size: 28rpx;
 }
 
+.points-info {
+  padding: 10px 15px;
+  background: #f8f8f8;
+  margin: 10px 0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.total-points {
+  color: #333;
+  font-weight: bold;
+}
+
+.potential-points {
+  color: #4CAF50;
+  font-size: 14px;
+}
+
 .nav-bar {
   position: fixed;
   bottom: 0;

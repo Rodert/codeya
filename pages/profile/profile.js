@@ -1,4 +1,5 @@
 const storage = require('../../utils/storage.js');
+const pointsDb = require('../../data/points.js');
 
 Page({
   data: {
@@ -38,7 +39,11 @@ Page({
 
   loadStatistics() {
     // 从本地存储获取统计数据
-    const stats = storage.getStatistics();
+    const stats = storage.getStatistics() || {};
+    
+    // 获取最新的积分数据
+    stats.points = pointsDb.totalPoints || 0;
+    
     this.setData({
       statistics: stats
     });
@@ -49,26 +54,27 @@ Page({
     switch (functionId) {
       case 'history':
         wx.showToast({
-          title: '正在开发中...',
+          title: '功能开发中',
           icon: 'none'
         });
         break;
       case 'points':
+        // 显示积分详情
         wx.showModal({
-          title: '我的积分',
-          content: `当前积分：${this.data.statistics.points}\n每答对一题可获得10积分`,
+          title: '积分详情',
+          content: `当前积分：${this.data.statistics.points}\n\n获取积分方式：\n- 简单题：1分\n- 中等题：2分\n- 困难题：3分`,
           showCancel: false
         });
         break;
       case 'wrong':
         wx.showToast({
-          title: '正在开发中...',
+          title: '功能开发中',
           icon: 'none'
         });
         break;
       case 'feedback':
         wx.showToast({
-          title: '正在开发中...',
+          title: '功能开发中',
           icon: 'none'
         });
         break;

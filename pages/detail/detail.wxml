@@ -54,6 +54,13 @@
         <rich-text nodes="{{question.code}}" class="code-content"></rich-text>
       </view>
     </view>
+
+    <view class="points-info">
+      <text class="total-points">当前积分: {{points}}</text>
+      <text wx:if="{{!hasEarnedPoints && !showAnswer}}" class="potential-points">
+        查看答案可获得 {{question.difficulty === '简单' ? 1 : (question.difficulty === '中等' ? 2 : 3)}} 积分
+      </text>
+    </view>
   </view>
 
   <!-- Navigation -->
