@@ -3,7 +3,7 @@
   <view class="user-info-section">
     <view class="avatar-wrapper">
       <button wx:if="{{!hasUserInfo}}" class="avatar-button" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
-        <image src="/images/default-avatar.png" class="avatar"></image>
+        <image src="/images/list/redis.png" class="avatar"></image>
       </button>
       <open-data wx:else type="userAvatarUrl" class="avatar"></open-data>
     </view>

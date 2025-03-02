@@ -274,7 +274,7 @@ module.exports = {
         "viewCount": 1450,
         "description": "分析Redis事务与数据库ACID特性的异同",
         "code": "",
-        "md": "# Redis事务\n\n## 事务执行\n```redis\nMULTI\nSET key1 100\nINCR key1\nEXEC  -- 输出：QUEUED, QUEUED, [OK, 101]\n```\n\n## ACID分析\n| 特性   | Redis实现                      | 传统数据库               |\n|--------|--------------------------------|--------------------------|\n| 原子性 | 命令队列整体执行               | 事务回滚保证             |\n| 一致性 | 无约束（依赖开发者）           | 外键、约束等机制         |\n| 隔离性 | 单线程执行无并发问题           | 多隔离级别               |\n| 持久性 | 依赖持久化配置                 | 事务日志保证             |\n\n## WATCH命令\n```redis\nWATCH balance\nbalance = GET balance\nif balance > 100:\n    MULTI\n    DECRBY balance 100\n    EXEC\nELSE:\n    UNWATCH\n```\n![事务流程图](https://example.com/redis-transaction.png)",
+        "md": "# Redis事务\n\n## 事务执行\n```redis\nMULTI\nSET key1 100\nINCR key1\nEXEC  -- 输出：QUEUED, QUEUED, [OK, 101]\n```\n\n## ACID分析\n| 特性   | Redis实现                      | 传统数据库               |\n|--------|--------------------------------|--------------------------|\n| 原子性 | 命令队列整体执行               | 事务回滚保证             |\n| 一致性 | 无约束（依赖开发者）           | 外键、约束等机制         |\n| 隔离性 | 单线程执行无并发问题           | 多隔离级别               |\n| 持久性 | 依赖持久化配置                 | 事务日志保证             |\n\n## WATCH命令\n```redis\nWATCH balance\nbalance = GET balance\nif balance > 100:\n    MULTI\n    DECRBY balance 100\n    EXEC\nELSE:\n    UNWATCH\n```\n ![事务流程图](https://img-blog.csdnimg.cn/9ea3f03626974923b9849b77e1bec51d.png)",
         "tags": ["事务", "ACID"]
       },
       {
