@@ -20,5 +20,8 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
-  }
+  },
+
+  // towxml markdown 转换工具
+  towxml: require('/towxml/index')
 })

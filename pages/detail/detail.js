@@ -9,7 +9,13 @@ Page({
     nextQuestion: null,
     showAnswer: false,
     points: 0,
-    hasEarnedPoints: false
+    hasEarnedPoints: false,
+    md: {} // md 内容，格式示例：
+    // ## 渲染 code 方法
+    //
+    // ```html
+    // <div>示例代码</div>
+    // ```
   },
 
   onLoad: function(options) {
@@ -22,7 +28,7 @@ Page({
     console.log('Detail page options:', options);
     const categoryKey = options.categoryKey;
     const questionId = parseInt(options.questionId);
-    
+
     this.setData({ 
       categoryKey: categoryKey,
       questionId: questionId,
@@ -65,6 +71,32 @@ Page({
     const hasEarnedPoints = db.getQuestionPoints(this.data.questionId) > 0;
 
     console.log('Current question:', currentQuestion); // 添加日志
+
+    // 使用 towxml 转换 markdown 内容
+    const app = getApp();
+    try {
+      if (currentQuestion && currentQuestion.md) {
+        console.log('Converting markdown content...');
+        currentQuestion.md = app.towxml(currentQuestion.md, 'markdown', {
+          theme: 'light',
+          events: {
+            tap: (e) => {
+              // 处理点击事件
+              console.log('Tapped element:', e);
+            }
+          }
+        });
+        console.log('Markdown conversion successful');
+      } else {
+        console.warn('No markdown content found for question:', this.data.questionId);
+      }
+    } catch (error) {
+      console.error('Error converting markdown:', error);
+      wx.showToast({
+        title: '内容加载失败',
+        icon: 'none'
+      });
+    }
 
     this.setData({
       question: currentQuestion,
