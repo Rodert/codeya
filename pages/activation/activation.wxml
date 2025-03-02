@@ -1,0 +1,22 @@
+<view class="container">
+  <!-- 轮播图部分 -->
+  <swiper class="banner" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{500}}">
+    <swiper-item wx:for="{{bannerList}}" wx:key="index">
+      <image src="{{item}}" mode="aspectFill" class="banner-image"></image>
+    </swiper-item>
+  </swiper>
+
+  <!-- 描述文本部分 -->
+  <view class="description">
+    <text>{{description}}</text>
+  </view>
+
+  <!-- 激活码部分 -->
+  <view class="activation-code-section">
+    <view class="code-title">激活码</view>
+    <view class="code-container" bindtap="copyActivationCode">
+      <text class="code-text">{{activationCode}}</text>
+      <view class="copy-tip">点击复制</view>
+    </view>
+  </view>
+</view>

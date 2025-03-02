@@ -1,0 +1,62 @@
+.container {
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.banner {
+  width: 100%;
+  height: 400rpx;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+}
+
+.description {
+  padding: 30rpx;
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+.activation-code-section {
+  margin: 30rpx;
+  padding: 30rpx;
+  background-color: #f8f8f8;
+  border-radius: 16rpx;
+}
+
+.code-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.code-container {
+  position: relative;
+  padding: 30rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+  border: 2rpx solid #e0e0e0;
+}
+
+.code-text {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  word-break: break-all;
+  line-height: 1.6;
+}
+
+.copy-tip {
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  font-size: 24rpx;
+  color: #1296db;
+  padding: 8rpx 16rpx;
+  background-color: rgba(18, 150, 219, 0.1);
+  border-radius: 8rpx;
+}

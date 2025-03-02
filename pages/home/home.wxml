@@ -14,5 +14,10 @@
       <image class="nav-icon" src="/images/icon_me.png" mode="aspectFit"></image>
       <text class="nav-text">我的</text>
     </navigator>
+
+    <navigator url="/pages/activation/activation" class="nav-button">
+      <image class="nav-icon" src="/images/activation/guantou.png" mode="aspectFit"></image>
+      <text class="nav-text">激活码领取</text>
+    </navigator>
   </view>
 </view>

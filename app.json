@@ -3,7 +3,8 @@
     "pages/home/home",
     "pages/index/index",
     "pages/profile/profile",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/activation/activation"
   ],
   "window": {
     "backgroundTextStyle": "light",
