@@ -5,7 +5,7 @@ module.exports = {
       name: "MySQL",
       key: "mysql",
       description: "MySQL数据库相关面试题",
-      questionCount: 99,
+      questionCount: 20,
       icon: "/images/list/mysql.png"
     },
     {
@@ -29,15 +29,15 @@ module.exports = {
       name: "Redis",
       key: "redis",
       description: "Redis缓存数据库相关面试题",
-      questionCount: 99,
-      icon: "/images/home.png"
+      questionCount: 15,
+      icon: "/images/list/redis.png"
     },
     {
       id: 5,
       name: "Python",
       key: "python",
       description: "Python编程语言相关面试题",
-      questionCount: 99,
+      questionCount: 10,
       icon: "/images/list/python.png"
     },
     {

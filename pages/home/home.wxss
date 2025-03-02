@@ -1,0 +1,60 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 40rpx;
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80rpx;
+}
+
+.logo {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 20rpx;
+}
+
+.app-name {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.nav-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  background: #f5f5f5;
+  border-radius: 16rpx;
+  transition: all 0.3s;
+}
+
+.nav-button:active {
+  background: #e0e0e0;
+}
+
+.nav-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 20rpx;
+}
+
+.nav-text {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+}
