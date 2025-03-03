@@ -17,6 +17,11 @@ Page({
 
   onLoad: function() {
     // 页面加载时执行的逻辑
+    // 分享朋友圈设置
+    wx.showShareMenu({
+      withShareTicket:true,
+      menus:['shareAppMessage','shareTimeline']
+    })
   },
 
   copyActivationCode: function() {
