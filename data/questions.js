@@ -151,6 +151,17 @@ module.exports = {
         code: "",
         md: ``,
         tags: ["集合", "List", "Set", "Map"]
+      },
+      {
+        "id": 5,
+        "categoryId": 2,
+        "title": "Hashtable与HashMap的区别",
+        "difficulty": "中等",
+        "viewCount": 1200,
+        "description": "Hashtable和HashMap都是Java中的Map接口实现类，但它们在线程安全性、性能、null值支持等方面存在显著差异。",
+        "code": "",
+        "md": "### Hashtable与HashMap的区别\n\n#### 1. 线程安全\n- **Hashtable**：是线程安全的，所有方法都是同步的，适合多线程环境。\n- **HashMap**：不是线程安全的，需要外部同步机制来保证线程安全。\n\n#### 2. 性能\n- **Hashtable**：由于线程安全，性能相对较低。\n- **HashMap**：由于非线程安全，性能更高，更适合单线程环境。\n\n#### 3. Null值支持\n- **Hashtable**：不支持key和value为null，否则会抛出NullPointerException。\n- **HashMap**：允许key和value为null，但key为null时只能有一个。\n\n#### 4. 迭代器\n- **Hashtable**：使用`Enumeration`迭代，不支持`Iterator`。\n- **HashMap**：使用`Iterator`迭代，支持迭代器的`remove()`方法。\n\n#### 5. 底层实现\n- **Hashtable**：底层基于哈希表实现，使用双哈希算法解决冲突。\n- **HashMap**：底层基于哈希表和红黑树实现，性能更优。\n\n#### 6. 初始容量和加载因子\n- **Hashtable**：默认初始容量为11，加载因子为0.75。\n- **HashMap**：默认初始容量为16，加载因子为0.75，可以通过构造函数自定义。\n",
+        "tags": ["集合", "Map", "Hashtable", "HashMap"]
       }
     ],
     ds: [
