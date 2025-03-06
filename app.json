@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/home/home",
     "pages/index/index",
     "pages/profile/profile",
     "pages/detail/detail",
-    "pages/activation/activation"
+    "pages/activation/activation",
+    "pages/home/home"
   ],
   "window": {
     "backgroundTextStyle": "light",
