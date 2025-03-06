@@ -5,7 +5,7 @@ module.exports = {
       name: "MySQL",
       key: "mysql",
       description: "MySQL数据库相关面试题",
-      questionCount: 20,
+      questionCount: 12,
       icon: "/images/list/mysql.png"
     },
     {
@@ -13,7 +13,7 @@ module.exports = {
       name: "Java",
       key: "java",
       description: "Java编程语言相关面试题",
-      questionCount: 1,
+      questionCount: 3,
       icon: "/images/list/java.png"
     },
     {
@@ -21,7 +21,7 @@ module.exports = {
       name: "数据结构",
       key: "ds",
       description: "数据结构与算法相关面试题",
-      questionCount: 20,
+      questionCount: 1,
       icon: "/images/list/data-structure.png"
     },
     {
@@ -29,7 +29,7 @@ module.exports = {
       name: "Redis",
       key: "redis",
       description: "Redis缓存数据库相关面试题",
-      questionCount: 15,
+      questionCount: 11,
       icon: "/images/list/redis.png"
     },
     {
@@ -37,7 +37,7 @@ module.exports = {
       name: "Python",
       key: "python",
       description: "Python编程语言相关面试题",
-      questionCount: 10,
+      questionCount: 1,
       icon: "/images/list/python.png"
     },
     {
@@ -45,7 +45,7 @@ module.exports = {
       name: "GoLang",
       key: "golang",
       description: "GoLang编程语言相关面试题",
-      questionCount: 10,
+      questionCount: 2,
       icon: "/images/list/golang.png"
     }
   ]
