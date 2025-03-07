@@ -10,12 +10,13 @@ Page({
     showAnswer: false,
     points: 0,
     hasEarnedPoints: false,
-    md: {} // md 内容，格式示例：
+    md: {}, // md 内容，格式示例：
     // ## 渲染 code 方法
     //
     // ```html
     // <div>示例代码</div>
     // ```
+    showBanner: true // 控制横幅显示
   },
 
   onLoad: function(options) {
@@ -36,6 +37,25 @@ Page({
     });
     
     this.loadQuestionData();
+  },
+
+  onShow: function() {
+    // 从全局变量获取是否显示横幅
+    const app = getApp();
+    this.setData({
+      showBanner: app.globalData.showBanner
+    });
+  },
+  
+  // 处理横幅关闭事件
+  onBannerClose: function() {
+    // 更新全局变量
+    const app = getApp();
+    app.globalData.showBanner = false;
+    
+    this.setData({
+      showBanner: false
+    });
   },
 
   loadQuestionData: function() {

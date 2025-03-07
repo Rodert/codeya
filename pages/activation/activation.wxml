@@ -1,4 +1,6 @@
-<view class="container">
+<banner wx:if="{{showBanner}}" text="随时随地看学编程" duration="0" bindclose="onBannerClose"></banner>
+
+<view class="container {{showBanner ? 'has-banner' : ''}}">
   <!-- 轮播图部分 -->
   <swiper class="banner" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{500}}">
     <swiper-item wx:for="{{bannerList}}" wx:key="index">

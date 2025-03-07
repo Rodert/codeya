@@ -25,7 +25,8 @@ Page({
         id: 'feedback',
         name: '意见反馈'
       }
-    ]
+    ],
+    showBanner: true // 控制横幅显示
   },
 
   onLoad() {
@@ -35,6 +36,12 @@ Page({
   onShow() {
     // 每次显示页面时更新统计数据
     this.loadStatistics();
+    
+    // 从全局变量获取是否显示横幅
+    const app = getApp();
+    this.setData({
+      showBanner: app.globalData.showBanner
+    });
   },
 
   loadStatistics() {
@@ -79,5 +86,16 @@ Page({
         });
         break;
     }
+  },
+
+  // 处理横幅关闭事件
+  onBannerClose: function() {
+    // 更新全局变量
+    const app = getApp();
+    app.globalData.showBanner = false;
+    
+    this.setData({
+      showBanner: false
+    });
   }
 });

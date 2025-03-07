@@ -3,6 +3,12 @@ page {
   background-color: #f8f8f8;
   font-size: 16px;
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+  --banner-height: 44px; /* 定义横幅高度变量 */
+}
+
+/* 当横幅显示时，为页面内容添加顶部内边距 */
+.has-banner {
+  padding-top: calc(var(--banner-height) + 10px); /* 横幅高度 + 额外间距 */
 }
 
 .container {

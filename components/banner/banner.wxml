@@ -1,0 +1,6 @@
+<view class="banner {{show ? 'show' : 'hide'}}">
+  <view class="banner-content">
+    <text>{{text}}</text>
+  </view>
+  <view class="banner-close" bindtap="closeBanner">×</view>
+</view> 

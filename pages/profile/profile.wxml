@@ -1,4 +1,6 @@
-<view class="profile-container">
+<banner wx:if="{{showBanner}}" text="随时随地看学编程" duration="0" bindclose="onBannerClose"></banner>
+
+<view class="profile-container {{showBanner ? 'has-banner' : ''}}">
   <!-- 用户信息区域 -->
   <view class="user-info-section">
     <view class="avatar-wrapper">

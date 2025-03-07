@@ -1,4 +1,6 @@
-<view class="page">
+<banner wx:if="{{showBanner}}" text="随时随地看学编程" duration="0" bindclose="onBannerClose"></banner>
+
+<view class="page {{showBanner ? 'has-banner' : ''}}">
   <view class="question-card">
     <view class="question-header">
       <text class="question-title">{{question.title}}</text>

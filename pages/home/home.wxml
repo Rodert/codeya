@@ -1,4 +1,6 @@
-<view class="container">
+<banner wx:if="{{showBanner}}" text="随时随地看学编程" duration="0" bindclose="onBannerClose"></banner>
+
+<view class="container {{showBanner ? 'has-banner' : ''}}">
   <view class="logo-section">
     <image class="logo" src="/images/logo/codeya_logo1.jpg" mode="aspectFit"></image>
     <text class="app-name">编程鸭</text>

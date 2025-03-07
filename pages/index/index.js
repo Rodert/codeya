@@ -15,7 +15,8 @@ Page({
     categories: [],
     recentQuestions: [],
     expandedCategoryId: null,
-    categoryQuestions: []
+    categoryQuestions: [],
+    showBanner: true // 控制横幅显示
   },
 
   onLoad: function() {
@@ -27,6 +28,25 @@ Page({
           withShareTicket:true,
           menus:['shareAppMessage','shareTimeline']
       })
+  },
+  
+  onShow: function() {
+    // 从全局变量获取是否显示横幅
+    const app = getApp();
+    this.setData({
+      showBanner: app.globalData.showBanner
+    });
+  },
+  
+  // 处理横幅关闭事件
+  onBannerClose: function() {
+    // 更新全局变量
+    const app = getApp();
+    app.globalData.showBanner = false;
+    
+    this.setData({
+      showBanner: false
+    });
   },
 
   loadCategories: function() {

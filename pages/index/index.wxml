@@ -1,4 +1,6 @@
-<view class="page">
+<banner wx:if="{{showBanner}}" text="随时随地看学编程" duration="0" bindclose="onBannerClose"></banner>
+
+<view class="page {{showBanner ? 'has-banner' : ''}}">
   <!-- Categories List -->
   <view class="categories-list">
     <view class="category-item" wx:for="{{categories}}" wx:key="id">
