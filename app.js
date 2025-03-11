@@ -2,19 +2,13 @@
  * @Author: JavaPub
  * @Date: 2025-02-26 11:41:14
  * @LastEditors: your name
- * @LastEditTime: 2025-03-07 19:29:12
+ * @LastEditTime: 2025-03-08 23:19:10
  * @Description: Here is the JavaPub code base. Search JavaPub on the whole web.
  * @FilePath: /codeya/app.js
  */
 App({
   globalData: {
     userInfo: null,
-    categories: [
-      { id: 1, name: '技术', icon: '/images/tech.png' },
-      { id: 2, name: '文学', icon: '/images/literature.png' },
-      { id: 3, name: '科学', icon: '/images/science.png' },
-      { id: 4, name: '艺术', icon: '/images/art.png' }
-    ],
     showBanner: true // 控制横幅显示
   },
   onLaunch() {
