@@ -41,7 +41,7 @@ module.exports = {
       name: "Python",
       key: "python",
       description: "Python编程语言相关面试题",
-      questionCount: 1,
+      questionCount: 21,
       icon: "/images/list/python.png",
       order: 5
     },
