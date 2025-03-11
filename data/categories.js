@@ -50,7 +50,7 @@ module.exports = {
       name: "GoLang",
       key: "golang",
       description: "GoLang编程语言相关面试题",
-      questionCount: 2,
+      questionCount: 35,
       icon: "/images/list/golang.png",
       order: 6
     }
