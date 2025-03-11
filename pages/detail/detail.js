@@ -10,13 +10,12 @@ Page({
     showAnswer: false,
     points: 0,
     hasEarnedPoints: false,
-    md: {}, // md 内容，格式示例：
+    md: {} // md 内容，格式示例：
     // ## 渲染 code 方法
     //
     // ```html
     // <div>示例代码</div>
     // ```
-    showBanner: true // 控制横幅显示
   },
 
   onLoad: function(options) {

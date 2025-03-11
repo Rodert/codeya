@@ -14,7 +14,7 @@ Page({
     ],
     categories: [],
     recentQuestions: [],
-    expandedCategoryId: null,
+    expandedCategoryKey: null,
     categoryQuestions: [],
     showBanner: true // 控制横幅显示
   },
@@ -25,9 +25,9 @@ Page({
     
     // 分享朋友圈设置
     wx.showShareMenu({
-          withShareTicket:true,
-          menus:['shareAppMessage','shareTimeline']
-      })
+      withShareTicket:true,
+      menus:['shareAppMessage','shareTimeline']
+    })
   },
   
   onShow: function() {
@@ -95,12 +95,12 @@ Page({
   },
 
   expandCategory: function(e) {
-    const categoryId = e.currentTarget.dataset.id;
+    const categoryKey = e.currentTarget.dataset.key;
     
     // 如果点击的是当前展开的类别，则收起
-    if (this.data.expandedCategoryId === categoryId) {
+    if (this.data.expandedCategoryKey === categoryKey) {
       this.setData({
-        expandedCategoryId: null,
+        expandedCategoryKey: null,
         categoryQuestions: []
       });
       return;
@@ -110,7 +110,7 @@ Page({
     const categories = this.data.categories;
     let category = null;
     for (let i = 0; i < categories.length; i++) {
-      if (categories[i].id === categoryId) {
+      if (categories[i].key === categoryKey) {
         category = categories[i];
         break;
       }
@@ -135,10 +135,17 @@ Page({
       });
       
       this.setData({
-        expandedCategoryId: categoryId,
+        expandedCategoryKey: categoryKey,
         categoryQuestions: questionsWithCategory
       });
     }
+  },
+
+  goToCategory: function(e) {
+    const categoryKey = e.currentTarget.dataset.key;
+    wx.navigateTo({
+      url: '/pages/category/category?key=' + categoryKey
+    });
   },
 
   goToDetail: function(e) {

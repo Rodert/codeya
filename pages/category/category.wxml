@@ -1,0 +1,43 @@
+<view class="page">
+  <!-- 分类头部 -->
+  <view class="category-header">
+    <view class="header-main">
+      <view class="category-content">
+        <image class="category-icon" src="{{category.icon}}" mode="aspectFit"/>
+        <view class="category-info">
+          <text class="category-name">{{category.name}}</text>
+          <text class="category-desc">{{category.description}}</text>
+        </view>
+      </view>
+      <button class="share-btn" open-type="share">⋮</button>
+    </view>
+  </view>
+
+  <!-- 题目列表标题 -->
+  <view class="list-header">
+    <text class="list-title">题目列表 ({{category.questionCount}})</text>
+    <view class="filter-btn">
+      <text>难度</text>
+      <text class="filter-icon">||</text>
+      <text>综合</text>
+      <text class="filter-icon">三</text>
+    </view>
+  </view>
+
+  <!-- 题目列表 -->
+  <view class="questions-list">
+    <view class="question-item" 
+          wx:for="{{questions}}" 
+          wx:key="id"
+          bindtap="goToDetail"
+          data-question-id="{{item.id}}">
+      <text class="question-title">{{item.title}}</text>
+      <view class="question-meta">
+        <text class="difficulty difficulty-{{item.difficulty === '简单' ? 'easy' : item.difficulty === '中等' ? 'medium' : 'hard'}}">
+          {{item.difficulty}}
+        </text>
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+</view> 

@@ -3,7 +3,7 @@ module.exports = {
     mysql: [
       {
         id: 1,
-        categoryId: 1,
+        categoryId: "mysql",
         title: "MySQL索引原理",
         difficulty: "中等",
         viewCount: 1520,
@@ -14,8 +14,8 @@ module.exports = {
       },
       {
         "id": 2,
-        "categoryId": 1,
-        "title": "MySQL事务ACID特性",
+        "categoryId": "mysql",
+        "title": "MySQL事务ACID特性MySQL事务ACID特性MySQL事务ACID特性MySQL事务ACID特性",
         "difficulty": "中等",
         "viewCount": 2345,
         "description": "详细解释MySQL事务的ACID特性及其实现机制，并说明隔离级别如何影响事务并发控制？",
@@ -25,7 +25,7 @@ module.exports = {
       },
       {
           "id": 3,
-          "categoryId": 1,
+          "categoryId": "mysql",
           "title": "MySQL锁机制解析",
           "difficulty": "困难",
           "viewCount": 1876,
@@ -36,7 +36,7 @@ module.exports = {
       },
       {
           "id": 4,
-          "categoryId": 1,
+          "categoryId": "mysql",
           "title": "SQL查询优化策略",
           "difficulty": "中等",
           "viewCount": 2987,
@@ -47,7 +47,7 @@ module.exports = {
       },
       {
         "id": 5,
-        "categoryId": 1,
+        "categoryId": "mysql",
         "title": "MySQL存储引擎对比",
         "difficulty": "中等",
         "viewCount": 3120,
@@ -58,7 +58,7 @@ module.exports = {
       },
       {
         "id": 6,
-        "categoryId": 1,
+        "categoryId": "mysql",
         "title": "MySQL主从复制原理",
         "difficulty": "中等",
         "viewCount": 2789,
@@ -69,7 +69,7 @@ module.exports = {
       },
       {
         "id": 7,
-        "categoryId": 1,
+        "categoryId": "mysql",
         "title": "MySQL日志系统解析",
         "difficulty": "困难",
         "viewCount": 1987,
@@ -80,7 +80,7 @@ module.exports = {
       },
       {
         "id": 10,
-        "categoryId": 1,
+        "categoryId": "mysql",
         "title": "SQL执行流程解析",
         "difficulty": "中等",
         "viewCount": 2876,
@@ -90,7 +90,7 @@ module.exports = {
       },
       {
         "id": 11,
-        "categoryId": 1,
+        "categoryId": "mysql",
         "title": "分库分表策略",
         "difficulty": "困难",
         "viewCount": 1895,
@@ -100,7 +100,7 @@ module.exports = {
       },
       {
         "id": 12,
-        "categoryId": 1,
+        "categoryId": "mysql",
         "title": "慢查询优化方法",
         "difficulty": "中等",
         "viewCount": 3267,
@@ -110,7 +110,7 @@ module.exports = {
     },
     {
         "id": 13,
-        "categoryId": 1,
+        "categoryId": "mysql",
         "title": "数据库备份策略",
         "difficulty": "中等",
         "viewCount": 2150,
@@ -120,7 +120,7 @@ module.exports = {
     },
     {
         "id": 14,
-        "categoryId": 1,
+        "categoryId": "mysql",
         "title": "SQL注入防御",
         "difficulty": "中等",
         "viewCount": 2789,
@@ -132,7 +132,7 @@ module.exports = {
     java: [
       {
         id: 3,
-        categoryId: 2,
+        categoryId: "java",
         title: "Java线程池原理",
         difficulty: "困难",
         viewCount: 2100,
@@ -143,7 +143,7 @@ module.exports = {
       },
       {
         id: 4,
-        categoryId: 2,
+        categoryId: "java",
         title: "Java集合框架",
         difficulty: "中等",
         viewCount: 1800,
@@ -154,7 +154,7 @@ module.exports = {
       },
       {
         "id": 5,
-        "categoryId": 2,
+        "categoryId": "java",
         "title": "Hashtable与HashMap的区别",
         "difficulty": "中等",
         "viewCount": 1200,
@@ -166,175 +166,39 @@ module.exports = {
     ],
     ds: [
       {
-        id: 5,
-        categoryId: 3,
-        title: "红黑树特性与实现",
-        difficulty: "困难",
-        viewCount: 1680,
-        description: "请详细说明红黑树的特性，以及插入、删除操作的实现原理。",
+        id: 1,
+        categoryId: "ds",
+        title: "常见排序算法比较",
+        difficulty: "中等",
+        viewCount: 1234,
+        description: "请比较常见排序算法的时间复杂度、空间复杂度和稳定性，并说明它们的适用场景。",
         code: "",
-        md: ``,
-        tags: ["红黑树", "平衡树", "数据结构"]
+        md: "# 常见排序算法比较\n\n## 排序算法复杂度与特性\n\n| 算法 | 平均时间复杂度 | 最坏时间复杂度 | 空间复杂度 | 稳定性 |\n|------|--------------|--------------|-----------|-------|\n| 冒泡排序 | O(n²) | O(n²) | O(1) | 稳定 |\n| 选择排序 | O(n²) | O(n²) | O(1) | 不稳定 |\n| 插入排序 | O(n²) | O(n²) | O(1) | 稳定 |\n| 希尔排序 | O(nlogn) | O(n²) | O(1) | 不稳定 |\n| 归并排序 | O(nlogn) | O(nlogn) | O(n) | 稳定 |\n| 快速排序 | O(nlogn) | O(n²) | O(logn) | 不稳定 |\n| 堆排序 | O(nlogn) | O(nlogn) | O(1) | 不稳定 |\n| 计数排序 | O(n+k) | O(n+k) | O(k) | 稳定 |\n| 桶排序 | O(n+k) | O(n²) | O(n+k) | 稳定 |\n| 基数排序 | O(nk) | O(nk) | O(n+k) | 稳定 |\n\n## 适用场景\n\n1. **插入排序**：小规模数据或基本有序的数据\n2. **快速排序**：大规模数据，平均性能最优\n3. **归并排序**：稳定性要求高，且有额外空间\n4. **堆排序**：大规模数据，且空间有限\n5. **计数/桶/基数排序**：特定数据分布，如整数、范围有限\n\n## 代码示例（快速排序）\n\n```java\npublic void quickSort(int[] arr, int left, int right) {\n    if (left < right) {\n        int pivot = partition(arr, left, right);\n        quickSort(arr, left, pivot - 1);\n        quickSort(arr, pivot + 1, right);\n    }\n}\n\nprivate int partition(int[] arr, int left, int right) {\n    int pivot = arr[right];\n    int i = left - 1;\n    for (int j = left; j < right; j++) {\n        if (arr[j] <= pivot) {\n            i++;\n            swap(arr, i, j);\n        }\n    }\n    swap(arr, i + 1, right);\n    return i + 1;\n}\n```",
+        tags: ["排序算法", "时间复杂度", "空间复杂度"]
       }
     ],
     redis: [
       {
         id: 1,
-        categoryId: 4,
-        title: "Redis持久化机制",
+        categoryId: "redis",
+        title: "Redis数据类型及应用场景",
         difficulty: "中等",
-        viewCount: 1890,
-        description: "请详细说明Redis的RDB和AOF两种持久化机制的原理、优缺点及使用场景。",
+        viewCount: 1876,
+        description: "请详细介绍Redis的五种基本数据类型及其应用场景，并说明如何选择合适的数据类型。",
         code: "",
-        md: ``,
-        tags: ["持久化", "RDB", "AOF"]
-      },
-      {
-        "id": 5,
-        "categoryId": 4,
-        "title": "Redis数据类型与使用场景",
-        "difficulty": "中等",
-        "viewCount": 2850,
-        "description": "详细说明Redis的5种核心数据类型及其典型应用场景",
-        "code": "",
-        "md": "# Redis核心数据类型\n\n## 数据结构对比\n| 类型       | 特性                          | 应用场景                  |\n|------------|-------------------------------|---------------------------|\n| String     | 二进制安全，最大512MB         | 缓存、计数器、分布式锁    |\n| Hash       | 键值对集合                    | 对象存储（用户信息等）    |\n| List       | 双向链表，支持阻塞操作        | 消息队列、最新消息列表    |\n| Set        | 无序唯一集合                  | 标签系统、共同好友        |\n| ZSet       | 有序唯一集合（按score排序）   | 排行榜、延迟队列          |\n\n## 示例场景\n```redis\n-- 排行榜实现（ZSET）\nZADD leaderboard 100 \"user1\"\nZADD leaderboard 85 \"user2\"\nZREVRANGE leaderboard 0 2 WITHSCORES\n```\n![数据结构示意图](https://example.com/redis-data-struct.png)",
-        "tags": ["数据结构", "缓存设计"]
-      },
-      {
-        "id": 6,
-        "categoryId": 4,
-        "title": "缓存穿透与解决方案",
-        "difficulty": "中等",
-        "viewCount": 3120,
-        "description": "解释缓存穿透现象及其解决方案",
-        "code": "",
-        "md": "# 缓存穿透\n\n## 现象描述\n- 大量请求查询**不存在的数据**\n- 绕过缓存直接访问数据库\n\n## 解决方案\n1. **布隆过滤器**\n   ```python\n   # 初始化布隆过滤器\n   from pybloom_live import ScalableBloomFilter\n   bf = ScalableBloomFilter()\n   \n   # 数据预热时添加所有合法key\n   for key in valid_keys:\n       bf.add(key)\n   \n   # 查询前校验\n   if not key in bf:\n       return None\n   ```\n2. **空值缓存**\n   ```redis\n   SETEX empty_key 300 \"nil\"  # 缓存空值5分钟\n   ```\n3. **请求限流**\n\n## 对比方案\n| 方案            | 优点                | 缺点                |\n|----------------|--------------------|---------------------|\n| 布隆过滤器      | 内存占用低         | 存在误判率          |\n| 空值缓存        | 实现简单           | 可能存储大量无效key |\n\n![缓存穿透流程图](https://example.com/cache-penetration.png)",
-        "tags": ["缓存穿透", "布隆过滤器"]
-      },
-      {
-        "id": 7,
-        "categoryId": 4,
-        "title": "Redis持久化机制",
-        "difficulty": "困难",
-        "viewCount": 1980,
-        "description": "对比RDB和AOF持久化机制，分析混合持久化优势",
-        "code": "",
-        "md": "# 持久化机制\n\n## RDB vs AOF\n| 特性         | RDB                      | AOF                      |\n|--------------|--------------------------|--------------------------|\n| 持久化方式   | 内存快照                 | 操作日志追加             |\n| 文件大小     | 小（压缩二进制）         | 大（文本格式）           |\n| 恢复速度     | 快                       | 慢                       |\n| 数据安全性   | 可能丢失最后一次快照数据 | 可配置同步频率（1秒/次） |\n\n## 混合持久化（Redis 4.0+）\n```conf\n# redis.conf配置\naof-use-rdb-preamble yes\n```\n- **存储结构**：RDB头 + AOF增量操作\n- **优势**：\n  1. 快速加载RDB部分\n  2. 保留AOF数据完整性\n\n![持久化流程图](https://example.com/redis-persistence.png)",
-        "tags": ["持久化", "RDB", "AOF"]
-      },
-      {
-        "id": 8,
-        "categoryId": 4,
-        "title": "Redis集群模式",
-        "difficulty": "困难",
-        "viewCount": 1670,
-        "description": "说明Redis Cluster的分布式实现原理",
-        "code": "",
-        "md": "# Redis Cluster\n\n## 核心机制\n1. **数据分片**\n   - 16384个哈希槽（slot）\n   - 公式：`HASH_SLOT = CRC16(key) mod 16384`\n2. **节点通信**\n   - Gossip协议维护集群状态\n   - 每秒随机选取节点PING/PONG\n\n## 节点扩容\n```bash\n# 添加新节点\nredis-cli --cluster add-node new_host:port existing_host:port\n\n# 迁移槽位\nredis-cli --cluster reshard host:port\n```\n\n## 故障转移\n- 主节点下线时，从节点自动升级\n- 需要至少3个主节点保证高可用\n\n![集群架构图](https://example.com/redis-cluster.png)",
-        "tags": ["集群", "分布式"]
-      },
-      {
-        "id": 9,
-        "categoryId": 4,
-        "title": "内存淘汰策略",
-        "difficulty": "中等",
-        "viewCount": 1540,
-        "description": "解释Redis的8种内存淘汰策略及适用场景",
-        "code": "",
-        "md": "# 内存淘汰策略\n\n## 策略列表\n| 策略                | 说明                          |\n|---------------------|-------------------------------|\n| noeviction          | 拒绝写入新数据（默认）        |\n| allkeys-lru         | 全体键中淘汰最近最少使用      |\n| allkeys-lfu         | 全体键中淘汰最不经常使用      |\n| allkeys-random      | 全体键随机淘汰                |\n| volatile-lru        | 仅淘汰带过期时间的键（LRU）   |\n| volatile-lfu        | 仅淘汰带过期时间的键（LFU）   |\n| volatile-random     | 过期键随机淘汰                |\n| volatile-ttl        | 淘汰剩余时间最短的键          |\n\n## 配置方法\n```conf\n# redis.conf\nmaxmemory-policy allkeys-lru\nmaxmemory 4gb\n```\n\n## 选型建议\n- 缓存场景：`allkeys-lru`\n- 持久化+缓存混合：`volatile-lru`\n\n![LRU算法示意图](https://example.com/lru-algo.png)",
-        "tags": ["内存管理", "淘汰策略"]
-      },
-      {
-        "id": 10,
-        "categoryId": 4,
-        "title": "分布式锁实现",
-        "difficulty": "困难",
-        "viewCount": 2890,
-        "description": "基于Redis实现安全的分布式锁，需解决死锁问题",
-        "code": "",
-        "md": "# 分布式锁\n\n## 正确实现\n```lua\n-- 原子操作：加锁\nlocal key = KEYS[1]\nlocal value = ARGV[1]\nlocal ttl = ARGV[2]\n\nif redis.call('setnx', key, value) == 1 then\n    redis.call('expire', key, ttl)\n    return 1\nelse\n    return 0\nend\n```\n\n## 常见问题\n1. **误删锁**\n   - 解决方案：校验锁持有者\n   ```lua\n   if redis.call('get', key) == value then\n       redis.call('del', key)\n   end\n   ```\n2. **锁续期**\n   - 使用Redisson的watch dog机制\n\n## Redlock算法\n1. 向N个节点获取锁\n2. 多数节点获取成功才算成功\n3. 总耗时需小于锁有效期\n\n![锁流程](https://example.com/redis-lock.png)",
-        "tags": ["分布式锁", "Redlock"]
-      },
-      {
-        "id": 11,
-        "categoryId": 4,
-        "title": "缓存雪崩预防",
-        "difficulty": "中等",
-        "viewCount": 1760,
-        "description": "如何预防大量缓存同时过期导致的雪崩问题？",
-        "code": "",
-        "md": "# 缓存雪崩\n\n## 现象\n- 大量缓存**同时失效**\n- 数据库瞬时压力激增\n\n## 解决方案\n1. **随机过期时间**\n   ```java\n   // 设置基础过期时间+随机值\n   int expireTime = 3600 + new Random().nextInt(600);\n   redisTemplate.opsForValue().set(key, value, expireTime);\n   ```\n2. **永不过期+后台更新**\n   - 逻辑过期时间字段\n   - 异步线程刷新缓存\n3. **熔断降级**\n   - Hystrix等工具限流\n\n## 架构优化\n![多级缓存架构](https://example.com/multi-level-cache.png)",
-        "tags": ["缓存雪崩", "高可用"]
-      },
-      {
-        "id": 12,
-        "categoryId": 4,
-        "title": "Pipeline批量操作",
-        "difficulty": "中等",
-        "viewCount": 1320,
-        "description": "如何使用Pipeline提升Redis操作效率？",
-        "code": "",
-        "md": "# Pipeline\n\n## 原理对比\n| 方式       | 网络RTT次数 | 执行流程           |\n|------------|-------------|--------------------|\n| 普通模式   | N次（串行） | 发送命令->等待响应 |\n| Pipeline   | 1次         | 批量发送->批量接收 |\n\n## Java示例\n```java\nJedis jedis = new Jedis();\nPipeline p = jedis.pipelined();\n\nfor(int i=0; i<1000; i++){\n    p.set('key'+i, 'value'+i);\n}\n\np.sync();  // 批量执行\n```\n\n## 注意事项\n- 每次Pipeline不宜超过1MB数据\n- 避免在事务中使用Pipeline\n\n![Pipeline流程](https://example.com/pipeline-flow.png)",
-        "tags": ["性能优化", "Pipeline"]
-      },
-      {
-        "id": 13,
-        "categoryId": 4,
-        "title": "Redis事务与ACID",
-        "difficulty": "困难",
-        "viewCount": 1450,
-        "description": "分析Redis事务与数据库ACID特性的异同",
-        "code": "",
-        "md": "# Redis事务\n\n## 事务执行\n```redis\nMULTI\nSET key1 100\nINCR key1\nEXEC  -- 输出：QUEUED, QUEUED, [OK, 101]\n```\n\n## ACID分析\n| 特性   | Redis实现                      | 传统数据库               |\n|--------|--------------------------------|--------------------------|\n| 原子性 | 命令队列整体执行               | 事务回滚保证             |\n| 一致性 | 无约束（依赖开发者）           | 外键、约束等机制         |\n| 隔离性 | 单线程执行无并发问题           | 多隔离级别               |\n| 持久性 | 依赖持久化配置                 | 事务日志保证             |\n\n## WATCH命令\n```redis\nWATCH balance\nbalance = GET balance\nif balance > 100:\n    MULTI\n    DECRBY balance 100\n    EXEC\nELSE:\n    UNWATCH\n```\n ![事务流程图](https://img-blog.csdnimg.cn/9ea3f03626974923b9849b77e1bec51d.png)",
-        "tags": ["事务", "ACID"]
-      },
-      {
-        "id": 14,
-        "categoryId": 4,
-        "title": "热Key问题处理",
-        "difficulty": "困难",
-        "viewCount": 1620,
-        "description": "如何检测和解决Redis热Key引发的性能问题？",
-        "code": "",
-        "md": "# 热Key问题\n\n## 检测方法\n1. **监控工具**\n   - `redis-cli --hotkeys`\n   - 第三方监控平台\n2. **日志分析**\n   ```bash\n   # 统计命令调用次数\n   cat redis.log | awk '{print $5}' | sort | uniq -c | sort -nr\n   ```\n\n## 解决方案\n1. **本地缓存**\n   ```java\n   // Guava Cache实现二级缓存\n   Cache<String, Object> localCache = CacheBuilder.newBuilder()\n       .expireAfterWrite(10, TimeUnit.SECONDS)\n       .build();\n   ```\n2. **Key拆分**\n   ```redis\n   SET article:1:part1 data1\n   SET article:1:part2 data2\n   ```\n3. **随机后缀**\n   ```java\n   String key = 'hotkey_' + ThreadLocalRandom.current().nextInt(10);\n   ```\n\n![热Key处理架构](https://example.com/hotkey-solution.png)",
-        "tags": ["热Key", "性能优化"]
-      }    
-    ],
-    python: [
-      {
-        id: 7,
-        categoryId: 5,
-        title: "Python装饰器原理",
-        difficulty: "中等",
-        viewCount: 500,
-        description: "请解释Python装饰器的工作原理，并给出常见的使用场景。",
-        code: ``,
-        md: ``,
-        tags: ["装饰器", "函数式编程", "性能统计"]
-      }
-    ],
-    golang: [
-      {
-        id: 1,
-        categoryId: 6,
-        title: "GoLang Map 并发",
-        difficulty: "中等",
-        viewCount: 500,
-        description: "GoLang Map 是否并发安全?",
-        code: ``,
-        md: ``,
-        tags: ["golang", "map", "并发"]
+        md: "# Redis数据类型及应用场景\n\n## 五种基本数据类型\n\n### 1. String（字符串）\n- **结构**：二进制安全的字符串，最大512MB\n- **命令**：SET, GET, INCR, DECR, MSET, MGET\n- **应用场景**：\n  - 缓存对象（JSON序列化）\n  - 计数器（如访问次数、点赞数）\n  - 分布式锁\n  - 会话缓存\n\n### 2. Hash（哈希）\n- **结构**：键值对集合，适合存储对象\n- **命令**：HSET, HGET, HMSET, HMGET, HGETALL\n- **应用场景**：\n  - 用户信息、商品信息等对象存储\n  - 购物车\n\n### 3. List（列表）\n- **结构**：双向链表，按插入顺序排序\n- **命令**：LPUSH, RPUSH, LPOP, RPOP, LRANGE\n- **应用场景**：\n  - 消息队列（有限）\n  - 最新动态、评论列表\n  - 关注列表\n\n### 4. Set（集合）\n- **结构**：无序不重复集合\n- **命令**：SADD, SMEMBERS, SINTER, SUNION, SREM\n- **应用场景**：\n  - 标签系统\n  - 用户关注、粉丝集合\n  - 去重（如IP统计）\n\n### 5. Sorted Set（有序集合）\n- **结构**：有序不重复集合，每个元素关联一个分数\n- **命令**：ZADD, ZRANGE, ZREVRANGE, ZRANK\n- **应用场景**：\n  - 排行榜\n  - 优先级队列\n  - 范围查询（如按时间范围）\n\n## 选择合适的数据类型\n\n1. **需要自动过期**：所有类型都可设置过期时间\n2. **存储对象**：\n   - 简单对象且不需要部分更新：String + 序列化\n   - 需要部分更新：Hash\n3. **计数场景**：String + INCR/DECR\n4. **有序数据**：Sorted Set\n5. **集合操作**：Set（交集、并集等）\n6. **队列**：List\n\n## 扩展数据类型\n\n- **Bitmap**：节省空间的位操作\n- **HyperLogLog**：估算基数\n- **Geo**：地理位置\n- **Stream**：更强大的消息队列",
+        tags: ["数据类型", "应用场景", "缓存设计"]
       },
       {
         id: 2,
-        categoryId: 6,
-        title: "GoLang 协程泄漏",
+        categoryId: "redis",
+        title: "Redis持久化机制",
         difficulty: "中等",
-        viewCount: 500,
-        description: "协程泄漏的原因可能是什么？",
-        code: `无`,
-        md: ``,
-        tags: ["golang", "Goroutine", "协程"]
+        viewCount: 1543,
+        description: "请详细介绍Redis的持久化机制（RDB和AOF），并比较它们的优缺点和适用场景。",
+        code: "",
+        md: "# Redis持久化机制\n\n## RDB（Redis Database）\n\n### 工作原理\nRDB持久化通过创建数据库快照（snapshot）来保存数据。Redis会在指定的时间间隔内将内存中的数据集写入磁盘。\n\n### 触发方式\n1. **自动触发**：根据配置文件中的save参数\n   ```\n   save 900 1    # 900秒内至少1个key变化\n   save 300 10   # 300秒内至少10个key变化\n   save 60 10000 # 60秒内至少10000个key变化\n   ```\n\n2. **手动触发**：\n   - `SAVE`命令：阻塞Redis服务器进程\n   - `BGSAVE`命令：创建子进程，不阻塞服务器\n\n### 优点\n- 文件紧凑，适合备份\n- 恢复速度快\n- 性能影响小（fork子进程）\n- 适合大规模数据恢复\n\n### 缺点\n- 可能丢失最后一次快照后的数据\n- fork过程可能导致服务短暂暂停\n- 数据量大时fork耗时增加\n\n## AOF（Append Only File）\n\n### 工作原理\nAOF持久化记录服务器执行的所有写操作命令，并在服务器启动时重新执行这些命令来恢复数据。\n\n### 配置选项\n```\nappendonly yes                 # 启用AOF\nappendfsync always             # 每次写入都同步\nappendfsync everysec           # 每秒同步一次（默认）\nappendfsync no                 # 由操作系统决定同步时机\n```\n\n### 重写机制\nAOF文件会随时间增长，Redis提供了`BGREWRITEAOF`命令来重写AOF文件，减小文件体积。\n\n### 优点\n- 数据安全性高，支持不同级别的同步\n- 文件易于理解和分析\n- 可在后台重写压缩\n\n### 缺点\n- 文件体积通常大于RDB\n- 恢复速度慢于RDB\n- 对性能影响较大（尤其是fsync策略为always时）\n\n## 持久化策略选择\n\n### 仅使用RDB\n- 适合：对数据丢失不敏感，注重性能，数据量大\n- 配置：关闭AOF，配置合适的RDB保存策略\n\n### 仅使用AOF\n- 适合：对数据安全性要求高，能接受较低性能\n- 配置：开启AOF，选择合适的fsync策略\n\n### 同时使用RDB和AOF（推荐）\n- 优势：兼顾数据安全和恢复速度\n- 配置：开启AOF，设置适当的RDB策略作为备份\n- 恢复时优先使用AOF\n\n### 无持久化\n- 适合：纯缓存场景，数据丢失可接受\n- 配置：关闭RDB和AOF",
+        tags: ["持久化", "RDB", "AOF", "数据恢复"]
       }
     ]
   }

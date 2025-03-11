@@ -4,7 +4,8 @@
     "pages/profile/profile",
     "pages/detail/detail",
     "pages/activation/activation",
-    "pages/home/home"
+    "pages/home/home",
+    "pages/category/category"
   ],
   "window": {
     "backgroundTextStyle": "light",

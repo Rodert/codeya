@@ -4,28 +4,11 @@
   <!-- Categories List -->
   <view class="categories-list">
     <view class="category-item" wx:for="{{categories}}" wx:key="id">
-      <view class="category-header" bindtap="expandCategory" data-id="{{item.id}}">
+      <view class="category-header" bindtap="goToCategory" data-key="{{item.key}}">
         <image class="category-icon" src="{{item.icon}}" mode="aspectFit"/>
         <text class="category-name">{{item.name}}</text>
         <text class="question-count">{{item.questionCount}}题</text>
-        <text class="expand-icon {{expandedCategoryId === item.id ? 'expanded' : ''}}">▼</text>
-      </view>
-      <view class="questions-list {{expandedCategoryId === item.id ? 'expanded' : ''}}">
-        <view class="question-item" 
-              wx:for="{{categoryQuestions}}" 
-              wx:for-item="question" 
-              wx:key="id"
-              bindtap="goToDetail"
-              data-category-key="{{item.key}}"
-              data-question-id="{{question.id}}">
-          <text class="question-title">{{question.title}}</text>
-          <view class="question-meta">
-            <text class="difficulty difficulty-{{question.difficulty === '简单' ? 'easy' : question.difficulty === '中等' ? 'medium' : 'hard'}}">
-              {{question.difficulty}}
-            </text>
-            <text class="view-count">{{question.viewCount}}次学习</text>
-          </view>
-        </view>
+        <text class="expand-icon">></text>
       </view>
     </view>
   </view>
