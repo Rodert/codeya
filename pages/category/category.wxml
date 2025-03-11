@@ -9,7 +9,7 @@
           <text class="category-desc">{{category.description}}</text>
         </view>
       </view>
-      <button class="share-btn" open-type="share">⋮</button>
+      <button class="share-btn" open-type="share">↗</button>
     </view>
   </view>
 
