@@ -4,7 +4,7 @@ module.exports = {
       id: 1,
       name: "MySQL",
       key: "mysql",
-      description: "MySQL数据库相关面试题",
+      description: "MySQL是一款开源关系型数据库，基于C/S架构，支持ACID事务（通过InnoDB引擎实现），采用MVCC机制与行级锁提升并发性能。数据以B+树索引组织，支持聚簇/非聚簇索引优化查询。存储引擎层可插拔（如InnoDB、MyISAM），事务日志（redo/undo）与binlog保障崩溃恢复及主从复制（异步/半同步）。提供SQL优化器、执行计划解析及慢查询分析，支持分区表、窗口函数。高可用方案涵盖主从集群、组复制（MGR）及InnoDB Cluster，通过XA协议实现分布式事务。工具链包含Performance Schema监控、EXPLAIN性能调优及在线DDL操作，适应高并发OLTP场景与云原生架构。",
       questionCount: 52,
       icon: "/images/list/mysql.png",
       order: 1
@@ -13,7 +13,7 @@ module.exports = {
       id: 2,
       name: "Java基础",
       key: "javabasics",
-      description: "Java编程语言相关面试题",
+      description: "Java是一种静态类型、面向对象的跨平台语言，基于JVM实现\"Write Once, Run Anywhere\"。其核心技术包括：类加载机制、字节码执行、自动内存管理（分代GC算法）；JVM内存模型（堆/栈/Metaspace）；强类型系统与多态继承机制。支持并发编程（java.util.concurrent包）及NIO非阻塞IO。通过JIT编译器优化运行时性能。企业级开发常用Spring Boot微服务架构，配合Maven/Gradle构建工具。JDK 17+引入Records、Sealed Classes等特性，增强模式匹配和异步编程能力。长期支持版本（LTS）确保稳定性，适用于高并发分布式系统，结合JMX监控和Arthurs诊断工具实现深度调优。",
       questionCount: 20,
       icon: "/images/list/java.png",
       order: 2
@@ -22,7 +22,7 @@ module.exports = {
       id: 3,
       name: "数据结构",
       key: "ds",
-      description: "数据结构与算法相关面试题",
+      description: "数据结构是计算机存储、组织数据的逻辑结构，用于实现高效数据访问与操作。核心类型包括线性结构（数组、链表、栈/队列）、树形结构（二叉树、B/B+树）、图结构（邻接表/矩阵）和哈希表（开放寻址/链地址法）。高级结构如堆（优先级队列）、Trie（前缀检索）、并查集（连通性检测）针对特定场景优化。设计时需权衡时间/空间复杂度，结合数据规模与操作频次（查询/插入/删除），如红黑树保障O(logn)操作，布隆过滤器以可控误判率换取空间压缩。合理选择数据结构能优化算法效率，如Dijkstra算法采用优先队列可将时间复杂度从O(V²)降至O(E+VlogV)。",
       questionCount: 1,
       icon: "/images/list/data-structure.png",
       order: 3
@@ -31,7 +31,7 @@ module.exports = {
       id: 4,
       name: "Redis",
       key: "redis",
-      description: "Redis缓存数据库相关面试题",
+      description: "Redis是一款高性能内存数据库，支持持久化（RDB快照/AOF日志），以单线程事件驱动模型实现高吞吐（10万+ QPS）。核心提供String、Hash、List、Set、SortedSet等数据结构，支持原子操作、Lua脚本及弱事务（非ACID）。采用多路复用I/O降低延迟，通过主从复制、哨兵（Sentinel）及Cluster分片（16384槽）实现高可用与水平扩展。支持过期策略（惰性/定期删除）、内存淘汰机制（LRU等）及管道批处理。常用于缓存、会话存储、实时排行榜及分布式锁（SET NX），同时支持Stream实现消息队列。通过RDB与AOF混合模式平衡数据安全与性能，适应高并发低延迟场景。",
       questionCount: 30,
       icon: "/images/list/redis.png",
       order: 4
@@ -40,7 +40,7 @@ module.exports = {
       id: 5,
       name: "Python",
       key: "python",
-      description: "Python编程语言相关面试题",
+      description: "Python是一种动态类型、解释型的高级编程语言，以简洁语法和丰富生态著称。其核心采用引用计数与分代垃圾回收机制管理内存，支持多范式编程（面向对象/函数式/过程式）。通过CPython解释器执行字节码，GIL（全局解释器锁）限制多线程并发效率，但可通过multiprocessing或asyncio协程实现并行。内置装饰器、生成器、上下文管理器等高级特性，标准库涵盖网络通信(asyncio)、数据结构(collections)等模块。广泛应用于数据分析（Pandas/NumPy）、机器学习（PyTorch/TensorFlow）、Web开发（Django/Flask）及自动化运维。动态类型系统支持鸭子类型，配合mypy实现渐进式类型检查。通过C扩展(Cython)或JIT编译器(PyPy)提升性能，兼容性强的.pyc字节码便于部署。持续迭代的类型提示（Type Hints）和模式匹配（Python 3.10+）增强工程化能力，结合PyPI生态快速构建复杂系统。",
       questionCount: 21,
       icon: "/images/list/python.png",
       order: 5
@@ -49,7 +49,7 @@ module.exports = {
       id: 6,
       name: "GoLang",
       key: "golang",
-      description: "GoLang编程语言相关面试题",
+      description: "Golang是由Google开发的开源静态类型、编译型语言，语法简洁高效，支持垃圾回收（GC）与内存安全。核心特性包括轻量级协程（goroutine）与CSP并发模型（基于channel通信），通过GMP调度器实现高并发（百万级协程）。编译为静态二进制文件，依赖少，跨平台支持良好。内置接口（隐式实现）、结构体组合及defer机制，支持反射与交叉编译。GC采用并发标记-清除算法（三色标记法），优化低延迟。标准库覆盖网络、加密、并发等场景，工具链强大（go fmt/test/mod）。高性能接近C，适用于微服务（Gin/Echo）、云原生（Docker/Kubernetes）及分布式系统，凭借高效编译、协程调度与原生并发优势成为后端开发主流选择。",
       questionCount: 35,
       icon: "/images/list/golang.png",
       order: 6
