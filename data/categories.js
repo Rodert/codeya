@@ -32,7 +32,7 @@ module.exports = {
       name: "Redis",
       key: "redis",
       description: "Redis缓存数据库相关面试题",
-      questionCount: 11,
+      questionCount: 30,
       icon: "/images/list/redis.png",
       order: 4
     },
