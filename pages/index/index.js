@@ -52,8 +52,19 @@ Page({
   loadCategories: function() {
     const categories = db.getCategories();
     console.log('Loading categories:', categories);
+    
+    // 根据order字段排序（升序）
+    const sortedCategories = [...categories].sort((a, b) => {
+      // 如果有order字段，按order排序
+      if (a.order !== undefined && b.order !== undefined) {
+        return a.order - b.order;
+      }
+      // 如果没有order字段，保持原顺序
+      return 0;
+    });
+    
     this.setData({
-      categories: categories
+      categories: sortedCategories
     });
   },
 

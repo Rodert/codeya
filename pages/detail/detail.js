@@ -96,7 +96,12 @@ Page({
     try {
       if (currentQuestion && currentQuestion.md) {
         console.log('Converting markdown content...');
-        currentQuestion.md = app.towxml(currentQuestion.md, 'markdown', {
+        // 确保md内容是字符串类型
+        const mdContent = typeof currentQuestion.md === 'string' 
+          ? currentQuestion.md 
+          : JSON.stringify(currentQuestion.md);
+        
+        currentQuestion.md = app.towxml(mdContent, 'markdown', {
           theme: 'light',
           events: {
             tap: (e) => {
@@ -108,13 +113,31 @@ Page({
         console.log('Markdown conversion successful');
       } else {
         console.warn('No markdown content found for question:', this.data.questionId);
+        // 设置一个默认的空markdown对象，避免渲染错误
+        currentQuestion.md = app.towxml('', 'markdown', { theme: 'light' });
       }
     } catch (error) {
       console.error('Error converting markdown:', error);
+      // 设置一个默认的空markdown对象，避免渲染错误
+      if (currentQuestion) {
+        currentQuestion.md = app.towxml('*内容加载失败，请稍后再试*', 'markdown', { theme: 'light' });
+      }
+      
       wx.showToast({
         title: '内容加载失败',
-        icon: 'none'
+        icon: 'none',
+        duration: 2000
       });
+    }
+
+    // 确保currentQuestion存在且有效
+    if (!currentQuestion) {
+      currentQuestion = {
+        title: '题目不存在或已被删除',
+        difficulty: '简单',
+        viewCount: 0,
+        md: app.towxml('*题目不存在或已被删除*', 'markdown', { theme: 'light' })
+      };
     }
 
     this.setData({

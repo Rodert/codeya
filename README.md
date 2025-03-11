@@ -2,7 +2,7 @@
  * @Author: JavaPub
  * @Date: 2025-02-26 11:52:01
  * @LastEditors: your name
- * @LastEditTime: 2025-03-11 15:41:49
+ * @LastEditTime: 2025-03-11 16:25:55
  * @Description: Here is the JavaPub code base. Search JavaPub on the whole web.
  * @FilePath: /codeya/README.md
 -->
@@ -75,7 +75,8 @@ codeya/
   key: "mysql",
   description: "MySQL数据库相关面试题",
   questionCount: 12,
-  icon: "/images/list/mysql.png"
+  icon: "/images/list/mysql.png",
+  order: 1  // 排序字段，数字越小排序越靠前
 }
 ```
 
@@ -95,6 +96,9 @@ codeya/
 ```
 
 ## 版本历史
+
+### v1.1.1
+1. 添加分类排序功能，通过order字段控制首页分类列表的显示顺序
 
 ### v1.1.0
 1. 支持 Markdown 渲染，解题思路模块使用 Markdown 转 HTML 渲染(基于towxml组件)

@@ -63,5 +63,16 @@ md.renderer.rules.emoji = (token,index)=>{
 
 // 导出模块
 module.exports = str => {
+    // 确保str是字符串类型
+    if (str === undefined || str === null) {
+        str = '';
+    } else if (typeof str !== 'string') {
+        try {
+            str = String(str);
+        } catch (e) {
+            str = JSON.stringify(str);
+        }
+    }
+    
     return md.render(str);
 };
