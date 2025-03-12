@@ -9,7 +9,8 @@
 App({
   globalData: {
     userInfo: null,
-    showBanner: true // 控制横幅显示
+    showBanner: true, // 控制横幅显示
+    version: "v1.0.22"
   },
   onLaunch() {
     // 展示本地存储能力

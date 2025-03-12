@@ -11,6 +11,7 @@ Page({
     showBanner: true,
     showFeedbackSheet: false,
     showEncourageSheet: false,
+    appVersion: '', // 应用版本号
     statistics: {
       points: 0,
       studyDays: 0,
@@ -45,6 +46,12 @@ Page({
     }
     // 加载统计数据
     this.loadStatistics();
+    
+    // 设置应用版本号
+    const app = getApp();
+    this.setData({
+      appVersion: app.globalData.version || 'v1.1.2'
+    });
     
     // 分享朋友圈设置
     wx.showShareMenu({
@@ -348,6 +355,14 @@ Page({
     
     this.setData({
       showBanner: false
+    });
+  },
+
+  // 预览二维码
+  previewQrcode: function() {
+    wx.previewImage({
+      urls: ['/images/qrcode.jpg'],
+      current: '/images/qrcode.jpg'
     });
   }
 });
