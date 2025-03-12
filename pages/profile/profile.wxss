@@ -73,6 +73,35 @@
   color: #666;
 }
 
+/* 分享按钮 */
+.share-container {
+  padding: 30rpx 20rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+
+.share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1296db, #36b4e5);
+  color: white;
+  border-radius: 40rpx;
+  padding: 20rpx 40rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  box-shadow: 0 4rpx 12rpx rgba(18, 150, 219, 0.3);
+  border: none;
+  width: 80%;
+  margin: 0;
+  text-align: center;
+}
+
+.share-button::after {
+  border: none;
+}
+
 /* 功能列表区域 */
 .function-list {
   margin: 20rpx;
@@ -108,7 +137,38 @@
 /* 版本信息 */
 .version-info {
   text-align: center;
-  padding: 30rpx;
+  padding: 20rpx;
   font-size: 24rpx;
   color: #999;
+}
+
+/* 意见反馈相关样式 */
+.feedback-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 0;
+}
+
+.feedback-item text {
+  font-size: 32rpx;
+  color: #333;
+}
+
+/* 客服按钮样式 */
+.contact-button {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  line-height: normal;
+  border: none;
+  border-radius: 0;
+  font-size: inherit;
+  text-align: left;
+}
+
+.contact-button::after {
+  border: none;
 }

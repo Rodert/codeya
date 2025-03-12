@@ -9,6 +9,38 @@
   height: 100%;
 }
 
+/* Share Button */
+.share-container {
+  padding: 20rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4CAF50, #2E7D32);
+  color: white;
+  border-radius: 40rpx;
+  padding: 16rpx 30rpx;
+  font-size: 28rpx;
+  box-shadow: 0 4rpx 12rpx rgba(46, 125, 50, 0.3);
+  border: none;
+  width: auto;
+  margin: 0;
+}
+
+.share-button::after {
+  border: none;
+}
+
+.share-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 12rpx;
+}
+
 /* Section Title */
 .section-title {
   font-size: 36rpx;

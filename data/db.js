@@ -61,11 +61,54 @@ function addPoints(questionId) {
   return true
 }
 
+// 添加分享积分
+function addSharePoints() {
+  // 固定给予6积分
+  const sharePoints = 6
+  
+  // 获取当前日期作为key前缀，用于记录每天的分享次数
+  const today = new Date().toISOString().split('T')[0]
+  const shareKeyPrefix = 'share_' + today + '_'
+  
+  // 检查今天已经分享了多少次
+  let shareCount = 0
+  for (let i = 1; i <= 5; i++) {
+    const shareKey = shareKeyPrefix + i
+    if (pointsData.questionPoints[shareKey]) {
+      shareCount++
+    }
+  }
+  
+  // 如果今天已经分享了5次，返回false
+  if (shareCount >= 5) {
+    return {
+      success: false,
+      message: '今天的分享次数已用完，明天再来吧！'
+    }
+  }
+  
+  // 当前分享是第几次
+  const currentShareNumber = shareCount + 1
+  const shareKey = shareKeyPrefix + currentShareNumber
+  
+  // 更新积分
+  pointsData.totalPoints = (pointsData.totalPoints || 0) + sharePoints
+  pointsData.questionPoints[shareKey] = sharePoints
+  
+  return {
+    success: true,
+    points: sharePoints,
+    message: `第${currentShareNumber}/5次分享，获得${sharePoints}积分！`,
+    remainingShares: 5 - currentShareNumber
+  }
+}
+
 module.exports = {
   getCategories,
   getQuestionsByCategory,
   getQuestionById,
   getTotalPoints,
   getQuestionPoints,
-  addPoints
+  addPoints,
+  addSharePoints
 }

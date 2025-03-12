@@ -46,8 +46,49 @@
     </view>
   </view>
 
+  <!-- 分享按钮 -->
+  <view class="share-container">
+    <button class="share-button" open-type="share" bindtap="onShareTap">
+      <text>分享给好友，一起学习进步</text>
+    </button>
+  </view>
+
   <!-- 版本信息 -->
   <view class="version-info">
-    <text>当前版本 v1.0.12</text>
+    <text>当前版本 v1.0.20</text>
   </view>
+
+  <!-- 意见反馈底部弹出框 -->
+  <action-sheet hidden="{{!showFeedbackSheet}}" bindchange="onFeedbackSheetClose">
+    <action-sheet-item>
+      <button open-type="contact" class="contact-button" bindcontact="handleContact">
+        <view class="feedback-item">
+          <text>联系客服</text>
+        </view>
+      </button>
+    </action-sheet-item>
+    <action-sheet-cancel>取消</action-sheet-cancel>
+  </action-sheet>
+  
+  <!-- 鼓励开发者底部弹出框 -->
+  <action-sheet hidden="{{!showEncourageSheet}}" bindchange="onEncourageSheetClose">
+    <action-sheet-item bindtap="handleEncourageOption" data-option="donate">
+      <view class="feedback-item">
+        <text>打赏开发者</text>
+      </view>
+    </action-sheet-item>
+    <action-sheet-item bindtap="handleEncourageOption" data-option="share">
+      <view class="feedback-item">
+        <text>分享给朋友</text>
+      </view>
+    </action-sheet-item>
+    <action-sheet-item bindtap="handleEncourageOption" data-option="rate">
+      <view class="feedback-item">
+        <text>五星好评（看广告给开发者打Call）</text>
+      </view>
+    </action-sheet-item>
+    <action-sheet-cancel>取消</action-sheet-cancel>
+  </action-sheet>
 </view>
+
+<!-- 不再需要隐藏的客服按钮 -->

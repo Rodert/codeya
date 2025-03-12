@@ -16,18 +16,20 @@ Page({
     recentQuestions: [],
     expandedCategoryKey: null,
     categoryQuestions: [],
-    showBanner: true // 控制横幅显示
+    showBanner: true, // 控制横幅显示
+    totalPoints: 0 // 用户总积分
   },
 
   onLoad: function() {
     this.loadCategories();
     this.loadRecentQuestions();
+    this.loadUserPoints();
     
     // 分享朋友圈设置
     wx.showShareMenu({
-      withShareTicket:true,
-      menus:['shareAppMessage','shareTimeline']
-    })
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    });
   },
   
   onShow: function() {
@@ -35,6 +37,17 @@ Page({
     const app = getApp();
     this.setData({
       showBanner: app.globalData.showBanner
+    });
+    
+    // 刷新积分数据
+    this.loadUserPoints();
+  },
+  
+  // 加载用户积分
+  loadUserPoints: function() {
+    const totalPoints = db.getTotalPoints();
+    this.setData({
+      totalPoints: totalPoints
     });
   },
   
@@ -47,6 +60,53 @@ Page({
     this.setData({
       showBanner: false
     });
+  },
+
+  // 分享到微信好友
+  onShareAppMessage: function() {
+    return {
+      title: '编程鸭 - 让编程学习更简单',
+      path: '/pages/home/home',
+      imageUrl: '/images/share_cover.png'
+    };
+  },
+  
+  // 分享到朋友圈
+  onShareTimeline: function() {
+    return {
+      title: '编程鸭 - 让编程学习更简单',
+      query: '',
+      imageUrl: '/images/share_cover.png'
+    };
+  },
+  
+  // 点击分享按钮
+  onShareTap: function() {
+    // 这里只记录用户点击了分享按钮
+    // 实际的积分添加在用户成功分享后处理
+    console.log('用户点击了分享按钮');
+    
+    // 由于微信小程序限制，无法直接获知用户是否成功分享
+    // 所以我们假设用户点击分享按钮后就成功分享了
+    setTimeout(() => {
+      const result = db.addSharePoints();
+      if (result.success) {
+        wx.showToast({
+          title: result.message,
+          icon: 'success',
+          duration: 2000
+        });
+        
+        // 刷新积分显示
+        this.loadUserPoints();
+      } else {
+        wx.showToast({
+          title: result.message,
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    }, 1500); // 延迟1.5秒，模拟用户分享完成的时间
   },
 
   loadCategories: function() {
