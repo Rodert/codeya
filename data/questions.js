@@ -22,7 +22,7 @@ module.exports = {
         "tags": ["存储引擎", "InnoDB", "MyISAM"]
       },
       {
-        "id": 3,
+          "id": 3,
         "categoryId": "mysql",
         "title": "写出一条SQL语句，将两个表按照某个字段进行左连接查询？",
         "difficulty": "简单",
@@ -505,7 +505,7 @@ module.exports = {
         "id": 51,
         "categoryId": "mysql",
         "title": "如何保证在高并发情况下安全地修改同一行数据？",
-        "difficulty": "困难",
+          "difficulty": "困难",
         "viewCount": 2123,
         "code": "UPDATE accounts SET balance = balance - 100 WHERE user_id = 1 AND balance >= 100;",
         "md": "# 高并发下的数据安全性\n\n在高并发情况下，多个事务可能同时修改同一行数据，导致数据不一致或错误。为了保证数据的安全性，可以采用以下方法：\n\n## 乐观锁\n乐观锁假设在大多数情况下不会发生冲突，通过版本号或时间戳来检测冲突。\n\n### 实现方式\n在表中添加一个版本号列，在更新时检查版本号是否匹配：\n```sql\nUPDATE table SET column = value, version = version + 1 WHERE id = 1 AND version = current_version;\n```\n\n## 悲观锁\n悲观锁假设冲突经常发生，通过锁机制来防止多个事务同时修改同一行数据。\n\n### 实现方式\n使用`SELECT ... FOR UPDATE`锁定行：\n```sql\nSTART TRANSACTION;\nSELECT * FROM table WHERE id = 1 FOR UPDATE;\n-- 进行业务逻辑处理\nUPDATE table SET column = value WHERE id = 1;\nCOMMIT;\n```\n\n## 示例场景\n假设有一个银行转账系统，在高并发情况下，需要保证账户余额的正确性：\n```sql\nSTART TRANSACTION;\nSELECT balance FROM accounts WHERE user_id = 1 FOR UPDATE;\n-- 检查余额是否足够\nUPDATE accounts SET balance = balance - 100 WHERE user_id = 1;\nUPDATE accounts SET balance = balance + 100 WHERE user_id = 2;\nCOMMIT;\n```\n\n## 注意事项\n- **锁的粒度**：尽量使用行级锁而不是表级锁，减少锁的范围，提高并发性能。\n- **事务时间**：尽量缩短事务的执行时间，减少锁的持有时间，避免死锁。\n- **死锁处理**：在高并发情况下，死锁是不可避免的，需要在应用程序中处理死锁情况，例如重试机制。",
@@ -529,7 +529,7 @@ module.exports = {
         "title": "Java的基本特性是什么？",
         "difficulty": "简单",
         "viewCount": 1567,
-        "code": "",
+          "code": "",
         "md": "# Java的基本特性\n\nJava具有以下基本特性：\n- **简单性**：语法简单，去掉了C++中一些复杂的特性，如指针、结构体等。\n- **面向对象**：支持封装、继承、多态等面向对象特性。\n- **平台无关性**：通过JVM实现一次编写，到处运行。\n- **健壮性**：具有强大的异常处理机制和内存管理。\n- **安全性**：防止恶意代码的攻击，如类的加载和验证机制。\n- **多线程**：支持多线程编程，可以充分利用多核处理器的优势。\n- **动态性**：支持动态加载类和方法，具有反射机制。",
         "tags": ["Java特性", "基础特性", "面向对象"]
       },
@@ -554,12 +554,12 @@ module.exports = {
         "tags": ["垃圾回收", "内存管理", "JVM"]
       },
       {
-        "id": 4,
+          "id": 4,
         "categoryId": "javabasics",
         "title": "什么是Java的异常处理？",
-        "difficulty": "中等",
+          "difficulty": "中等",
         "viewCount": 1632,
-        "code": "",
+          "code": "",
         "md": "# Java的异常处理\n\nJava的异常处理机制用于处理程序运行过程中可能出现的错误或异常情况，使程序能够优雅地处理错误并继续执行。异常处理主要包括以下概念：\n- ** Throwable**：所有异常类的父类。\n- **Exception**：表示程序中出现的异常情况，可分为运行时异常（RuntimeException）和检查型异常（非运行时异常）。\n- **Error**：表示严重的错误，通常无法恢复，如虚拟机错误。\n\n异常处理的常用语句包括try、catch、finally、throw和throws。通过try块包裹可能产生异常的代码，catch块捕获并处理异常，finally块用于执行无论是否发生异常都要执行的代码，如资源关闭操作。",
         "tags": ["异常处理", "错误处理", "程序健壮性"]
       },
@@ -642,8 +642,8 @@ module.exports = {
         "code": "",
         "md": "# JDBC和JPA的区别\n\n1. **JDBC（Java Database Connectivity）**：\n   - 是Java中用于执行SQL语句的API，提供了与数据库连接和交互的底层操作。\n   - 直接使用SQL语句进行数据库操作，需要手动处理连接、语句、结果集等资源。\n   - 对数据库的依赖性较高，不同数据库的SQL语法和驱动可能不同，代码的可移植性较差。\n\n2. **JPA（Java Persistence API）**：\n   - 是一种ORM（对象关系映射）规范，提供了一套高层次的API用于对象与关系数据库之间的映射和操作。\n   - 使用面向对象的方式操作数据库，通过实体类与数据库表的映射，简化了数据库操作的代码。\n   - 提供了更丰富的查询方式，如JPQL（Java Persistence Query Language），支持面向对象的查询语言。\n   - 实现了数据访问层的统一规范，便于在不同ORM框架（如Hibernate、EclipseLink等）之间切换，提高了代码的可移植性和可维护性。\n\n总结来说，JDBC更接近底层的数据库操作，适合对SQL语句有深入了解的场景；JPA则提供了更高层次的抽象和便利性，适合快速开发和维护复杂的业务逻辑。",
         "tags": ["数据库", "ORM", "数据访问"]
-      },
-      {
+    },
+    {
         "id": 13,
         "categoryId": "javabasics",
         "title": "什么是Spring框架？",
@@ -652,8 +652,8 @@ module.exports = {
         "code": "",
         "md": "# Spring框架\n\nSpring框架是一个开源的Java EE框架，旨在简化企业级应用的开发。其核心特性包括：\n- **控制反转（IoC）**：通过容器管理对象的创建和依赖关系，将对象的创建和依赖注入交给Spring容器，降低了组件之间的耦合度。\n- **面向切面编程（AOP）**：提供了一种横向模块化的编程方式，用于处理系统中分散的横切关注点（如日志、事务、安全等），提高了代码的复用性和可维护性。\n- **丰富的模块**：包括Spring MVC、Spring Data、Spring Security、Spring Boot等，覆盖了Web开发、数据访问、安全控制、微服务架构等多个领域。\n\nSpring框架的优势在于其轻量级、非侵入式、松散耦合等特性，使得开发者能够更专注于业务逻辑的实现，而不必过多关注底层的基础设施代码。",
         "tags": ["Spring", "框架", "IoC", "AOP"]
-      },
-      {
+    },
+    {
         "id": 14,
         "categoryId": "javabasics",
         "title": "JDK和JRE有什么区别？",
