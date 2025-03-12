@@ -39,6 +39,18 @@ Page({
       showBanner: app.globalData.showBanner
     });
     
+    // 如果横幅显示，设置5秒后自动关闭
+    if (this.data.showBanner) {
+      setTimeout(() => {
+        // 更新全局变量
+        app.globalData.showBanner = false;
+        
+        this.setData({
+          showBanner: false
+        });
+      }, 5000); // 5秒后自动关闭
+    }
+    
     // 刷新积分数据
     this.loadUserPoints();
   },
