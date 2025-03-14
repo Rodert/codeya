@@ -418,7 +418,12 @@ Page({
     }
     
     this.setData({
-      showAdOptions: true
+      showAdOptions: true,
+      adRewardOptions: [
+        { id: 'growth', name: '成长值加速', desc: '获得20点成长值', icon: '🚀' },
+        { id: 'skin', name: '皮肤解锁加速', desc: '皮肤解锁进度+20%', icon: '👔' },
+        { id: 'premium', name: '解锁精选题目', desc: '解锁3道高质量题目', icon: '⭐' }
+      ]
     });
   },
   
@@ -591,6 +596,10 @@ Page({
 
   // 初始化广告视频
   initAdVideo: function() {
+    // 如果已经初始化过，就不再重复初始化
+    if (this.videoAd) {
+      return;
+    }
     if (wx.createRewardedVideoAd) {
       this.videoAd = wx.createRewardedVideoAd({
         adUnitId: 'adunit-xxxxxxxxxxxxxxxx' // 替换为实际的广告单元ID

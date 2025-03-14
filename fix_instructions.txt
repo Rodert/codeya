@@ -1,0 +1,1 @@
+在data对象中添加adRewardOptions数组
