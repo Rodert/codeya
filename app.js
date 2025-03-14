@@ -2,15 +2,16 @@
  * @Author: JavaPub
  * @Date: 2025-02-26 11:41:14
  * @LastEditors: your name
- * @LastEditTime: 2025-03-08 23:19:10
+ * @LastEditTime: 2025-03-14 10:00:00
  * @Description: Here is the JavaPub code base. Search JavaPub on the whole web.
  * @FilePath: /codeya/app.js
  */
+
 App({
   globalData: {
     userInfo: null,
     showBanner: true, // 控制横幅显示
-    version: "v1.0.22"
+    version: 'v1.0.23' // 直接定义版本号
   },
   onLaunch() {
     // 展示本地存储能力

@@ -1,8 +1,16 @@
+/*
+ * @Author: JavaPub
+ * @Date: 2025-03-07 19:18:15
+ * @LastEditors: your name
+ * @LastEditTime: 2025-03-14 16:41:58
+ * @Description: Here is the JavaPub code base. Search JavaPub on the whole web.
+ * @FilePath: /codeya/components/banner/banner.js
+ */
 Component({
   properties: {
     text: {
       type: String,
-      value: '随时随地学编程'
+      value: ''  // 移除默认值，使用传入的文本
     },
     duration: {
       type: Number,

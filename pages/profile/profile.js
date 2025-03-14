@@ -47,10 +47,10 @@ Page({
     // 加载统计数据
     this.loadStatistics();
     
-    // 设置应用版本号
+    // 设置应用版本号（从全局获取）
     const app = getApp();
     this.setData({
-      appVersion: app.globalData.version || 'v1.1.2'
+      appVersion: app.globalData.version
     });
     
     // 分享朋友圈设置

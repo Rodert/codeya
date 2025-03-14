@@ -41,14 +41,6 @@
   margin-right: 12rpx;
 }
 
-/* Section Title */
-.section-title {
-  font-size: 36rpx;
-  font-weight: bold;
-  padding: 24rpx 30rpx;
-  color: #333;
-}
-
 /* Categories */
 .categories-section {
   margin: 20rpx 0;
@@ -162,61 +154,6 @@
 .difficulty-hard {
   background: #fbe9e7;
   color: #d32f2f;
-}
-
-.view-count {
-  font-size: 24rpx;
-  color: #999;
-}
-
-/* Recent Questions */
-.recent-section {
-  margin: 30rpx 20rpx;
-  background: #fff;
-  border-radius: 12rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
-}
-
-.section-title {
-  padding: 28rpx 30rpx;
-  font-size: 34rpx;
-  font-weight: 500;
-  color: #333;
-  border-bottom: 1rpx solid #eee;
-}
-
-.recent-list {
-  padding: 0;
-}
-
-.recent-item {
-  display: flex;
-  flex-direction: column;
-  padding: 28rpx 30rpx;
-  border-bottom: 1rpx solid #eee;
-}
-
-.recent-item:last-child {
-  border-bottom: none;
-}
-
-.recent-title {
-  font-size: 30rpx;
-  color: #333;
-  margin-bottom: 12rpx;
-  line-height: 1.4;
-}
-
-.recent-meta {
-  display: flex;
-  align-items: center;
-  gap: 16rpx;
-}
-
-.difficulty {
-  padding: 6rpx 16rpx;
-  border-radius: 8rpx;
-  font-size: 24rpx;
 }
 
 .view-count {

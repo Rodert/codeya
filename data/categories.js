@@ -53,6 +53,33 @@ module.exports = {
       questionCount: 35,
       icon: "/images/list/golang.png",
       order: 6
-    }
+    },
+    {
+      id: 7,
+      name: "Java集合",
+      key: "javacollections",
+      description: "Java集合是Java中用于存储和操作一组对象的类和接口的集合。它提供了多种数据结构，如List、Set、Map等，每种结构都有不同的实现类，如ArrayList、LinkedList、HashSet、HashMap等。这些集合类具有不同的特性和性能，适用于不同的场景。Java集合框架提供了统一的体系结构，使得开发人员可以方便地使用和操作集合数据。",
+      questionCount: 20,
+      icon: "/images/list/java5.png",
+      order: 2
+    },
+    {
+      id: 8,
+      name: "Java并发",
+      key: "javaconcurrent",
+      description: "Java并发是多线程程序设计，线程是执行单位，通过实现Runnable或继承Thread创建。共享数据需用锁（如synchronized）保证线程安全，避免竞态条件。Java并发包（java.util.concurrent）提供Executor线程池、Future结果获取、阻塞队列等工具，提升开发效率。",
+      questionCount: 20,
+      icon: "/images/list/java3.png",
+      order: 2
+    },
+    {
+      id: 9,
+      name: "Java虚拟机",
+      key: "javajvm",
+      description: "Java虚拟机（JVM）是Java运行时环境的核心，负责执行Java字节码。它通过类加载器加载.class文件，使用执行引擎解释执行字节码指令。JVM具备自动内存管理功能，通过垃圾回收机制有效管理对象内存。其跨平台特性使Java程序能在不同操作系统上运行，底层由JVM实现。JVM的架构包括程序计数器、Java栈、本地方法栈、Java堆、方法区等，各部分协同工作，保障Java程序稳定运行。",
+      questionCount: 20,
+      icon: "/images/list/java4.png",
+      order: 2
+    },
   ]
 }

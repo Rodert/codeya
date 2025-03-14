@@ -1,5 +1,39 @@
 const db = require('../../data/db.js');
 
+// 励志语录数组
+const motivationalQuotes = [
+  "编程改变世界，学习改变人生",
+  "每天进步一点点，离梦想就近一点点",
+  "代码写出来是给人看的，附带能在机器上运行",
+  "不要害怕困难，代码的每一行都是你的成长",
+  "程序员的成长是一个持续迭代的过程",
+  "没有解决不了的bug，只有不够努力的程序员",
+  "学习编程最好的时机是十年前，其次是现在",
+  "写代码要像写诗一样优雅，像写散文一样流畅",
+  "程序员的进步在于每天写的代码都比昨天好一点",
+  "你的指尖有改变世界的力量"
+];
+
+// 获取今天的励志语录
+function getTodayQuote() {
+  const today = new Date().toDateString();
+  const lastQuoteDate = wx.getStorageSync('lastQuoteDate');
+  const lastQuoteIndex = wx.getStorageSync('lastQuoteIndex');
+  
+  if (!lastQuoteDate || lastQuoteDate !== today) {
+    let newIndex;
+    do {
+      newIndex = Math.floor(Math.random() * motivationalQuotes.length);
+    } while (newIndex === lastQuoteIndex);
+    
+    wx.setStorageSync('lastQuoteDate', today);
+    wx.setStorageSync('lastQuoteIndex', newIndex);
+    return motivationalQuotes[newIndex];
+  }
+  
+  return motivationalQuotes[lastQuoteIndex];
+}
+
 Page({
   data: {
     banners: [
@@ -13,16 +47,16 @@ Page({
       }
     ],
     categories: [],
-    recentQuestions: [],
     expandedCategoryKey: null,
     categoryQuestions: [],
-    showBanner: true, // 控制横幅显示
-    totalPoints: 0 // 用户总积分
+    showBanner: false, // 默认不显示横幅
+    totalPoints: 0, // 用户总积分
+    dailyQuestion: null, // 每日一题数据
+    bannerText: '' // 横幅文本
   },
 
   onLoad: function() {
     this.loadCategories();
-    this.loadRecentQuestions();
     this.loadUserPoints();
     
     // 分享朋友圈设置
@@ -33,26 +67,67 @@ Page({
   },
   
   onShow: function() {
-    // 从全局变量获取是否显示横幅
-    const app = getApp();
-    this.setData({
-      showBanner: app.globalData.showBanner
-    });
+    // 检查是否需要显示横幅
+    this.checkBannerDisplay();
     
-    // 如果横幅显示，设置5秒后自动关闭
-    if (this.data.showBanner) {
-      setTimeout(() => {
-        // 更新全局变量
-        app.globalData.showBanner = false;
-        
-        this.setData({
-          showBanner: false
-        });
-      }, 5000); // 5秒后自动关闭
-    }
+    // 检查是否需要显示每日一题
+    this.checkDailyQuestion();
     
     // 刷新积分数据
     this.loadUserPoints();
+  },
+
+  // 检查是否需要显示横幅
+  checkBannerDisplay: function() {
+    const today = new Date().toDateString(); // 获取当前日期（不含时间）
+    const lastShowDate = wx.getStorageSync('lastBannerShowDate');
+    
+    // 如果从未显示过或者不是今天显示的，则显示横幅
+    if (!lastShowDate || lastShowDate !== today) {
+      // 更新全局变量
+      const app = getApp();
+      app.globalData.showBanner = true;
+      
+      // 获取今天的励志语录
+      const todayQuote = getTodayQuote();
+      
+      this.setData({
+        showBanner: true,
+        bannerText: todayQuote
+      });
+      
+      // 如果横幅显示，设置10秒后自动关闭
+      setTimeout(() => {
+        this.closeBanner();
+      }, 10000); // 10秒后自动关闭
+      
+      // 记录显示日期
+      wx.setStorageSync('lastBannerShowDate', today);
+    } else {
+      // 如果今天已经显示过，则不显示
+      const app = getApp();
+      app.globalData.showBanner = false;
+      
+      this.setData({
+        showBanner: false
+      });
+    }
+  },
+  
+  // 关闭横幅的统一处理函数
+  closeBanner: function() {
+    // 更新全局变量
+    const app = getApp();
+    app.globalData.showBanner = false;
+    
+    this.setData({
+      showBanner: false
+    });
+  },
+  
+  // 处理横幅关闭事件
+  onBannerClose: function() {
+    this.closeBanner();
   },
   
   // 加载用户积分
@@ -60,17 +135,6 @@ Page({
     const totalPoints = db.getTotalPoints();
     this.setData({
       totalPoints: totalPoints
-    });
-  },
-  
-  // 处理横幅关闭事件
-  onBannerClose: function() {
-    // 更新全局变量
-    const app = getApp();
-    app.globalData.showBanner = false;
-    
-    this.setData({
-      showBanner: false
     });
   },
 
@@ -140,43 +204,6 @@ Page({
     });
   },
 
-  loadRecentQuestions: function() {
-    const categories = db.getCategories();
-    let recentQuestions = [];
-    
-    // 从每个类别中获取问题
-    categories.forEach(function(category) {
-      const questions = db.getQuestionsByCategory(category.key);
-      if (questions && questions.length > 0) {
-        // 为每个问题添加categoryKey
-        const questionsWithCategory = questions.map(function(q) {
-          return {
-            id: q.id,
-            categoryId: q.categoryId,
-            title: q.title,
-            difficulty: q.difficulty,
-            viewCount: q.viewCount,
-            description: q.description,
-            answer: q.answer,
-            code: q.code,
-            tags: q.tags,
-            categoryKey: category.key
-          };
-        });
-        recentQuestions = recentQuestions.concat(questionsWithCategory);
-      }
-    });
-
-    // 按照浏览次数排序
-    recentQuestions.sort(function(a, b) {
-      return b.viewCount - a.viewCount;
-    });
-    
-    this.setData({
-      recentQuestions: recentQuestions.slice(0, 5)
-    });
-  },
-
   expandCategory: function(e) {
     const categoryKey = e.currentTarget.dataset.key;
     
@@ -236,6 +263,70 @@ Page({
     const questionId = e.currentTarget.dataset.questionId;
     wx.navigateTo({
       url: '/pages/detail/detail?categoryKey=' + categoryKey + '&questionId=' + questionId
+    });
+  },
+
+  // 检查是否需要显示每日一题
+  checkDailyQuestion: function() {
+    const today = new Date().toDateString();
+    const lastQuestionDate = wx.getStorageSync('lastDailyQuestionDate');
+    const lastQuestionCompleted = wx.getStorageSync('lastQuestionCompleted'); // 是否完成了每日一题
+    
+    // 如果从未显示过，或者不是今天显示的，或者今天显示了但没完成，则显示每日一题
+    if (!lastQuestionDate || lastQuestionDate !== today || (lastQuestionDate === today && !lastQuestionCompleted)) {
+      this.showDailyQuestion();
+    }
+  },
+
+  // 获取随机题目
+  getRandomQuestion: function() {
+    const categories = this.data.categories;
+    if (!categories || categories.length === 0) return null;
+
+    // 随机选择一个分类
+    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+    const questions = db.getQuestionsByCategory(randomCategory.key);
+    
+    if (!questions || questions.length === 0) return null;
+
+    // 随机选择一道题目
+    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+    return {
+      ...randomQuestion,
+      categoryKey: randomCategory.key,
+      categoryName: randomCategory.name
+    };
+  },
+
+  // 显示每日一题弹窗
+  showDailyQuestion: function() {
+    const question = this.getRandomQuestion();
+    if (!question) return;
+
+    this.setData({ dailyQuestion: question });
+
+    const today = new Date().toDateString();
+    wx.showModal({
+      title: '每日一题',
+      content: `[${question.categoryName}] ${question.title}\n\n难度：${question.difficulty}`,
+      confirmText: '立即学习',
+      cancelText: '稍后再说',
+      success: (res) => {
+        // 记录最后显示日期
+        wx.setStorageSync('lastDailyQuestionDate', today);
+        
+        if (res.confirm) {
+          // 用户点击了立即学习，记录完成状态
+          wx.setStorageSync('lastQuestionCompleted', true);
+          // 跳转到题目详情页
+          wx.navigateTo({
+            url: '/pages/detail/detail?categoryKey=' + question.categoryKey + '&questionId=' + question.id
+          });
+        } else {
+          // 用户点击了稍后再说，清除完成状态
+          wx.setStorageSync('lastQuestionCompleted', false);
+        }
+      }
     });
   }
 });
