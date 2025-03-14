@@ -81,5 +81,14 @@ module.exports = {
       icon: "/images/list/java4.png",
       order: 2
     },
+    {
+      id: 10,
+      name: "Hadoop",
+      key: "hadoop",
+      description: "Hadoop是一个开源的分布式计算平台，基于Java开发，核心是HDFS和MapReduce。HDFS负责分布式存储，将数据分割成多个块存储在不同节点，提供高容错性和高扩展性；MapReduce则用于大规模数据的并行计算，简化编程模型，支持复杂统计和数据分析任务。",
+      questionCount: 30,
+      icon: "/images/list/hadoop.png",
+      order: 10
+    },
   ]
 }

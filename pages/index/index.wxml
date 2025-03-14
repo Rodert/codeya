@@ -1,4 +1,4 @@
-<banner wx:if="{{showBanner}}" text="随时随地看学编程" duration="0" bindclose="onBannerClose"></banner>
+<banner wx:if="{{showBanner}}" text="{{bannerText}}" duration="0" bindclose="onBannerClose"></banner>
 
 <view class="page {{showBanner ? 'has-banner' : ''}}">
   <!-- Categories List -->
@@ -9,6 +9,109 @@
         <text class="category-name">{{item.name}}</text>
         <text class="question-count">{{item.questionCount}}题</text>
         <text class="expand-icon">></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 鸭鸭冒险 - 随机刷题功能 -->
+  <view class="duck-adventure">
+    <view class="adventure-title">
+      <image class="duck-icon" src="{{currentDuckSkinIcon}}" mode="aspectFit"/>
+      <text>鸭鸭冒险</text>
+      <view class="duck-level">Lv.{{duckLevel}}</view>
+    </view>
+    <view class="adventure-description">
+      每次点击，鸭鸭会带你探索一个随机知识点
+    </view>
+    <view class="growth-bar-container">
+      <view class="growth-bar">
+        <view class="growth-progress" style="width: {{(duckGrowth / (duckLevel * 10)) * 100}}%"></view>
+      </view>
+      <text class="growth-text">成长值: {{duckGrowth}}/{{duckLevel * 10}}</text>
+    </view>
+    <view class="adventure-buttons">
+      <button class="adventure-button" bindtap="startRandomQuestion">
+        <text class="adventure-button-text">开始冒险</text>
+        <text class="adventure-emoji">🚀</text>
+      </button>
+      <button class="achievement-button" bindtap="showAchievements">
+        <text class="achievement-emoji">🏆</text>
+      </button>
+      <button class="skin-button" bindtap="showSkinSelector">
+        <text class="skin-emoji">👔</text>
+      </button>
+      <button class="ad-button" bindtap="showAdRewardOptions">
+        <text class="ad-emoji">🎁</text>
+      </button>
+    </view>
+    
+    <!-- 高级题目解锁状态 -->
+    <view wx:if="{{premiumUnlocked}}" class="premium-status">
+      <text class="premium-text">🌟 高级题目已解锁</text>
+    </view>
+  </view>
+
+  <!-- Recent Questions -->
+  <view class="recent-section">
+    <view class="section-title">最近更新</view>
+    <view class="recent-list">
+      <view class="recent-item" 
+            wx:for="{{recentQuestions}}" 
+            wx:key="id"
+            bindtap="goToDetail"
+            data-category-key="{{item.categoryKey}}"
+            data-question-id="{{item.id}}">
+        <text class="recent-title">{{item.title}}</text>
+        <view class="recent-meta">
+          <text class="difficulty difficulty-{{item.difficulty === '简单' ? 'easy' : item.difficulty === '中等' ? 'medium' : 'hard'}}">
+            {{item.difficulty}}
+          </text>
+          <text class="view-count">{{item.viewCount}}次学习</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 广告奖励选项弹窗 -->
+  <view class="ad-options-popup" wx:if="{{showAdOptions}}">
+    <view class="ad-options-container">
+      <view class="ad-options-header">
+        <text class="ad-options-title">选择广告奖励</text>
+        <view class="ad-options-close" bindtap="closeAdOptions">×</view>
+      </view>
+      
+      <view class="ad-options-content">
+        <view class="ad-option-item" wx:for="{{adRewardOptions}}" wx:key="id" bindtap="selectAdReward" data-id="{{item.id}}">
+          <view class="ad-option-icon">{{item.icon}}</view>
+          <view class="ad-option-info">
+            <view class="ad-option-name">{{item.name}}</view>
+            <view class="ad-option-desc">{{item.desc}}</view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="ad-options-footer">
+        <text class="ad-options-note">完整观看广告后获得奖励</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 如果有解锁的高级题目，显示在首页 -->
+  <view class="premium-questions" wx:if="{{premiumUnlocked && premiumQuestions.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">⭐ 精选题目</text>
+      <text class="section-subtitle">通过广告解锁的高质量题目</text>
+    </view>
+    
+    <view class="premium-list">
+      <view class="premium-item" wx:for="{{premiumQuestions}}" wx:key="id" bindtap="navigateToQuestion" data-id="{{item.id}}">
+        <view class="premium-item-content">
+          <view class="premium-item-title">{{item.title}}</view>
+          <view class="premium-item-meta">
+            <text class="premium-item-category">{{item.category}}</text>
+            <text class="premium-item-difficulty">难度: {{item.difficulty}}</text>
+          </view>
+        </view>
       </view>
     </view>
   </view>
