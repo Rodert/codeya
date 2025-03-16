@@ -6,7 +6,8 @@
     "pages/activation/activation",
     "pages/home/home",
     "pages/category/category",
-    "pages/games/games"
+    "pages/games/games",
+    "pages/emoji-match/emoji-match"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -21,12 +21,12 @@ Page({
         reward: '最多10积分'
       },
       {
-        id: 'codeGuess',
-        name: '代码猜猜猜',
-        description: '猜测代码片段的输出结果',
+        id: 'emojiMatch',
+        name: '表情消消乐',
+        description: '匹配相同的表情，消除所有方块',
         icon: '/images/logo/codeya_logo1.jpg',
         cost: 2,
-        reward: '每题2积分'
+        reward: '最多8积分'
       }
     ]
   },
@@ -81,12 +81,10 @@ Page({
         });
         break;
         
-      case 'codeGuess':
-        // 代码猜猜猜游戏暂未实现，显示提示
-        wx.showModal({
-          title: '游戏开发中',
-          content: '代码猜猜猜游戏正在开发中，敬请期待！',
-          showCancel: false
+      case 'emojiMatch':
+        // 导航到表情消消乐游戏页面
+        wx.navigateTo({
+          url: '/pages/emoji-match/emoji-match'
         });
         break;
         

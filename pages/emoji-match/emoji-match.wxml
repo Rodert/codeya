@@ -1,0 +1,73 @@
+<view class="game-container">
+  <!-- 游戏头部信息 -->
+  <view class="game-header">
+    <view class="score-container">
+      <text class="score-label">得分:</text>
+      <text class="score-value">{{score}}</text>
+    </view>
+    <view class="time-container">
+      <text class="time-label">时间:</text>
+      <text class="time-value">{{timeLeft}}秒</text>
+    </view>
+    <view class="moves-container">
+      <text class="moves-label">步数:</text>
+      <text class="moves-value">{{moves}}</text>
+    </view>
+  </view>
+
+  <!-- 游戏开始前的介绍界面 -->
+  <view class="intro-screen" wx:if="{{gameState === 'intro'}}">
+    <view class="intro-content">
+      <text class="intro-title">表情消消乐</text>
+      <text class="intro-description">匹配相同的表情，消除所有方块！</text>
+      <text class="intro-feature">🦆 🐶 🐱 丰富的动物表情等你来配对！</text>
+      <text class="intro-rules">游戏规则:</text>
+      <text class="intro-rule-item">1. 点击两个相同的表情进行匹配</text>
+      <text class="intro-rule-item">2. 匹配成功的表情会消失</text>
+      <text class="intro-rule-item">3. 在规定时间内消除所有表情</text>
+      <text class="intro-rule-item">4. 步数越少，得分越高</text>
+      <text class="intro-cost">本次游戏将消耗 2 积分</text>
+      <button class="start-button" bindtap="startGame">开始游戏</button>
+    </view>
+  </view>
+
+  <!-- 游戏主界面 -->
+  <view class="game-board" wx:if="{{gameState === 'playing'}}">
+    <view class="emoji-grid" style="grid-template-columns: repeat({{gridSize}}, 1fr);">
+      <view 
+        wx:for="{{emojiGrid}}" 
+        wx:key="index" 
+        class="emoji-cell {{item.selected ? 'selected' : ''}} {{item.matched ? 'matched' : ''}}"
+        bindtap="onEmojiTap"
+        data-index="{{index}}"
+      >
+        <text class="emoji" wx:if="{{!item.matched}}">{{item.emoji}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 游戏结束界面 -->
+  <view class="game-over-screen" wx:if="{{gameState === 'gameOver'}}">
+    <view class="game-over-content">
+      <text class="game-over-title">{{gameWon ? '恭喜过关！' : '游戏结束'}}</text>
+      <text class="game-over-emoji">{{gameWon ? '🎉 🦆 🎊' : '😢 🐶 😢'}}</text>
+      <text class="game-over-score">最终得分: {{score}}</text>
+      <text class="game-over-moves">使用步数: {{moves}}</text>
+      <text class="game-over-time">剩余时间: {{timeLeft}}秒</text>
+      <text class="game-over-reward" wx:if="{{gameWon}}">获得奖励: {{reward}}积分</text>
+      <view class="game-over-buttons">
+        <button class="restart-button" bindtap="restartGame">再来一局</button>
+        <button class="exit-button" bindtap="exitGame">退出游戏</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部积分显示 -->
+  <view class="points-info">
+    <view class="points-display">
+      <text class="points-icon">🪙</text>
+      <text class="points-value">{{totalPoints}}</text>
+      <text class="points-label">当前积分</text>
+    </view>
+  </view>
+</view> 
