@@ -19,6 +19,7 @@
   <view class="intro-screen" wx:if="{{gameState === 'intro'}}">
     <view class="intro-content">
       <text class="intro-title">表情消消乐</text>
+      <text class="intro-level">关卡 {{currentLevel + 1}}</text>
       <text class="intro-description">匹配相同的表情，消除所有方块！</text>
       <text class="intro-feature">🦆 🐶 🐱 丰富的动物表情等你来配对！</text>
       <text class="intro-rules">游戏规则:</text>
@@ -26,8 +27,46 @@
       <text class="intro-rule-item">2. 匹配成功的表情会消失</text>
       <text class="intro-rule-item">3. 在规定时间内消除所有表情</text>
       <text class="intro-rule-item">4. 步数越少，得分越高</text>
-      <text class="intro-cost">本次游戏将消耗 2 积分</text>
-      <button class="start-button" bindtap="startGame">开始游戏</button>
+      <view class="intro-level-info">
+        <text class="level-info-item">网格大小: {{levels[currentLevel].gridSize}}x{{levels[currentLevel].gridSize}}</text>
+        <text class="level-info-item">时间限制: {{levels[currentLevel].timeLimit}}秒</text>
+        <text class="level-info-item">基础奖励: {{levels[currentLevel].reward}}坨鸭屎</text>
+      </view>
+      <text class="intro-cost">本次游戏将消耗 {{levels[currentLevel].costPoints}} 积分</text>
+      <view class="intro-buttons">
+        <button class="start-button" bindtap="startGame">开始游戏</button>
+        <button class="level-select-button" bindtap="showLevelSelect">选择关卡</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 关卡选择界面 -->
+  <view class="level-select-screen" wx:if="{{gameState === 'level-select'}}">
+    <view class="level-select-content">
+      <text class="level-select-title">选择关卡</text>
+      <view class="levels-grid">
+        <view 
+          wx:for="{{levels}}" 
+          wx:key="index" 
+          class="level-item {{index < unlockedLevels ? 'unlocked' : 'locked'}}"
+          bindtap="selectLevel"
+          data-level="{{index}}"
+        >
+          <text class="level-number">{{index + 1}}</text>
+          <view class="level-details" wx:if="{{index < unlockedLevels}}">
+            <text class="level-grid-size">{{item.gridSize}}x{{item.gridSize}}</text>
+            <text class="level-time">{{item.timeLimit}}秒</text>
+          </view>
+          <view class="level-lock" wx:else>
+            <text class="lock-icon">🔒</text>
+          </view>
+          <view class="level-progress" wx:if="{{levelProgress['level_' + index]}}">
+            <text class="level-high-score">最高分: {{levelProgress['level_' + index].highScore}}</text>
+            <text class="level-best-moves">最少步数: {{levelProgress['level_' + index].bestMoves}}</text>
+          </view>
+        </view>
+      </view>
+      <button class="back-button" bindtap="exitGame">返回</button>
     </view>
   </view>
 
@@ -37,11 +76,11 @@
       <view 
         wx:for="{{emojiGrid}}" 
         wx:key="index" 
-        class="emoji-cell {{item.selected ? 'selected' : ''}} {{item.matched ? 'matched' : ''}}"
+        class="emoji-cell {{item.selected ? 'selected' : ''}} {{item.matched ? 'matched' : ''}} {{item.empty ? 'empty' : ''}}"
         bindtap="onEmojiTap"
         data-index="{{index}}"
       >
-        <text class="emoji" wx:if="{{!item.matched}}">{{item.emoji}}</text>
+        <text class="emoji" wx:if="{{!item.matched && !item.empty}}">{{item.emoji}}</text>
       </view>
     </view>
   </view>
@@ -51,12 +90,14 @@
     <view class="game-over-content">
       <text class="game-over-title">{{gameWon ? '恭喜过关！' : '游戏结束'}}</text>
       <text class="game-over-emoji">{{gameWon ? '🎉 🦆 🎊' : '😢 🐶 😢'}}</text>
+      <text class="game-over-level">关卡 {{currentLevel + 1}}</text>
       <text class="game-over-score">最终得分: {{score}}</text>
       <text class="game-over-moves">使用步数: {{moves}}</text>
       <text class="game-over-time">剩余时间: {{timeLeft}}秒</text>
-      <text class="game-over-reward" wx:if="{{gameWon}}">获得奖励: {{reward}}积分</text>
+      <text class="game-over-reward" wx:if="{{gameWon}}">获得奖励: {{reward}}坨鸭屎 💩</text>
       <view class="game-over-buttons">
         <button class="restart-button" bindtap="restartGame">再来一局</button>
+        <button class="level-select-button" bindtap="backToLevelSelect">选择关卡</button>
         <button class="exit-button" bindtap="exitGame">退出游戏</button>
       </view>
     </view>
@@ -67,7 +108,12 @@
     <view class="points-display">
       <text class="points-icon">🪙</text>
       <text class="points-value">{{totalPoints}}</text>
-      <text class="points-label">当前积分</text>
+      <text class="points-label">积分</text>
+    </view>
+    <view class="poop-display">
+      <text class="poop-icon">💩</text>
+      <text class="poop-value">{{totalPoop}}</text>
+      <text class="poop-label">鸭屎</text>
     </view>
   </view>
 </view> 

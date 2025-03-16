@@ -23,20 +23,21 @@
   font-weight: bold;
 }
 
-.points-display {
+.points-display, .poop-display {
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.2);
   padding: 8rpx 16rpx;
   border-radius: 30rpx;
+  margin-left: 10rpx;
 }
 
-.points-icon {
+.points-icon, .poop-icon {
   font-size: 28rpx;
   margin-right: 8rpx;
 }
 
-.points-value {
+.points-value, .poop-value {
   font-size: 28rpx;
   font-weight: bold;
   color: white;
@@ -101,6 +102,13 @@
   font-size: 28rpx;
   color: #f44336;
   margin: 20rpx 0;
+  font-weight: bold;
+}
+
+.instructions-reward {
+  font-size: 28rpx;
+  color: #795548;
+  margin: 10rpx 0 20rpx;
   font-weight: bold;
 }
 

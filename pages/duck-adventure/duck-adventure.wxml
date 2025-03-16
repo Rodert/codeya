@@ -5,6 +5,10 @@
       <text class="points-icon">🪙</text>
       <text class="points-value">{{totalPoints}}</text>
     </view>
+    <view class="poop-display">
+      <text class="poop-icon">💩</text>
+      <text class="poop-value">{{totalPoop}}</text>
+    </view>
   </view>
   
   <view class="game-canvas-container">
@@ -27,6 +31,7 @@
     <text class="instructions-text">3. 收集金币增加得分</text>
     <text class="instructions-text">4. 坚持时间越长分数越高</text>
     <text class="instructions-cost">本次游戏将消耗 5 积分</text>
+    <text class="instructions-reward">游戏胜利可获得鸭屎奖励 💩</text>
     <button class="start-game-button" bindtap="startGame">开始游戏</button>
   </view>
   

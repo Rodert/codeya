@@ -3,6 +3,7 @@ const db = require('../../data/db.js');
 Page({
   data: {
     totalPoints: 0,
+    totalPoop: 0,
     gameStarted: false,
     gameOver: false,
     gameScore: 0,
@@ -29,16 +30,16 @@ Page({
   },
 
   onLoad: function() {
-    // 加载用户积分
-    this.loadUserPoints();
+    // 加载用户积分和鸭屎数量
+    this.loadUserData();
     
     // 初始化游戏画布
     this.initGameCanvas();
   },
   
   onShow: function() {
-    // 每次显示页面时刷新积分
-    this.loadUserPoints();
+    // 每次显示页面时刷新数据
+    this.loadUserData();
   },
   
   onUnload: function() {
@@ -46,11 +47,13 @@ Page({
     this.clearAllTimers();
   },
   
-  // 加载用户积分
-  loadUserPoints: function() {
+  // 加载用户积分和鸭屎数量
+  loadUserData: function() {
     const totalPoints = db.getTotalPoints();
+    const totalPoop = db.getTotalDuckPoop();
     this.setData({
-      totalPoints: totalPoints
+      totalPoints: totalPoints,
+      totalPoop: totalPoop
     });
   },
   
@@ -412,20 +415,19 @@ Page({
     // 清除所有计时器
     this.clearAllTimers();
     
-    // 计算奖励积分
-    const reward = Math.floor(this.data.gameScore / 10) + Math.floor(this.data.gameTime / 5);
+    // 计算奖励鸭屎
+    const poopReward = Math.floor(this.data.gameScore / 10) + Math.floor(this.data.gameTime / 5);
     
-    // 添加奖励积分
-    if (reward > 0) {
-      const newPoints = this.data.totalPoints + reward;
-      db.updateTotalPoints(newPoints);
+    // 添加奖励鸭屎
+    if (poopReward > 0) {
+      const result = db.addDuckPoop('duckAdventure', poopReward);
       
       this.setData({
-        totalPoints: newPoints
+        totalPoop: result.totalPoop
       });
       
       wx.showToast({
-        title: `获得${reward}积分奖励！`,
+        title: result.message,
         icon: 'success',
         duration: 2000
       });

@@ -12,7 +12,7 @@
         <text class="game-description">控制小鸭子躲避障碍物，收集金币</text>
         <view class="game-meta">
           <text class="game-cost">消耗: 5积分</text>
-          <text class="game-reward">奖励: 根据得分</text>
+          <text class="game-reward">奖励: 鸭屎 💩</text>
         </view>
       </view>
       <text class="arrow">></text>
@@ -25,7 +25,7 @@
         <text class="game-description">考验记忆力，找出所有配对的卡片</text>
         <view class="game-meta">
           <text class="game-cost">消耗: 3积分</text>
-          <text class="game-reward">奖励: 最多10积分</text>
+          <text class="game-reward">奖励: 鸭屎 💩</text>
         </view>
       </view>
       <text class="arrow">></text>
@@ -38,7 +38,7 @@
         <text class="game-description">匹配相同的表情，消除所有方块</text>
         <view class="game-meta">
           <text class="game-cost">消耗: 2积分</text>
-          <text class="game-reward">奖励: 最多8积分</text>
+          <text class="game-reward">奖励: 鸭屎 💩</text>
         </view>
       </view>
       <text class="arrow">></text>
@@ -53,7 +53,12 @@
     <view class="points-display">
       <text class="points-icon">🪙</text>
       <text class="points-value">{{totalPoints}}</text>
-      <text class="points-label">当前积分</text>
+      <text class="points-label">积分</text>
+    </view>
+    <view class="poop-display">
+      <text class="poop-icon">💩</text>
+      <text class="poop-value">{{totalPoop}}</text>
+      <text class="poop-label">鸭屎</text>
     </view>
   </view>
 </view> 

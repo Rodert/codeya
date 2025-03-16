@@ -2,6 +2,7 @@
 const categoriesData = require('./categories.js')
 const questionsData = require('./questions.js')
 const pointsData = require('./points.js')
+const duckPoopData = require('./duckPoop.js')
 
 // 强制重新加载积分数据
 function reloadPointsData() {
@@ -19,6 +20,25 @@ function reloadPointsData() {
     }
   } catch (e) {
     console.error('Failed to reload points data:', e);
+  }
+}
+
+// 强制重新加载鸭屎数据
+function reloadDuckPoopData() {
+  try {
+    const savedPoop = wx.getStorageSync('userDuckPoop');
+    if (savedPoop) {
+      const parsedData = JSON.parse(savedPoop);
+      // 更新内存中的数据
+      if (parsedData.totalPoop !== undefined) {
+        duckPoopData.totalPoop = parsedData.totalPoop;
+      }
+      if (parsedData.gamePoop) {
+        duckPoopData.gamePoop = parsedData.gamePoop;
+      }
+    }
+  } catch (e) {
+    console.error('Failed to reload duck poop data:', e);
   }
 }
 
@@ -46,6 +66,13 @@ function getTotalPoints() {
   // 先重新加载积分数据，确保获取的是最新的
   reloadPointsData();
   return pointsData.totalPoints || 0
+}
+
+// 获取用户总鸭屎数量
+function getTotalDuckPoop() {
+  // 先重新加载鸭屎数据，确保获取的是最新的
+  reloadDuckPoopData();
+  return duckPoopData.totalPoop || 0
 }
 
 // 获取题目的积分记录
@@ -80,6 +107,23 @@ function addPoints(questionId) {
   pointsData.questionPoints[questionId] = points
 
   return true
+}
+
+// 添加鸭屎
+function addDuckPoop(gameId, amount) {
+  // 生成唯一的游戏记录ID
+  const gameRecordId = gameId + '_' + Date.now();
+  
+  // 更新鸭屎数量
+  duckPoopData.totalPoop = (duckPoopData.totalPoop || 0) + amount;
+  duckPoopData.gamePoop[gameRecordId] = amount;
+  
+  return {
+    success: true,
+    amount: amount,
+    message: `获得${amount}坨鸭屎！`,
+    totalPoop: duckPoopData.totalPoop
+  };
 }
 
 // 添加分享积分
@@ -131,6 +175,13 @@ function updateTotalPoints(newPoints) {
   return pointsData.totalPoints;
 }
 
+// 直接更新用户总鸭屎数量
+function updateTotalDuckPoop(newPoop) {
+  // 确保鸭屎数量不为负数
+  duckPoopData.totalPoop = Math.max(0, newPoop);
+  return duckPoopData.totalPoop;
+}
+
 module.exports = {
   getCategories,
   getQuestionsByCategory,
@@ -140,5 +191,9 @@ module.exports = {
   addPoints,
   addSharePoints,
   updateTotalPoints,
-  reloadPointsData
+  reloadPointsData,
+  getTotalDuckPoop,
+  addDuckPoop,
+  updateTotalDuckPoop,
+  reloadDuckPoopData
 }

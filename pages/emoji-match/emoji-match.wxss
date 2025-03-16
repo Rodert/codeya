@@ -59,13 +59,20 @@
   font-size: 48rpx;
   font-weight: bold;
   color: #2196f3;
+  margin-bottom: 10rpx;
+}
+
+.intro-level {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ff9800;
   margin-bottom: 20rpx;
 }
 
 .intro-description {
   font-size: 32rpx;
   color: #666;
-  margin-bottom: 30rpx;
+  margin-bottom: 20rpx;
   text-align: center;
 }
 
@@ -77,37 +84,169 @@
   font-weight: bold;
 }
 
-.intro-rules {
-  font-size: 32rpx;
-  font-weight: bold;
+.intro-level-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin: 20rpx 0;
+  padding: 20rpx;
+  background-color: rgba(33, 150, 243, 0.1);
+  border-radius: 16rpx;
+}
+
+.level-info-item {
+  font-size: 28rpx;
   color: #333;
-  margin-bottom: 16rpx;
-  align-self: flex-start;
-}
-
-.intro-rule-item {
-  font-size: 28rpx;
-  color: #666;
   margin-bottom: 10rpx;
-  align-self: flex-start;
 }
 
-.intro-cost {
-  font-size: 28rpx;
-  color: #f44336;
-  margin: 30rpx 0;
+.intro-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20rpx;
 }
 
 .start-button {
+  flex: 1;
+  margin-right: 10rpx;
   background: linear-gradient(135deg, #4fc3f7, #2196f3);
   color: white;
   border-radius: 40rpx;
-  padding: 20rpx 60rpx;
+  padding: 20rpx 0;
   font-size: 32rpx;
   font-weight: bold;
   box-shadow: 0 6rpx 16rpx rgba(33, 150, 243, 0.3);
   border: none;
-  margin-top: 20rpx;
+}
+
+.level-select-button {
+  flex: 1;
+  margin-left: 10rpx;
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: white;
+  border-radius: 40rpx;
+  padding: 20rpx 0;
+  font-size: 32rpx;
+  font-weight: bold;
+  box-shadow: 0 6rpx 16rpx rgba(245, 124, 0, 0.3);
+  border: none;
+}
+
+.back-button {
+  width: 60%;
+  margin-top: 30rpx;
+  background: #f5f5f5;
+  color: #333;
+  border-radius: 40rpx;
+  padding: 20rpx 0;
+  font-size: 32rpx;
+  font-weight: bold;
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+/* 关卡选择界面样式 */
+.level-select-screen {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30rpx;
+}
+
+.level-select-content {
+  background-color: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  width: 100%;
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.level-select-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #2196f3;
+  margin-bottom: 30rpx;
+}
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20rpx;
+  width: 100%;
+  margin-bottom: 30rpx;
+}
+
+.level-item {
+  background-color: white;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.level-item.unlocked {
+  border: 2rpx solid #4caf50;
+}
+
+.level-item.locked {
+  border: 2rpx solid #bdbdbd;
+  opacity: 0.7;
+}
+
+.level-number {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #2196f3;
+  margin-bottom: 10rpx;
+}
+
+.level-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.level-grid-size, .level-time {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 5rpx;
+}
+
+.level-lock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10rpx 0;
+}
+
+.lock-icon {
+  font-size: 36rpx;
+}
+
+.level-progress {
+  margin-top: 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 10rpx;
+  border-top: 1rpx solid #e0e0e0;
+}
+
+.level-high-score, .level-best-moves {
+  font-size: 22rpx;
+  color: #4caf50;
 }
 
 /* 游戏主界面样式 */
@@ -136,6 +275,11 @@
   align-items: center;
   box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+}
+
+.emoji-cell.empty {
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .emoji {
@@ -190,8 +334,15 @@
 
 .game-over-emoji {
   font-size: 60rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 20rpx;
   text-align: center;
+}
+
+.game-over-level {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ff9800;
+  margin-bottom: 20rpx;
 }
 
 .game-over-score, .game-over-moves, .game-over-time {
@@ -203,20 +354,21 @@
 .game-over-reward {
   font-size: 36rpx;
   font-weight: bold;
-  color: #4caf50;
+  color: #795548;
   margin: 20rpx 0 30rpx;
 }
 
 .game-over-buttons {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   margin-top: 20rpx;
 }
 
-.restart-button, .exit-button {
-  flex: 1;
-  margin: 0 10rpx;
+.restart-button, .exit-button, .game-over-buttons .level-select-button {
+  width: 100%;
+  margin: 10rpx 0;
   border-radius: 40rpx;
   padding: 20rpx 0;
   font-size: 28rpx;
@@ -229,10 +381,20 @@
   box-shadow: 0 4rpx 12rpx rgba(33, 150, 243, 0.3);
 }
 
+.game-over-buttons .level-select-button {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: white;
+  box-shadow: 0 4rpx 12rpx rgba(245, 124, 0, 0.3);
+}
+
 .exit-button {
   background: #f5f5f5;
   color: #666;
   box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.restart-button::after, .exit-button::after, .level-select-button::after, .back-button::after {
+  border: none;
 }
 
 /* 底部积分显示样式 */
@@ -244,30 +406,38 @@
   display: flex;
   justify-content: center;
   z-index: 50;
+  gap: 20rpx;
+}
+
+.points-display, .poop-display {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 30rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.2);
 }
 
 .points-display {
-  display: flex;
-  align-items: center;
   background: linear-gradient(135deg, #4fc3f7, #2196f3);
-  padding: 16rpx 30rpx;
-  border-radius: 40rpx;
-  box-shadow: 0 6rpx 16rpx rgba(33, 150, 243, 0.3);
 }
 
-.points-icon {
+.poop-display {
+  background: linear-gradient(135deg, #a1887f, #795548);
+}
+
+.points-icon, .poop-icon {
   font-size: 32rpx;
   margin-right: 10rpx;
 }
 
-.points-value {
+.points-value, .poop-value {
   font-size: 36rpx;
   font-weight: bold;
   color: white;
   margin-right: 10rpx;
 }
 
-.points-label {
+.points-label, .poop-label {
   font-size: 28rpx;
   color: rgba(255, 255, 255, 0.9);
 } 
