@@ -5,7 +5,8 @@
     "pages/detail/detail",
     "pages/activation/activation",
     "pages/home/home",
-    "pages/category/category"
+    "pages/category/category",
+    "pages/games/games"
   ],
   "window": {
     "backgroundTextStyle": "light",

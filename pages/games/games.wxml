@@ -1,0 +1,59 @@
+<view class="games-container">
+  <view class="page-header">
+    <text class="page-title">游戏轻松一刻</text>
+    <text class="page-subtitle">放松一下，玩个小游戏吧</text>
+  </view>
+
+  <view class="games-list">
+    <view class="game-item" bindtap="navigateToGame" data-game="duckAdventure">
+      <image class="game-icon" src="/images/logo/codeya_logo3.jpg" mode="aspectFit"></image>
+      <view class="game-info">
+        <text class="game-title">鸭鸭冒险</text>
+        <text class="game-description">控制小鸭子躲避障碍物，收集金币</text>
+        <view class="game-meta">
+          <text class="game-cost">消耗: 5积分</text>
+          <text class="game-reward">奖励: 根据得分</text>
+        </view>
+      </view>
+      <text class="arrow">></text>
+    </view>
+
+    <view class="game-item" bindtap="navigateToGame" data-game="memoryCard">
+      <image class="game-icon" src="/images/logo/codeya_logo2.jpg" mode="aspectFit"></image>
+      <view class="game-info">
+        <text class="game-title">记忆翻牌</text>
+        <text class="game-description">考验记忆力，找出所有配对的卡片</text>
+        <view class="game-meta">
+          <text class="game-cost">消耗: 3积分</text>
+          <text class="game-reward">奖励: 最多10积分</text>
+        </view>
+      </view>
+      <text class="arrow">></text>
+    </view>
+
+    <view class="game-item" bindtap="navigateToGame" data-game="codeGuess">
+      <image class="game-icon" src="/images/logo/codeya_logo1.jpg" mode="aspectFit"></image>
+      <view class="game-info">
+        <text class="game-title">代码猜猜猜</text>
+        <text class="game-description">猜测代码片段的输出结果</text>
+        <view class="game-meta">
+          <text class="game-cost">消耗: 2积分</text>
+          <text class="game-reward">奖励: 每题2积分</text>
+        </view>
+      </view>
+      <text class="arrow">></text>
+    </view>
+
+    <view class="coming-soon">
+      <text>更多游戏，敬请期待...</text>
+    </view>
+  </view>
+
+  <view class="points-info">
+    <view class="points-display">
+      <text class="points-icon">🪙</text>
+      <text class="points-value">{{totalPoints}}</text>
+      <text class="points-label">当前积分</text>
+    </view>
+  </view>
+</view> 

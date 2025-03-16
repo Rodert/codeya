@@ -27,6 +27,10 @@ Page({
         name: '我的积分'
       },
       {
+        id: 'games',
+        name: '游戏轻松一刻'
+      },
+      {
         id: 'encourage',
         name: '鼓励开发者'
       },
@@ -189,6 +193,12 @@ Page({
           title: '积分详情',
           content: `当前积分：${this.data.statistics.points}\n\n获取积分方式：\n- 简单题：1分\n- 中等题：2分\n- 困难题：3分\n- 分享给好友：6分（每天最多5次）`,
           showCancel: false
+        });
+        break;
+      case 'games':
+        // 导航到游戏列表页面
+        wx.navigateTo({
+          url: '/pages/games/games'
         });
         break;
       case 'encourage':
