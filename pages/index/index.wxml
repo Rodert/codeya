@@ -13,44 +13,6 @@
     </view>
   </view>
 
-  <!-- 鸭鸭冒险 - 随机刷题功能 -->
-  <view class="duck-adventure">
-    <view class="adventure-title">
-      <image class="duck-icon" src="{{currentDuckSkinIcon}}" mode="aspectFit"/>
-      <text>鸭鸭冒险</text>
-      <view class="duck-level">Lv.{{duckLevel}}</view>
-    </view>
-    <view class="adventure-description">
-      每次点击，鸭鸭会带你探索一个随机知识点
-    </view>
-    <view class="growth-bar-container">
-      <view class="growth-bar">
-        <view class="growth-progress" style="width: {{(duckGrowth / (duckLevel * 10)) * 100}}%"></view>
-      </view>
-      <text class="growth-text">成长值: {{duckGrowth}}/{{duckLevel * 10}}</text>
-    </view>
-    <view class="adventure-buttons">
-      <button class="adventure-button" bindtap="startRandomQuestion">
-        <text class="adventure-button-text">开始冒险</text>
-        <text class="adventure-emoji">🚀</text>
-      </button>
-      <button class="achievement-button" bindtap="showAchievements">
-        <text class="achievement-emoji">🏆</text>
-      </button>
-      <button class="skin-button" bindtap="showSkinSelector">
-        <text class="skin-emoji">👔</text>
-      </button>
-      <button class="ad-button" bindtap="showAdRewardOptions">
-        <text class="ad-emoji">🎁</text>
-      </button>
-    </view>
-    
-    <!-- 高级题目解锁状态 -->
-    <view wx:if="{{premiumUnlocked}}" class="premium-status">
-      <text class="premium-text">🌟 高级题目已解锁</text>
-    </view>
-  </view>
-
   <!-- Recent Questions -->
   <view class="recent-section">
     <view class="section-title">最近更新</view>
@@ -68,30 +30,6 @@
           </text>
           <text class="view-count">{{item.viewCount}}次学习</text>
         </view>
-      </view>
-    </view>
-  </view>
-
-  <!-- 广告奖励选项弹窗 -->
-  <view class="ad-options-popup" wx:if="{{showAdOptions}}">
-    <view class="ad-options-container">
-      <view class="ad-options-header">
-        <text class="ad-options-title">选择广告奖励</text>
-        <view class="ad-options-close" bindtap="closeAdOptions">×</view>
-      </view>
-      
-      <view class="ad-options-content">
-        <view class="ad-option-item" wx:for="{{adRewardOptions}}" wx:key="id" bindtap="selectAdReward" data-id="{{item.id}}">
-          <view class="ad-option-icon">{{item.icon}}</view>
-          <view class="ad-option-info">
-            <view class="ad-option-name">{{item.name}}</view>
-            <view class="ad-option-desc">{{item.desc}}</view>
-          </view>
-        </view>
-      </view>
-      
-      <view class="ad-options-footer">
-        <text class="ad-options-note">完整观看广告后获得奖励</text>
       </view>
     </view>
   </view>
