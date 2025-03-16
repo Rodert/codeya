@@ -54,7 +54,22 @@ Page({
     dailyQuestion: null, // 每日一题数据
     bannerText: '', // 横幅文本
     premiumQuestions: [], // 高级题目列表
-    premiumUnlocked: false // 是否解锁高级题目
+    premiumUnlocked: false, // 是否解锁高级题目
+    
+    // 鸭鸭冒险游戏相关数据
+    showGamePopup: false, // 是否显示游戏弹窗
+    gameStarted: false, // 游戏是否已开始
+    gameOver: false, // 游戏是否结束
+    gameScore: 0, // 游戏得分
+    gameTime: 0, // 游戏时间（秒）
+    gameObjects: [], // 游戏对象（障碍物、金币等）
+    duckPosition: { x: 0, y: 0 }, // 鸭鸭位置
+    canvasWidth: 0, // 画布宽度
+    canvasHeight: 0, // 画布高度
+    gameTimer: null, // 游戏计时器
+    animationTimer: null, // 动画计时器
+    obstacleTimer: null, // 障碍物生成计时器
+    coinTimer: null, // 金币生成计时器
   },
 
   onLoad: function() {
@@ -329,6 +344,426 @@ Page({
           wx.setStorageSync('lastQuestionCompleted', false);
         }
       }
+    });
+  },
+
+  // ==================== 鸭鸭冒险游戏相关函数 ====================
+
+  // 开始鸭鸭冒险游戏
+  startDuckGame: function() {
+    // 先重新加载最新的积分数据
+    const latestPoints = db.getTotalPoints();
+    this.setData({
+      totalPoints: latestPoints
+    });
+    
+    // 检查积分是否足够
+    if (latestPoints < 5) {
+      wx.showToast({
+        title: '积分不足，无法开始游戏',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+
+    // 显示游戏弹窗
+    this.setData({
+      showGamePopup: true,
+      gameStarted: false,
+      gameOver: false,
+      gameScore: 0,
+      gameTime: 0
+    });
+
+    // 初始化游戏画布
+    this.initGameCanvas();
+  },
+
+  // 初始化游戏画布
+  initGameCanvas: function() {
+    const query = wx.createSelectorQuery();
+    query.select('.game-canvas').boundingClientRect();
+    query.exec((res) => {
+      if (res[0]) {
+        const canvasWidth = res[0].width;
+        const canvasHeight = res[0].height;
+        
+        // 设置画布尺寸
+        this.setData({
+          canvasWidth: canvasWidth,
+          canvasHeight: canvasHeight,
+          duckPosition: {
+            x: canvasWidth / 2,
+            y: canvasHeight - 100
+          }
+        });
+        
+        // 绘制初始画面
+        this.drawGameScene();
+      }
+    });
+  },
+
+  // 开始游戏
+  startGame: function() {
+    // 先重新加载最新的积分数据
+    const latestPoints = db.getTotalPoints();
+    
+    // 检查积分是否足够
+    if (latestPoints < 5) {
+      wx.showToast({
+        title: '积分不足，无法开始游戏',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+    
+    // 扣除积分
+    const newPoints = latestPoints - 5;
+    
+    // 更新数据库中的积分
+    db.updateTotalPoints(newPoints);
+    
+    this.setData({
+      totalPoints: newPoints,
+      gameStarted: true,
+      gameOver: false,
+      gameScore: 0,
+      gameTime: 0,
+      gameObjects: []
+    });
+    
+    // 开始游戏循环
+    this.startGameLoop();
+    
+    // 开始生成障碍物和金币
+    this.startObstacleGeneration();
+    this.startCoinGeneration();
+  },
+
+  // 开始游戏循环
+  startGameLoop: function() {
+    // 清除之前的计时器
+    if (this.data.gameTimer) clearInterval(this.data.gameTimer);
+    if (this.data.animationTimer) clearInterval(this.data.animationTimer);
+    
+    // 设置游戏计时器（每秒更新一次时间）
+    const gameTimer = setInterval(() => {
+      const newTime = this.data.gameTime + 1;
+      this.setData({
+        gameTime: newTime
+      });
+    }, 1000);
+    
+    // 设置动画计时器（每帧更新一次游戏状态和画面）
+    const animationTimer = setInterval(() => {
+      this.updateGameState();
+      this.drawGameScene();
+    }, 16); // 约60fps
+    
+    this.setData({
+      gameTimer: gameTimer,
+      animationTimer: animationTimer
+    });
+  },
+
+  // 开始生成障碍物
+  startObstacleGeneration: function() {
+    // 清除之前的计时器
+    if (this.data.obstacleTimer) clearInterval(this.data.obstacleTimer);
+    
+    // 设置障碍物生成计时器（每2-4秒生成一个障碍物）
+    const obstacleTimer = setInterval(() => {
+      if (!this.data.gameStarted || this.data.gameOver) return;
+      
+      const canvasWidth = this.data.canvasWidth;
+      const newObstacle = {
+        type: 'obstacle',
+        x: Math.random() * (canvasWidth - 40),
+        y: -50,
+        width: 40,
+        height: 40,
+        speed: 3 + Math.random() * 2
+      };
+      
+      const gameObjects = [...this.data.gameObjects, newObstacle];
+      this.setData({
+        gameObjects: gameObjects
+      });
+    }, 2000 + Math.random() * 2000);
+    
+    this.setData({
+      obstacleTimer: obstacleTimer
+    });
+  },
+
+  // 开始生成金币
+  startCoinGeneration: function() {
+    // 清除之前的计时器
+    if (this.data.coinTimer) clearInterval(this.data.coinTimer);
+    
+    // 设置金币生成计时器（每1-3秒生成一个金币）
+    const coinTimer = setInterval(() => {
+      if (!this.data.gameStarted || this.data.gameOver) return;
+      
+      const canvasWidth = this.data.canvasWidth;
+      const newCoin = {
+        type: 'coin',
+        x: Math.random() * (canvasWidth - 30),
+        y: -30,
+        width: 30,
+        height: 30,
+        speed: 2 + Math.random() * 1.5
+      };
+      
+      const gameObjects = [...this.data.gameObjects, newCoin];
+      this.setData({
+        gameObjects: gameObjects
+      });
+    }, 1000 + Math.random() * 2000);
+    
+    this.setData({
+      coinTimer: coinTimer
+    });
+  },
+
+  // 更新游戏状态
+  updateGameState: function() {
+    if (!this.data.gameStarted || this.data.gameOver) return;
+    
+    const canvasHeight = this.data.canvasHeight;
+    const duckPosition = this.data.duckPosition;
+    let gameObjects = [...this.data.gameObjects];
+    let gameScore = this.data.gameScore;
+    
+    // 更新游戏对象位置
+    gameObjects = gameObjects.filter(obj => {
+      // 移动对象
+      obj.y += obj.speed;
+      
+      // 检查是否超出屏幕底部
+      if (obj.y > canvasHeight) {
+        return false;
+      }
+      
+      // 检查是否与鸭鸭碰撞
+      if (this.checkCollision(obj, duckPosition)) {
+        if (obj.type === 'obstacle') {
+          // 碰到障碍物，游戏结束
+          this.endGame();
+          return false;
+        } else if (obj.type === 'coin') {
+          // 碰到金币，加分
+          gameScore += 10;
+          return false;
+        }
+      }
+      
+      return true;
+    });
+    
+    this.setData({
+      gameObjects: gameObjects,
+      gameScore: gameScore
+    });
+  },
+
+  // 检查碰撞
+  checkCollision: function(obj, duckPos) {
+    // 简单的矩形碰撞检测
+    const duckWidth = 50;
+    const duckHeight = 50;
+    
+    return (
+      duckPos.x < obj.x + obj.width &&
+      duckPos.x + duckWidth > obj.x &&
+      duckPos.y < obj.y + obj.height &&
+      duckPos.y + duckHeight > obj.y
+    );
+  },
+
+  // 绘制游戏场景
+  drawGameScene: function() {
+    const ctx = wx.createCanvasContext('gameCanvas');
+    
+    // 清空画布
+    ctx.clearRect(0, 0, this.data.canvasWidth, this.data.canvasHeight);
+    
+    // 绘制背景
+    ctx.setFillStyle('#f0f9ff');
+    ctx.fillRect(0, 0, this.data.canvasWidth, this.data.canvasHeight);
+    
+    // 如果游戏未开始，显示提示文字
+    if (!this.data.gameStarted && !this.data.gameOver) {
+      ctx.setFillStyle('#2196f3');
+      ctx.setFontSize(20);
+      ctx.setTextAlign('center');
+      ctx.fillText('点击"开始游戏"按钮开始', this.data.canvasWidth / 2, this.data.canvasHeight / 2);
+      ctx.draw();
+      return;
+    }
+    
+    // 绘制游戏对象
+    this.data.gameObjects.forEach(obj => {
+      if (obj.type === 'obstacle') {
+        // 绘制障碍物（红色方块）
+        ctx.setFillStyle('#f44336');
+        ctx.fillRect(obj.x, obj.y, obj.width, obj.height);
+      } else if (obj.type === 'coin') {
+        // 绘制金币（黄色圆形）
+        ctx.setFillStyle('#ffc107');
+        ctx.beginPath();
+        ctx.arc(obj.x + obj.width / 2, obj.y + obj.height / 2, obj.width / 2, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+    });
+    
+    // 绘制鸭鸭（蓝色圆形）
+    ctx.setFillStyle('#2196f3');
+    ctx.beginPath();
+    ctx.arc(this.data.duckPosition.x, this.data.duckPosition.y, 25, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    // 绘制鸭鸭眼睛
+    ctx.setFillStyle('white');
+    ctx.beginPath();
+    ctx.arc(this.data.duckPosition.x - 8, this.data.duckPosition.y - 5, 5, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(this.data.duckPosition.x + 8, this.data.duckPosition.y - 5, 5, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    // 绘制鸭鸭嘴巴
+    ctx.setFillStyle('#ff9800');
+    ctx.beginPath();
+    ctx.moveTo(this.data.duckPosition.x - 10, this.data.duckPosition.y + 5);
+    ctx.lineTo(this.data.duckPosition.x + 10, this.data.duckPosition.y + 5);
+    ctx.lineTo(this.data.duckPosition.x, this.data.duckPosition.y + 15);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.draw();
+  },
+
+  // 触摸开始事件
+  onTouchStart: function(e) {
+    if (!this.data.gameStarted || this.data.gameOver) return;
+    
+    const touch = e.touches[0];
+    this.setData({
+      duckPosition: {
+        x: touch.x,
+        y: this.data.duckPosition.y
+      }
+    });
+  },
+
+  // 触摸移动事件
+  onTouchMove: function(e) {
+    if (!this.data.gameStarted || this.data.gameOver) return;
+    
+    const touch = e.touches[0];
+    this.setData({
+      duckPosition: {
+        x: touch.x,
+        y: this.data.duckPosition.y
+      }
+    });
+  },
+
+  // 触摸结束事件
+  onTouchEnd: function(e) {
+    // 可以添加一些触摸结束的逻辑
+  },
+
+  // 结束游戏
+  endGame: function() {
+    this.setData({
+      gameOver: true
+    });
+    
+    // 清除所有计时器
+    if (this.data.gameTimer) clearInterval(this.data.gameTimer);
+    if (this.data.animationTimer) clearInterval(this.data.animationTimer);
+    if (this.data.obstacleTimer) clearInterval(this.data.obstacleTimer);
+    if (this.data.coinTimer) clearInterval(this.data.coinTimer);
+    
+    // 根据得分和时间计算奖励积分
+    const bonusPoints = Math.floor(this.data.gameScore / 10) + Math.floor(this.data.gameTime / 5);
+    
+    // 更新用户积分
+    if (bonusPoints > 0) {
+      // 先获取最新的积分
+      const currentPoints = db.getTotalPoints();
+      const newPoints = currentPoints + bonusPoints;
+      
+      // 更新数据库中的积分
+      db.updateTotalPoints(newPoints);
+      
+      // 更新显示
+      this.setData({
+        totalPoints: newPoints
+      });
+      
+      // 显示奖励提示
+      wx.showToast({
+        title: `获得${bonusPoints}积分奖励！`,
+        icon: 'success',
+        duration: 2000
+      });
+    }
+  },
+
+  // 重新开始游戏
+  restartGame: function() {
+    // 先重新加载最新的积分数据
+    const latestPoints = db.getTotalPoints();
+    this.setData({
+      totalPoints: latestPoints
+    });
+    
+    // 检查积分是否足够
+    if (latestPoints < 5) {
+      wx.showToast({
+        title: '积分不足，无法重新开始',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+    
+    // 重置游戏状态
+    this.setData({
+      gameStarted: false,
+      gameOver: false,
+      gameScore: 0,
+      gameTime: 0,
+      gameObjects: []
+    });
+    
+    // 重新绘制初始画面
+    this.drawGameScene();
+    
+    // 开始新游戏
+    this.startGame();
+  },
+
+  // 关闭游戏弹窗
+  closeGamePopup: function() {
+    // 清除所有计时器
+    if (this.data.gameTimer) clearInterval(this.data.gameTimer);
+    if (this.data.animationTimer) clearInterval(this.data.animationTimer);
+    if (this.data.obstacleTimer) clearInterval(this.data.obstacleTimer);
+    if (this.data.coinTimer) clearInterval(this.data.coinTimer);
+    
+    // 重新加载最新的积分数据
+    const latestPoints = db.getTotalPoints();
+    
+    this.setData({
+      showGamePopup: false,
+      totalPoints: latestPoints
     });
   }
 });

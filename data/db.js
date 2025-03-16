@@ -3,6 +3,25 @@ const categoriesData = require('./categories.js')
 const questionsData = require('./questions.js')
 const pointsData = require('./points.js')
 
+// 强制重新加载积分数据
+function reloadPointsData() {
+  try {
+    const savedPoints = wx.getStorageSync('userPoints');
+    if (savedPoints) {
+      const parsedData = JSON.parse(savedPoints);
+      // 更新内存中的数据
+      if (parsedData.totalPoints !== undefined) {
+        pointsData.totalPoints = parsedData.totalPoints;
+      }
+      if (parsedData.questionPoints) {
+        pointsData.questionPoints = parsedData.questionPoints;
+      }
+    }
+  } catch (e) {
+    console.error('Failed to reload points data:', e);
+  }
+}
+
 // 获取所有类别
 function getCategories() {
   return categoriesData.categories
@@ -24,6 +43,8 @@ function getQuestionById(categoryKey, questionId) {
 
 // 获取用户总积分
 function getTotalPoints() {
+  // 先重新加载积分数据，确保获取的是最新的
+  reloadPointsData();
   return pointsData.totalPoints || 0
 }
 
@@ -103,6 +124,13 @@ function addSharePoints() {
   }
 }
 
+// 直接更新用户总积分
+function updateTotalPoints(newPoints) {
+  // 确保积分不为负数
+  pointsData.totalPoints = Math.max(0, newPoints);
+  return pointsData.totalPoints;
+}
+
 module.exports = {
   getCategories,
   getQuestionsByCategory,
@@ -110,5 +138,7 @@ module.exports = {
   getTotalPoints,
   getQuestionPoints,
   addPoints,
-  addSharePoints
+  addSharePoints,
+  updateTotalPoints,
+  reloadPointsData
 }

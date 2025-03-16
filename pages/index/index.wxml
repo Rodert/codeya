@@ -13,6 +13,27 @@
     </view>
   </view>
 
+  <!-- 鸭鸭冒险游戏 -->
+  <view class="duck-game">
+    <view class="game-header">
+      <image class="duck-icon" src="/images/logo/codeya_logo3.jpg" mode="aspectFit"/>
+      <text class="game-title">鸭鸭冒险</text>
+      <view class="points-display">
+        <text class="points-icon">🪙</text>
+        <text class="points-value">{{totalPoints}}</text>
+      </view>
+    </view>
+    <view class="game-description">
+      开始一场冒险，每次游戏消耗5积分
+    </view>
+    <view class="game-actions">
+      <button class="game-button {{totalPoints < 5 ? 'disabled' : ''}}" bindtap="startDuckGame" disabled="{{totalPoints < 5}}">
+        <text class="game-button-text">开始冒险</text>
+        <text class="game-cost">-5积分</text>
+      </button>
+    </view>
+  </view>
+
   <!-- Recent Questions -->
   <view class="recent-section">
     <view class="section-title">最近更新</view>
@@ -51,6 +72,52 @@
           </view>
         </view>
       </view>
+    </view>
+  </view>
+</view>
+
+<!-- 鸭鸭冒险游戏弹窗 -->
+<view class="game-popup" wx:if="{{showGamePopup}}">
+  <view class="game-container">
+    <view class="game-popup-header">
+      <text class="game-popup-title">鸭鸭冒险</text>
+      <view class="points-display">
+        <text class="points-icon">🪙</text>
+        <text class="points-value">{{totalPoints}}</text>
+      </view>
+      <view class="game-popup-close" bindtap="closeGamePopup">×</view>
+    </view>
+    
+    <view class="game-canvas-container">
+      <canvas canvas-id="gameCanvas" class="game-canvas" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd"></canvas>
+    </view>
+    
+    <view class="game-controls">
+      <view class="game-score">
+        <text>得分: {{gameScore}}</text>
+      </view>
+      <view class="game-time">
+        <text>时间: {{gameTime}}秒</text>
+      </view>
+    </view>
+    
+    <view class="game-instructions" wx:if="{{!gameStarted}}">
+      <text class="instructions-title">游戏说明:</text>
+      <text class="instructions-text">1. 点击屏幕开始游戏</text>
+      <text class="instructions-text">2. 控制鸭鸭躲避障碍物</text>
+      <text class="instructions-text">3. 收集金币增加得分</text>
+      <text class="instructions-text">4. 坚持时间越长分数越高</text>
+      <button class="start-game-button" bindtap="startGame">开始游戏</button>
+    </view>
+    
+    <view class="game-over-panel" wx:if="{{gameOver}}">
+      <text class="game-over-title">游戏结束</text>
+      <text class="final-score">最终得分: {{gameScore}}</text>
+      <text class="time-survived">坚持时间: {{gameTime}}秒</text>
+      <button class="restart-button" bindtap="restartGame" disabled="{{totalPoints < 5}}">
+        {{totalPoints >= 5 ? '再来一局 (-5积分)' : '积分不足'}}
+      </button>
+      <button class="exit-button" bindtap="closeGamePopup">退出游戏</button>
     </view>
   </view>
 </view>
