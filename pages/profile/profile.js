@@ -37,6 +37,11 @@ Page({
       {
         id: 'feedback',
         name: '意见反馈'
+      },
+      {
+        id: 'clearData',
+        name: '清除所有数据',
+        icon: '⚠️'
       }
     ]
   },
@@ -168,37 +173,32 @@ Page({
   },
 
   loadStatistics() {
-    // 从本地存储获取统计数据
-    const stats = storage.getStatistics() || {};
-    
-    // 获取最新的积分数据
-    stats.points = pointsDb.totalPoints || 0;
-    
     this.setData({
-      statistics: stats
+      statistics: {
+        days: db.getStudyDays(),
+        questions: db.getTotalQuestions(),
+        points: db.getTotalPoints()
+      }
     });
   },
 
   handleFunctionClick(e) {
     const id = e.currentTarget.dataset.id;
-    switch (id) {
+    
+    switch(id) {
       case 'history':
         wx.navigateTo({
-          url: '/pages/history/history'
+          url: '/pages/history/history',
         });
         break;
       case 'points':
-        // 显示积分详情
-        wx.showModal({
-          title: '积分详情',
-          content: `当前积分：${this.data.statistics.points}\n\n获取积分方式：\n- 简单题：1分\n- 中等题：2分\n- 困难题：3分\n- 分享给好友：6分（每天最多5次）`,
-          showCancel: false
+        wx.navigateTo({
+          url: '/pages/points/points',
         });
         break;
       case 'games':
-        // 导航到游戏列表页面
         wx.navigateTo({
-          url: '/pages/games/games'
+          url: '/pages/games/games',
         });
         break;
       case 'encourage':
@@ -209,6 +209,63 @@ Page({
       case 'feedback':
         this.setData({
           showFeedbackSheet: true
+        });
+        break;
+      case 'clearData':
+        wx.showModal({
+          title: '确认清除数据',
+          content: '确定要清除所有数据吗？这将重置您的积分、鸭屎和游戏进度。此操作不可撤销！',
+          confirmColor: '#e74c3c',
+          success: (res) => {
+            if (res.confirm) {
+              // 二次确认
+              wx.showModal({
+                title: '最终确认',
+                content: '您真的确定要清除所有数据吗？此操作执行后无法恢复！',
+                confirmText: '确定清除',
+                confirmColor: '#e74c3c',
+                cancelText: '取消',
+                success: (secondRes) => {
+                  if (secondRes.confirm) {
+                    // 显示加载中
+                    wx.showLoading({
+                      title: '正在清除数据...',
+                      mask: true
+                    });
+                    
+                    // 延迟执行，显示动画效果
+                    setTimeout(() => {
+                      const result = db.clearAllUserData();
+                      
+                      // 隐藏加载中
+                      wx.hideLoading();
+                      
+                      if (result.success) {
+                        wx.showToast({
+                          title: '数据已清除',
+                          icon: 'success',
+                          duration: 2000
+                        });
+                        // 刷新页面数据
+                        this.loadStatistics();
+                        // 更新用户信息显示
+                        this.setData({
+                          hasUserInfo: false
+                        });
+                      } else {
+                        wx.showToast({
+                          title: '清除失败',
+                          icon: 'error',
+                          duration: 2000
+                        });
+                        console.error('清除数据失败:', result.error);
+                      }
+                    }, 1000); // 延迟1秒执行
+                  }
+                }
+              });
+            }
+          }
         });
         break;
     }
@@ -374,5 +431,27 @@ Page({
       urls: ['/images/qrcode.jpg'],
       current: '/images/qrcode.jpg'
     });
+  },
+
+  // 清除所有用户数据
+  clearAllUserData() {
+    const result = db.clearAllUserData();
+    
+    if (result.success) {
+      // 刷新统计数据
+      this.loadStatistics();
+      
+      wx.showToast({
+        title: '数据已清除',
+        icon: 'success',
+        duration: 2000
+      });
+    } else {
+      wx.showToast({
+        title: result.message,
+        icon: 'none',
+        duration: 2000
+      });
+    }
   }
 });

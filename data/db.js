@@ -3,6 +3,7 @@ const categoriesData = require('./categories.js')
 const questionsData = require('./questions.js')
 const pointsData = require('./points.js')
 const duckPoopData = require('./duckPoop.js')
+const storage = require('../utils/storage.js')
 
 // 强制重新加载积分数据
 function reloadPointsData() {
@@ -182,6 +183,116 @@ function updateTotalDuckPoop(newPoop) {
   return duckPoopData.totalPoop;
 }
 
+// 清除所有用户数据（积分和鸭屎）
+function clearAllUserData() {
+  try {
+    // 重置积分数据
+    pointsData.totalPoints = 0;
+    pointsData.questionPoints = {};
+    
+    // 重置鸭屎数据
+    duckPoopData.totalPoop = 0;
+    duckPoopData.gamePoop = {};
+    
+    // 保存到本地存储
+    wx.setStorageSync('userPoints', JSON.stringify(pointsData));
+    wx.setStorageSync('userDuckPoop', JSON.stringify(duckPoopData));
+    
+    // 清除关卡进度
+    wx.removeStorageSync('emojiMatchLevelProgress');
+    
+    // 清除学习历史和学习天数
+    wx.setStorageSync('study_history', []);
+    wx.setStorageSync('study_days', 0);
+    wx.removeStorageSync('last_study_date');
+    
+    // 清除用户信息
+    wx.removeStorageSync('userInfo');
+    
+    return {
+      success: true,
+      message: '所有数据已清除'
+    };
+  } catch (e) {
+    console.error('Failed to clear user data:', e);
+    
+    // 尝试使用异步方法
+    try {
+      // 异步保存重置的数据
+      wx.setStorage({
+        key: 'userPoints',
+        data: JSON.stringify({
+          totalPoints: 0,
+          questionPoints: {}
+        })
+      });
+      
+      wx.setStorage({
+        key: 'userDuckPoop',
+        data: JSON.stringify({
+          totalPoop: 0,
+          gamePoop: {}
+        })
+      });
+      
+      wx.removeStorage({
+        key: 'emojiMatchLevelProgress'
+      });
+      
+      // 异步清除学习历史和学习天数
+      wx.setStorage({
+        key: 'study_history',
+        data: []
+      });
+      
+      wx.setStorage({
+        key: 'study_days',
+        data: 0
+      });
+      
+      wx.removeStorage({
+        key: 'last_study_date'
+      });
+      
+      // 异步清除用户信息
+      wx.removeStorage({
+        key: 'userInfo'
+      });
+    } catch (asyncError) {
+      console.error('Async clear also failed:', asyncError);
+      return {
+        success: false,
+        message: '数据清除失败，请重试'
+      };
+    }
+    
+    return {
+      success: true,
+      message: '所有数据已清除'
+    };
+  }
+}
+
+// 获取学习天数
+function getStudyDays() {
+  try {
+    return storage.getStudyDays() || 0;
+  } catch (e) {
+    console.error('Failed to get study days:', e);
+    return 0;
+  }
+}
+
+// 获取已学习的题目总数
+function getTotalQuestions() {
+  try {
+    return storage.getStudyHistory().length || 0;
+  } catch (e) {
+    console.error('Failed to get total questions:', e);
+    return 0;
+  }
+}
+
 module.exports = {
   getCategories,
   getQuestionsByCategory,
@@ -195,5 +306,8 @@ module.exports = {
   getTotalDuckPoop,
   addDuckPoop,
   updateTotalDuckPoop,
-  reloadDuckPoopData
+  reloadDuckPoopData,
+  clearAllUserData,
+  getStudyDays,
+  getTotalQuestions
 }

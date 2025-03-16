@@ -15,9 +15,37 @@ App({
   },
   onLaunch() {
     // 展示本地存储能力
-    const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    try {
+      const logs = wx.getStorageSync('logs') || []
+      logs.unshift(Date.now())
+      wx.setStorageSync('logs', logs)
+    } catch (e) {
+      console.error('Storage operation failed in app.js:', e)
+      // 使用异步方法尝试存储
+      try {
+        wx.getStorage({
+          key: 'logs',
+          success: (res) => {
+            const logs = res.data || []
+            logs.unshift(Date.now())
+            wx.setStorage({
+              key: 'logs',
+              data: logs
+            })
+          },
+          fail: () => {
+            // 如果获取失败，直接创建新的日志
+            const logs = [Date.now()]
+            wx.setStorage({
+              key: 'logs',
+              data: logs
+            })
+          }
+        })
+      } catch (asyncError) {
+        console.error('Async storage also failed:', asyncError)
+      }
+    }
 
     // 登录
     wx.login({

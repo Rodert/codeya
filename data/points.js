@@ -13,6 +13,11 @@ function loadPointsData() {
     }
   } catch (e) {
     console.error('Failed to load points data:', e);
+    // 加载失败时使用默认数据
+    pointsData = {
+      totalPoints: 0,
+      questionPoints: {}
+    };
   }
 }
 
@@ -22,11 +27,27 @@ function savePointsData() {
     wx.setStorageSync('userPoints', JSON.stringify(pointsData));
   } catch (e) {
     console.error('Failed to save points data:', e);
+    // 同步保存失败时尝试异步保存
+    try {
+      wx.setStorage({
+        key: 'userPoints',
+        data: JSON.stringify(pointsData),
+        fail: (err) => {
+          console.error('Async storage also failed:', err);
+        }
+      });
+    } catch (asyncError) {
+      console.error('Failed to use async storage:', asyncError);
+    }
   }
 }
 
 // 初始加载数据
-loadPointsData();
+try {
+  loadPointsData();
+} catch (e) {
+  console.error('Initial load failed:', e);
+}
 
 module.exports = {
   get totalPoints() {

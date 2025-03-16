@@ -40,6 +40,30 @@
     </view>
   </view>
 
+  <!-- 积分不足提示弹窗 -->
+  <view class="points-insufficient-modal" wx:if="{{showPointsInsufficientModal}}">
+    <view class="modal-content">
+      <text class="modal-title">积分不足</text>
+      <text class="modal-description">您当前的积分不足以开始游戏，需要 {{levels[currentLevel].costPoints}} 积分</text>
+      <text class="modal-subtitle">获取积分的方式：</text>
+      <view class="get-points-options">
+        <view class="option-item" bindtap="navigateToStudy">
+          <text class="option-icon">📚</text>
+          <text class="option-text">学习编程题目</text>
+        </view>
+        <button class="option-item" open-type="share" bindtap="onShareTap" hover-class="none" style="display:flex; align-items:center; text-align:left; padding:20rpx; background-color:#f5f5f5; border:none; border-radius:12rpx; margin-bottom:16rpx; width:100%; box-sizing:border-box;">
+          <text class="option-icon" style="font-size:40rpx; margin-right:20rpx;">🔄</text>
+          <text class="option-text" style="font-size:30rpx; color:#333;">分享小程序</text>
+        </button>
+        <view class="option-item" bindtap="watchAdToGetPoints">
+          <text class="option-icon">📺</text>
+          <text class="option-text">观看广告</text>
+        </view>
+      </view>
+      <button class="modal-close-button" bindtap="closePointsInsufficientModal">关闭</button>
+    </view>
+  </view>
+
   <!-- 关卡选择界面 -->
   <view class="level-select-screen" wx:if="{{gameState === 'level-select'}}">
     <view class="level-select-content">
@@ -116,4 +140,7 @@
       <text class="poop-label">鸭屎</text>
     </view>
   </view>
+  
+  <!-- 隐藏的分享按钮 -->
+  <button class="hidden-share-btn" id="shareBtn" open-type="share" style="display:none;"></button>
 </view> 

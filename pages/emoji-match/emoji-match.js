@@ -82,13 +82,20 @@ Page({
     currentLevel: 0, // 当前关卡
     levels: LEVELS, // 关卡配置
     unlockedLevels: 1, // 已解锁的关卡数量
-    levelProgress: {} // 关卡进度
+    levelProgress: {}, // 关卡进度
+    showPointsInsufficientModal: false // 添加积分不足弹窗控制变量
   },
 
   onLoad: function() {
     // 加载用户积分和鸭屎数量
     this.loadUserData();
     
+    // 分享朋友圈设置
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    });
+
     // 加载关卡进度
     this.loadLevelProgress();
   },
@@ -126,6 +133,30 @@ Page({
       }
     } catch (e) {
       console.error('Failed to load level progress:', e);
+      // 加载失败时使用默认值
+      this.setData({
+        unlockedLevels: 1,
+        levelProgress: {}
+      });
+      
+      // 尝试使用异步方法获取
+      wx.getStorage({
+        key: 'emojiMatchLevelProgress',
+        success: (res) => {
+          try {
+            const parsedProgress = JSON.parse(res.data);
+            this.setData({
+              unlockedLevels: parsedProgress.unlockedLevels || 1,
+              levelProgress: parsedProgress.levelProgress || {}
+            });
+          } catch (parseError) {
+            console.error('Failed to parse level progress:', parseError);
+          }
+        },
+        fail: (err) => {
+          console.error('Async get storage failed:', err);
+        }
+      });
     }
   },
   
@@ -139,6 +170,19 @@ Page({
       wx.setStorageSync('emojiMatchLevelProgress', JSON.stringify(progress));
     } catch (e) {
       console.error('Failed to save level progress:', e);
+      // 同步保存失败时尝试异步保存
+      const progress = {
+        unlockedLevels: this.data.unlockedLevels,
+        levelProgress: this.data.levelProgress
+      };
+      
+      wx.setStorage({
+        key: 'emojiMatchLevelProgress',
+        data: JSON.stringify(progress),
+        fail: (err) => {
+          console.error('Async storage also failed:', err);
+        }
+      });
     }
   },
   
@@ -176,10 +220,9 @@ Page({
     
     // 检查积分是否足够
     if (this.data.totalPoints < levelConfig.costPoints) {
-      wx.showToast({
-        title: '积分不足，无法开始游戏',
-        icon: 'none',
-        duration: 2000
+      // 显示积分不足弹窗，而不是简单的提示
+      this.setData({
+        showPointsInsufficientModal: true
       });
       return;
     }
@@ -482,16 +525,109 @@ Page({
     });
   },
   
+  // 关闭积分不足弹窗
+  closePointsInsufficientModal: function() {
+    this.setData({
+      showPointsInsufficientModal: false
+    });
+  },
+  
+  // 导航到学习页面
+  navigateToStudy: function() {
+    this.closePointsInsufficientModal();
+    wx.switchTab({
+      url: '/pages/index/index',
+      success: () => {
+        wx.showToast({
+          title: '学习题目可获得积分',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  },
+  
+  // 点击分享按钮
+  onShareTap: function() {
+    // 这里只记录用户点击了分享按钮
+    console.log('用户点击了分享按钮');
+    
+    // 由于微信小程序限制，无法直接获知用户是否成功分享
+    // 所以我们假设用户点击分享按钮后就成功分享了
+    setTimeout(() => {
+      this.addSharePoints();
+    }, 1500); // 延迟1.5秒，模拟用户分享完成的时间
+  },
+  
+  // 分享小程序
+  onShareAppMessage: function() {
+    return {
+      title: '表情消消乐 - 编程鸭小游戏',
+      path: '/pages/emoji-match/emoji-match',
+      imageUrl: '/images/logo/codeya_logo1.jpg'
+    };
+  },
+  
+  // 观看广告获取积分
+  watchAdToGetPoints: function() {
+    this.closePointsInsufficientModal();
+    
+    wx.showModal({
+      title: '观看广告获取积分',
+      content: '观看一个短视频广告，可获得10积分奖励',
+      confirmText: '观看广告',
+      cancelText: '取消',
+      success: (res) => {
+        if (res.confirm) {
+          // 这里应该调用广告API，但由于微信小程序的广告API需要真实的广告单元ID，
+          // 所以这里只是模拟广告观看完成后的奖励
+          wx.showLoading({
+            title: '加载广告中...',
+          });
+          
+          setTimeout(() => {
+            wx.hideLoading();
+            
+            // 模拟广告观看完成，给予积分奖励
+            const newPoints = this.data.totalPoints + 10;
+            db.updateTotalPoints(newPoints);
+            
+            this.setData({
+              totalPoints: newPoints
+            });
+            
+            wx.showToast({
+              title: '获得10积分奖励！',
+              icon: 'success',
+              duration: 2000
+            });
+          }, 2000);
+        }
+      }
+    });
+  },
+  
+  // 分享小程序获取积分
+  shareToGetPoints: function() {
+    this.closePointsInsufficientModal();
+    
+    // 显示分享提示
+    wx.showToast({
+      title: '请点击分享按钮',
+      icon: 'none',
+      duration: 2000
+    });
+  },
+  
   // 重新开始游戏
   restartGame: function() {
     const levelConfig = LEVELS[this.data.currentLevel];
     
     // 检查积分是否足够
     if (this.data.totalPoints < levelConfig.costPoints) {
-      wx.showToast({
-        title: '积分不足，无法重新开始',
-        icon: 'none',
-        duration: 2000
+      // 显示积分不足弹窗，而不是简单的提示
+      this.setData({
+        showPointsInsufficientModal: true
       });
       return;
     }
@@ -512,5 +648,33 @@ Page({
   // 退出游戏
   exitGame: function() {
     wx.navigateBack();
+  },
+  
+  // 添加分享积分
+  addSharePoints: function() {
+    const result = db.addSharePoints();
+    if (result.success) {
+      // 更新积分显示
+      this.setData({
+        totalPoints: db.getTotalPoints()
+      });
+      
+      // 关闭积分不足弹窗
+      this.setData({
+        showPointsInsufficientModal: false
+      });
+      
+      wx.showToast({
+        title: result.message,
+        icon: 'success',
+        duration: 2000
+      });
+    } else {
+      wx.showToast({
+        title: result.message,
+        icon: 'none',
+        duration: 2000
+      });
+    }
   }
 }); 

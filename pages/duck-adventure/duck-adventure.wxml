@@ -44,4 +44,28 @@
     </button>
     <button class="exit-button" bindtap="exitGame">退出游戏</button>
   </view>
+  
+  <!-- 积分不足提示弹窗 -->
+  <view class="points-insufficient-modal" wx:if="{{showPointsInsufficientModal}}">
+    <view class="modal-content">
+      <text class="modal-title">积分不足</text>
+      <text class="modal-description">您当前的积分不足以开始游戏，需要 5 积分</text>
+      <text class="modal-subtitle">获取积分的方式：</text>
+      <view class="get-points-options">
+        <view class="option-item" bindtap="navigateToStudy">
+          <text class="option-icon">📚</text>
+          <text class="option-text">学习编程题目</text>
+        </view>
+        <button class="option-item share-button" open-type="share">
+          <text class="option-icon">🔄</text>
+          <text class="option-text">分享小程序</text>
+        </button>
+        <view class="option-item" bindtap="watchAdToGetPoints">
+          <text class="option-icon">📺</text>
+          <text class="option-text">观看广告</text>
+        </view>
+      </view>
+      <button class="modal-close-button" bindtap="closePointsInsufficientModal">关闭</button>
+    </view>
+  </view>
 </view> 

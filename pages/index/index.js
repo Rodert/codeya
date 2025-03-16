@@ -97,7 +97,15 @@ Page({
   // 检查是否需要显示横幅
   checkBannerDisplay: function() {
     const today = new Date().toDateString(); // 获取当前日期（不含时间）
-    const lastShowDate = wx.getStorageSync('lastBannerShowDate');
+    let lastShowDate = null;
+    
+    try {
+      lastShowDate = wx.getStorageSync('lastBannerShowDate');
+    } catch (e) {
+      console.error('Failed to get lastBannerShowDate:', e);
+      // 如果获取失败，默认显示横幅
+      lastShowDate = null;
+    }
     
     // 如果从未显示过或者不是今天显示的，则显示横幅
     if (!lastShowDate || lastShowDate !== today) {
@@ -119,7 +127,19 @@ Page({
       }, 10000); // 10秒后自动关闭
       
       // 记录显示日期
-      wx.setStorageSync('lastBannerShowDate', today);
+      try {
+        wx.setStorageSync('lastBannerShowDate', today);
+      } catch (e) {
+        console.error('Failed to save lastBannerShowDate:', e);
+        // 尝试使用异步方法保存
+        wx.setStorage({
+          key: 'lastBannerShowDate',
+          data: today,
+          fail: (err) => {
+            console.error('Async storage also failed:', err);
+          }
+        });
+      }
     } else {
       // 如果今天已经显示过，则不显示
       const app = getApp();
@@ -287,10 +307,9 @@ Page({
   checkDailyQuestion: function() {
     const today = new Date().toDateString();
     const lastQuestionDate = wx.getStorageSync('lastDailyQuestionDate');
-    const lastQuestionCompleted = wx.getStorageSync('lastQuestionCompleted'); // 是否完成了每日一题
     
-    // 如果从未显示过，或者不是今天显示的，或者今天显示了但没完成，则显示每日一题
-    if (!lastQuestionDate || lastQuestionDate !== today || (lastQuestionDate === today && !lastQuestionCompleted)) {
+    // 只有从未显示过，或者不是今天显示的，才显示每日一题
+    if (!lastQuestionDate || lastQuestionDate !== today) {
       this.showDailyQuestion();
     }
   },
@@ -329,19 +348,14 @@ Page({
       confirmText: '立即学习',
       cancelText: '稍后再说',
       success: (res) => {
-        // 记录最后显示日期
+        // 记录最后显示日期，无论用户选择什么，都标记为今天已经显示过
         wx.setStorageSync('lastDailyQuestionDate', today);
         
         if (res.confirm) {
-          // 用户点击了立即学习，记录完成状态
-          wx.setStorageSync('lastQuestionCompleted', true);
-          // 跳转到题目详情页
+          // 用户点击了立即学习
           wx.navigateTo({
             url: '/pages/detail/detail?categoryKey=' + question.categoryKey + '&questionId=' + question.id
           });
-        } else {
-          // 用户点击了稍后再说，清除完成状态
-          wx.setStorageSync('lastQuestionCompleted', false);
         }
       }
     });

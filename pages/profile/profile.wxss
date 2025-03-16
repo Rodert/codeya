@@ -122,10 +122,27 @@
   border-bottom: none;
 }
 
+.function-name-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.function-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
 .function-name {
   flex: 1;
   font-size: 28rpx;
   color: #333;
+}
+
+/* 清除数据按钮样式 */
+.function-item:last-child .function-name {
+  color: #e74c3c;
+  font-weight: 500;
 }
 
 .arrow {

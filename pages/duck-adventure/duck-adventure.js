@@ -26,7 +26,8 @@ Page({
     },
     isJumping: false,
     touchStartX: 0,
-    touchStartY: 0
+    touchStartY: 0,
+    showPointsInsufficientModal: false
   },
 
   onLoad: function() {
@@ -86,10 +87,9 @@ Page({
   startGame: function() {
     // 检查积分是否足够
     if (this.data.totalPoints < 5) {
-      wx.showToast({
-        title: '积分不足，无法开始游戏',
-        icon: 'none',
-        duration: 2000
+      // 显示积分不足弹窗，而不是简单的提示
+      this.setData({
+        showPointsInsufficientModal: true
       });
       return;
     }
@@ -438,10 +438,9 @@ Page({
   restartGame: function() {
     // 检查积分是否足够
     if (this.data.totalPoints < 5) {
-      wx.showToast({
-        title: '积分不足，无法重新开始',
-        icon: 'none',
-        duration: 2000
+      // 显示积分不足弹窗，而不是简单的提示
+      this.setData({
+        showPointsInsufficientModal: true
       });
       return;
     }
@@ -450,6 +449,104 @@ Page({
     this.setData({
       gameStarted: false,
       gameOver: false
+    });
+  },
+  
+  // 关闭积分不足弹窗
+  closePointsInsufficientModal: function() {
+    this.setData({
+      showPointsInsufficientModal: false
+    });
+  },
+  
+  // 导航到学习页面
+  navigateToStudy: function() {
+    this.closePointsInsufficientModal();
+    wx.switchTab({
+      url: '/pages/index/index',
+      success: () => {
+        wx.showToast({
+          title: '学习题目可获得积分',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  },
+  
+  // 分享小程序
+  onShareAppMessage: function() {
+    // 延迟添加积分，模拟用户分享完成
+    setTimeout(() => {
+      const result = db.addSharePoints();
+      if (result.success) {
+        // 更新积分显示
+        this.setData({
+          totalPoints: db.getTotalPoints()
+        });
+        
+        // 关闭积分不足弹窗
+        this.setData({
+          showPointsInsufficientModal: false
+        });
+        
+        wx.showToast({
+          title: result.message,
+          icon: 'success',
+          duration: 2000
+        });
+      } else {
+        wx.showToast({
+          title: result.message,
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    }, 1000);
+    
+    return {
+      title: '鸭鸭冒险 - 编程鸭小游戏',
+      path: '/pages/duck-adventure/duck-adventure',
+      imageUrl: '/images/logo/codeya_logo3.jpg'
+    };
+  },
+  
+  // 观看广告获取积分
+  watchAdToGetPoints: function() {
+    this.closePointsInsufficientModal();
+    
+    wx.showModal({
+      title: '观看广告获取积分',
+      content: '观看一个短视频广告，可获得10积分奖励',
+      confirmText: '观看广告',
+      cancelText: '取消',
+      success: (res) => {
+        if (res.confirm) {
+          // 这里应该调用广告API，但由于微信小程序的广告API需要真实的广告单元ID，
+          // 所以这里只是模拟广告观看完成后的奖励
+          wx.showLoading({
+            title: '加载广告中...',
+          });
+          
+          setTimeout(() => {
+            wx.hideLoading();
+            
+            // 模拟广告观看完成，给予积分奖励
+            const newPoints = this.data.totalPoints + 10;
+            db.updateTotalPoints(newPoints);
+            
+            this.setData({
+              totalPoints: newPoints
+            });
+            
+            wx.showToast({
+              title: '获得10积分奖励！',
+              icon: 'success',
+              duration: 2000
+            });
+          }, 2000);
+        }
+      }
     });
   },
   
@@ -526,6 +623,18 @@ Page({
     
     this.setData({
       duckVelocity: duckVelocity
+    });
+  },
+  
+  // 分享小程序获取积分
+  shareToGetPoints: function() {
+    this.closePointsInsufficientModal();
+    
+    // 显示分享提示
+    wx.showToast({
+      title: '请点击分享按钮',
+      icon: 'none',
+      duration: 2000
     });
   }
 });
