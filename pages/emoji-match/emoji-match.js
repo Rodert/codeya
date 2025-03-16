@@ -65,6 +65,9 @@ const LEVELS = [
   }
 ];
 
+// 激励视频广告实例
+let videoAd = null;
+
 Page({
   data: {
     totalPoints: 0,
@@ -98,6 +101,9 @@ Page({
 
     // 加载关卡进度
     this.loadLevelProgress();
+    
+    // 初始化激励视频广告
+    this.initRewardedVideoAd();
   },
   
   onShow: function() {
@@ -568,43 +574,142 @@ Page({
     };
   },
   
+  // 初始化激励视频广告
+  initRewardedVideoAd: function() {
+    // 若在开发者工具中无法预览广告，请切换开发者工具中的基础库版本
+    if (wx.createRewardedVideoAd) {
+      videoAd = wx.createRewardedVideoAd({
+        adUnitId: 'adunit-49b33605e9adf471'  // 使用流量主提供的广告单元ID
+      });
+      
+      videoAd.onLoad(() => {
+        console.log('激励视频广告加载成功');
+      });
+      
+      videoAd.onError((err) => {
+        console.error('激励视频广告加载失败', err);
+        // 加载失败时，显示提示并给予积分（为了测试）
+        wx.showToast({
+          title: '广告加载失败，模拟观看',
+          icon: 'none',
+          duration: 2000
+        });
+        
+        // 模拟广告观看完成，给予积分奖励
+        setTimeout(() => {
+          const newPoints = this.data.totalPoints + 10;
+          db.updateTotalPoints(newPoints);
+          
+          this.setData({
+            totalPoints: newPoints
+          });
+          
+          wx.showToast({
+            title: '获得10积分奖励！',
+            icon: 'success',
+            duration: 2000
+          });
+        }, 2000);
+      });
+      
+      videoAd.onClose((res) => {
+        // 用户点击了【关闭广告】按钮
+        if (res && res.isEnded) {
+          // 正常播放结束，可以下发游戏奖励
+          const newPoints = this.data.totalPoints + 10;
+          db.updateTotalPoints(newPoints);
+          
+          this.setData({
+            totalPoints: newPoints
+          });
+          
+          wx.showToast({
+            title: '获得10积分奖励！',
+            icon: 'success',
+            duration: 2000
+          });
+        } else {
+          // 播放中途退出，不下发游戏奖励
+          wx.showToast({
+            title: '观看完整广告才能获得奖励',
+            icon: 'none',
+            duration: 2000
+          });
+        }
+      });
+    }
+  },
+  
   // 观看广告获取积分
   watchAdToGetPoints: function() {
     this.closePointsInsufficientModal();
     
-    wx.showModal({
-      title: '观看广告获取积分',
-      content: '观看一个短视频广告，可获得10积分奖励',
-      confirmText: '观看广告',
-      cancelText: '取消',
-      success: (res) => {
-        if (res.confirm) {
-          // 这里应该调用广告API，但由于微信小程序的广告API需要真实的广告单元ID，
-          // 所以这里只是模拟广告观看完成后的奖励
-          wx.showLoading({
-            title: '加载广告中...',
-          });
-          
-          setTimeout(() => {
-            wx.hideLoading();
-            
-            // 模拟广告观看完成，给予积分奖励
-            const newPoints = this.data.totalPoints + 10;
-            db.updateTotalPoints(newPoints);
-            
-            this.setData({
-              totalPoints: newPoints
-            });
-            
+    // 用户触发广告后，显示激励视频广告
+    if (videoAd) {
+      videoAd.show().catch(() => {
+        // 失败重试
+        videoAd.load()
+          .then(() => videoAd.show())
+          .catch(err => {
+            console.error('激励视频广告显示失败', err);
+            // 显示失败时，显示提示并给予积分（为了测试）
             wx.showToast({
-              title: '获得10积分奖励！',
-              icon: 'success',
+              title: '广告显示失败，模拟观看',
+              icon: 'none',
               duration: 2000
             });
-          }, 2000);
+            
+            // 模拟广告观看完成，给予积分奖励
+            setTimeout(() => {
+              const newPoints = this.data.totalPoints + 10;
+              db.updateTotalPoints(newPoints);
+              
+              this.setData({
+                totalPoints: newPoints
+              });
+              
+              wx.showToast({
+                title: '获得10积分奖励！',
+                icon: 'success',
+                duration: 2000
+              });
+            }, 2000);
+          });
+      });
+    } else {
+      // 如果没有初始化成功，使用模拟方式
+      wx.showModal({
+        title: '观看广告获取积分',
+        content: '观看一个短视频广告，可获得10积分奖励',
+        confirmText: '观看广告',
+        cancelText: '取消',
+        success: (res) => {
+          if (res.confirm) {
+            wx.showLoading({
+              title: '加载广告中...',
+            });
+            
+            setTimeout(() => {
+              wx.hideLoading();
+              
+              // 模拟广告观看完成，给予积分奖励
+              const newPoints = this.data.totalPoints + 10;
+              db.updateTotalPoints(newPoints);
+              
+              this.setData({
+                totalPoints: newPoints
+              });
+              
+              wx.showToast({
+                title: '获得10积分奖励！',
+                icon: 'success',
+                duration: 2000
+              });
+            }, 2000);
+          }
         }
-      }
-    });
+      });
+    }
   },
   
   // 分享小程序获取积分
