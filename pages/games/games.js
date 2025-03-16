@@ -56,19 +56,9 @@ Page({
     // 根据游戏ID进行不同的导航
     switch(gameId) {
       case 'duckAdventure':
-        // 直接在首页打开鸭鸭冒险游戏
-        wx.switchTab({
-          url: '/pages/index/index',
-          success: () => {
-            // 通过页面栈获取首页实例，并调用其startDuckGame方法
-            const pages = getCurrentPages();
-            const indexPage = pages[pages.length - 1];
-            if (indexPage && indexPage.startDuckGame) {
-              setTimeout(() => {
-                indexPage.startDuckGame();
-              }, 500); // 延迟调用，确保页面已完全加载
-            }
-          }
+        // 导航到鸭鸭冒险游戏页面
+        wx.navigateTo({
+          url: '/pages/duck-adventure/duck-adventure'
         });
         break;
         

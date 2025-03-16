@@ -7,7 +7,8 @@
     "pages/home/home",
     "pages/category/category",
     "pages/games/games",
-    "pages/emoji-match/emoji-match"
+    "pages/emoji-match/emoji-match",
+    "pages/duck-adventure/duck-adventure"
   ],
   "window": {
     "backgroundTextStyle": "light",
