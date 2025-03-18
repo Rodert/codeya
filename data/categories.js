@@ -50,7 +50,7 @@ module.exports = {
       name: "GoLang",
       key: "golang",
       description: "Golang是由Google开发的开源静态类型、编译型语言，语法简洁高效，支持垃圾回收（GC）与内存安全。核心特性包括轻量级协程（goroutine）与CSP并发模型（基于channel通信），通过GMP调度器实现高并发（百万级协程）。编译为静态二进制文件，依赖少，跨平台支持良好。内置接口（隐式实现）、结构体组合及defer机制，支持反射与交叉编译。GC采用并发标记-清除算法（三色标记法），优化低延迟。标准库覆盖网络、加密、并发等场景，工具链强大（go fmt/test/mod）。高性能接近C，适用于微服务（Gin/Echo）、云原生（Docker/Kubernetes）及分布式系统，凭借高效编译、协程调度与原生并发优势成为后端开发主流选择。",
-      questionCount: 35,
+      questionCount: 45,
       icon: "/images/list/golang.png",
       order: 6
     },
