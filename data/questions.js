@@ -2701,5 +2701,208 @@ module.exports = {
         "tags": ["HDFS", "NameNode", "DataNode", "故障处理", "数据恢复", "容错机制"]
       }
     ],
+    linux: [
+      {
+        "id": 1,
+        "categoryId": "linux",
+        "title": "绝对路径用什么符号表示？当前目录、上层目录用什么表示？主目录用什么表示？切换目录用什么命令？",
+        "difficulty": "简单",
+        "viewCount": 1567,
+        "code": "绝对路径用`/`表示；当前目录用`.`表示；上层目录用`..`表示；主目录用`~`表示；切换目录用`cd`命令。",
+        "md": "# 目录路径表示与切换\n\n在Linux中，路径的表示和目录切换是非常基础的操作。\n\n- **绝对路径**：以`/`开头，表示从根目录开始的路径。例如：`/home/user/documents`。\n\n- **当前目录**：用`.`表示。例如：`ls .`表示列出当前目录下的文件。\n\n- **上层目录**：用`..`表示。例如：`cd ..`表示切换到上一层目录。\n\n- **主目录**：用`~`表示。例如：`cd ~`表示切换到当前用户的主目录。\n\n- **切换目录命令**：使用`cd`命令。例如：`cd /path/to/directory`。",
+        "tags": ["Linux基础", "路径表示", "目录切换"]
+      },
+      {
+        "id": 2,
+        "categoryId": "linux",
+        "title": "怎么查看当前进程？怎么执行退出？怎么查看当前路径？",
+        "difficulty": "简单",
+        "viewCount": 1452,
+        "code": "查看当前进程用`ps`命令；执行退出用`exit`命令；查看当前路径用`pwd`命令。",
+        "md": "# 查看进程、退出与查看路径\n\n- **查看当前进程**：使用`ps`命令。`ps`命令用于报告当前系统的进程状态。例如：`ps aux`可以列出所有进程的详细信息。\n\n- **执行退出**：使用`exit`命令。在终端中输入`exit`并按回车键，可以退出当前的登录会话或shell。\n\n- **查看当前路径**：使用`pwd`命令。`pwd`表示\"print working directory\"，用于显示当前所在的目录路径。",
+        "tags": ["Linux基础", "进程管理", "路径查看"]
+      },
+      {
+        "id": 3,
+        "categoryId": "linux",
+        "title": "怎么清屏？怎么退出当前命令？怎么查看当前用户id？查看指定帮助用什么命令？",
+        "difficulty": "简单",
+        "viewCount": 1346,
+        "code": "清屏用`clear`命令；退出当前命令用`Ctrl+C`；查看当前用户id用`id`命令；查看指定帮助用`man`或`--help`参数。",
+        "md": "# 清屏、退出命令、查看用户ID与帮助\n\n- **清屏**：使用`clear`命令。在终端中输入`clear`并按回车键，可以清除屏幕上的内容，使终端界面变得整洁。\n\n- **退出当前命令**：使用`Ctrl+C`组合键。在执行一个命令时，如果想中途停止，可以按下`Ctrl+C`来终止当前命令的执行。\n\n- **查看当前用户id**：使用`id`命令。`id`命令用于显示当前用户的用户ID、组ID等信息。例如：`id`会输出类似`uid=1000(user) gid=1000(user) groups=1000(user)`的信息。\n\n- **查看指定帮助**：使用`man`命令或在命令后添加`--help`参数。`man`命令用于查看某个命令的详细手册，例如：`man ls`会显示`ls`命令的使用说明。`--help`参数则用于显示命令的简要使用帮助，例如：`ls --help`。",
+        "tags": ["Linux基础", "命令操作", "用户信息", "帮助查看"]
+      },
+      {
+        "id": 4,
+        "categoryId": "linux",
+        "title": "ls命令执行什么功能？可以带哪些参数，有什么区别？",
+        "difficulty": "简单",
+        "viewCount": 1678,
+        "code": "ls命令用于列出目录内容。常用参数有：`-a`显示所有文件（包括隐藏文件）；`-l`使用长格式列出文件详情；`-h`以人类可读的格式显示文件大小；`-t`按修改时间排序等。",
+        "md": "# ls命令功能与参数\n\n`ls`命令是Linux中最常用的命令之一，用于列出指定目录下的文件和文件夹。\n\n- **基本使用**：直接输入`ls`并按回车键，可以列出当前目录下的文件和文件夹。\n\n- **参数说明**：\n\n  - `-a`：显示所有文件，包括以`.`开头的隐藏文件。例如：`ls -a`。\n\n  - `-l`：使用长格式列出文件，显示文件的权限、所有者、大小等详细信息。例如：`ls -l`。\n\n  - `-h`：与`-l`一起使用时，以人类可读的格式（如KB、MB）显示文件大小。例如：`ls -lh`。\n\n  - `-t`：按文件的修改时间排序，最新的文件排在最前面。例如：`ls -lt`。\n\n  - `-r`：反转排序顺序。例如：`ls -ltr`按修改时间降序排列。\n\n- **应用场景**：在日常的文件管理中，`ls`命令可以帮助我们快速了解目录结构和文件信息，方便我们进行后续的操作。",
+        "tags": ["Linux基础", "文件管理", "命令参数"]
+      },
+      {
+        "id": 5,
+        "categoryId": "linux",
+        "title": "怎么查看文件有哪些命令？",
+        "difficulty": "简单",
+        "viewCount": 1234,
+        "code": "查看文件内容的命令有`cat`、`more`、`less`、`head`、`tail`等。",
+        "md": "# 查看文件内容的命令\n\n在Linux中，有多种命令可以用来查看文件内容，不同的命令适用于不同的场景。\n\n- **cat命令**：用于连接文件并打印到标准输出（屏幕）。适用于查看较小的文件。例如：`cat filename`会将文件的全部内容输出到屏幕上。\n\n- **more命令**：用于分页显示文件内容。当文件内容较多时，`more`会一页一页地显示，按回车键可以向下翻一行，按空格键可以向下翻一页。例如：`more filename`。\n\n- **less命令**：与`more`类似，但功能更强大。可以向上和向下翻页。例如：`less filename`，按`k`键向上翻，按`j`键向下翻，按`q`键退出。\n\n- **head命令**：用于查看文件的开头部分，默认显示前10行。例如：`head filename`。可以通过`-n`参数指定显示的行数，如`head -n 5 filename`显示前5行。\n\n- **tail命令**：用于查看文件的末尾部分，默认显示最后10行。例如：`tail filename`。同样可以通过`-n`参数指定显示的行数，如`tail -n 5 filename`显示最后5行。`tail`还常用于实时查看日志文件的最新内容，例如：`tail -f logfile`会不断显示追加到logfile中的内容。",
+        "tags": ["Linux基础", "文件查看", "命令工具"]
+      },
+      {
+        "id": 6,
+        "categoryId": "linux",
+        "title": "列举几个常用的Linux命令。",
+        "difficulty": "简单",
+        "viewCount": 1890,
+        "code": "常用的Linux命令有：`ls`（列出目录内容）、`cd`（切换目录）、`pwd`（显示当前路径）、`cat`（查看文件内容）、`cp`（复制文件）、`mv`（移动或重命名文件）、`rm`（删除文件）、`mkdir`（创建目录）、`rmdir`（删除空目录）、`touch`（创建空文件）、`chmod`（更改文件权限）、`chown`（更改文件所有者）、`grep`（文本搜索）、`ps`（查看进程）、`top`（显示系统资源使用情况）、`kill`（终止进程）等。",
+        "md": "# 常用Linux命令列举\n\nLinux中有许多常用的命令，以下是其中一些重要的命令及其功能简介：\n\n- **ls**：列出目录内容。例如：`ls -l`以长格式列出文件详情。\n\n- **cd**：切换目录。例如：`cd /home/user`切换到指定目录。\n\n- **pwd**：显示当前工作目录的路径。例如：`pwd`会输出如`/home/user/documents`这样的路径。\n\n- **cat**：查看文件内容。例如：`cat file.txt`会将文件内容全部输出到屏幕上。\n\n- **cp**：复制文件或目录。例如：`cp source.txt destination.txt`将source.txt复制为destination.txt。\n\n- **mv**：移动文件或重命名文件。例如：`mv oldname.txt newname.txt`将文件重命名，或`mv file.txt /path/to/destination`将文件移动到指定目录。\n\n- **rm**：删除文件或目录。例如：`rm file.txt`删除文件，`rm -r directory`递归删除目录及其内容。\n\n- **mkdir**：创建目录。例如：`mkdir newdir`创建名为newdir的目录。\n\n- **rmdir**：删除空目录。例如：`rmdir emptydir`删除名为emptydir的空目录。\n\n- **touch**：创建空文件或更改文件时间戳。例如：`touch newfile`创建一个名为newfile的空文件。\n\n- **chmod**：更改文件或目录的权限。例如：`chmod 755 file.sh`将file.sh的权限设置为所有者可读写执行，组用户和他人可读执行。\n\n- **chown**：更改文件或目录的所有者。例如：`chown user:group file.txt`将file.txt的所有者更改为user，所属组更改为group。\n\n- **grep**：在文件中搜索文本模式。例如：`grep 'pattern' file.txt`在file.txt中搜索包含'pattern'的行。\n\n- **ps**：报告当前系统的进程状态。例如：`ps aux`列出所有进程的详细信息。\n\n- **top**：显示系统资源使用情况和运行中的进程。运行`top`后，会动态显示系统的CPU使用率、内存使用情况以及各个进程的资源占用情况。\n\n- **kill**：终止进程。例如：`kill -9 1234`强制终止进程ID为1234的进程。\n\n这些命令是Linux操作的基础，熟练掌握它们可以大大提高工作效率。",
+        "tags": ["Linux基础", "常用命令", "系统操作"]
+      },
+      {
+        "id": 7,
+        "categoryId": "linux",
+        "title": "你平时是怎么查看日志的？",
+        "difficulty": "中等",
+        "viewCount": 1789,
+        "code": "查看日志常用`tail -f`实时查看日志尾部内容，`grep`筛选特定内容，`less`分页查看大文件，结合`awk`、`sed`等工具进行复杂处理。",
+        "md": "# 查看日志的方法\n\n在实际工作中，查看日志是排查问题的重要手段。以下是一些常用的方法：\n\n- **使用`tail`命令**：\n\n  - `tail -f logfile`：实时查看日志文件的最新内容，适合监控正在写入的日志。例如，查看Apache服务器的访问日志：`tail -f /var/log/apache2/access.log`。\n\n  - `tail -n 100 logfile`：查看日志文件的最后100行，快速定位近期发生的事件。\n\n- **使用`grep`命令筛选日志**：\n\n  - `grep 'ERROR' logfile`：在日志中查找包含\"ERROR\"的关键信息，快速定位错误。\n\n  - `grep '2023-10-10' logfile`：查找特定日期的日志条目，便于按时间范围排查问题。\n\n- **使用`less`命令查看大日志文件**：\n\n  - `less logfile`：对于非常大的日志文件，`less`可以分页查看，按`k`键向上翻，`j`键向下翻，`/pattern`搜索内容，`q`键退出。\n\n- **结合`awk`、`sed`等工具进行复杂处理**：\n\n  - `awk '{print $4}' logfile`：提取日志中特定字段，例如IP地址、时间戳等。\n\n  - `sed -n '/pattern/p' logfile`：使用`sed`进行模式匹配并输出匹配的行。\n\n- **使用日志分析工具**：\n\n  - 对于复杂的日志分析，可以使用专门的日志分析工具如`logstash`、`splunk`等，它们可以对日志进行结构化处理、统计分析等高级操作。",
+        "tags": ["Linux应用", "日志管理", "问题排查"]
+      },
+      {
+        "id": 8,
+        "categoryId": "linux",
+        "title": "建立软链接（快捷方式）以及硬链接的命令是什么？",
+        "difficulty": "中等",
+        "viewCount": 1432,
+        "code": "建立软链接用`ln -s target linkname`，硬链接用`ln target linkname`。",
+        "md": "# 软链接与硬链接的创建\n\n在Linux中，链接分为软链接（符号链接）和硬链接，它们有不同的特性和使用场景。\n\n- **软链接（符号链接）**：\n\n  - **创建命令**：`ln -s target linkname`。例如：`ln -s /path/to/originalfile softlink`创建一个指向originalfile的软链接softlink。\n\n  - **特点**：\n\n    - 软链接是一个独立的文件，它包含所链接文件的路径。\n\n    - 如果原始文件被删除，软链接会变成无效链接（ dangling link ）。\n\n    - 软链接可以跨越不同的文件系统。\n\n    - 可以对目录创建软链接。\n\n  - **应用场景**：当需要在不同的目录下访问同一个文件，或者需要创建一个易记的别名时，软链接非常有用。例如，在项目的不同版本之间创建软链接，方便快速切换。\n\n- **硬链接**：\n\n  - **创建命令**：`ln target linkname`。例如：`ln /path/to/originalfile hardlink`创建一个硬链接hardlink，它与originalfile共享同一个 inode 。\n\n  - **特点**：\n\n    - 硬链接不是独立的文件，它直接指向磁盘上的数据块。\n\n    - 原始文件被删除后，硬链接仍然有效，只要还有一个硬链接存在，数据就不会被删除。\n\n    - 硬链接不能跨越不同的文件系统。\n\n    - 不能对目录创建硬链接（在大多数文件系统中，出于安全和一致性考虑，不允许对目录创建硬链接，以防止产生循环引用等问题）。\n\n  - **应用场景**：当需要为一个重要文件创建多个入口，或者需要在磁盘空间紧张的情况下节省空间时，硬链接是一个不错的选择。例如，对配置文件创建硬链接，方便在多个地方进行修改。",
+        "tags": ["Linux文件", "链接操作", "文件系统"]
+      },
+      {
+        "id": 9,
+        "categoryId": "linux",
+        "title": "目录创建用什么命令？创建文件用什么命令？复制文件用什么命令？",
+        "difficulty": "简单",
+        "viewCount": 1324,
+        "code": "目录创建用`mkdir`命令；创建文件用`touch`或`>filename`等方法；复制文件用`cp`命令。",
+        "md": "# 目录与文件的创建及文件复制\n\n- **创建目录**：使用`mkdir`命令。例如：`mkdir newdirectory`创建一个名为newdirectory的目录。如果需要创建多级目录，可以使用`mkdir -p`选项，例如：`mkdir -p parent/child/grandchild`会创建parent、child、grandchild三级目录。\n\n- **创建文件**：有多种方法可以创建文件。\n\n  - 使用`touch`命令：`touch newfile`创建一个名为newfile的空文件。如果文件已存在，`touch`会更新其时间戳。\n\n  - 使用重定向操作符：`> newfile`也会创建一个空文件，如果文件已存在，会清空其内容。\n\n  - 使用文本编辑器：如`vi`、`nano`等，打开一个不存在的文件时会创建它。\n\n- **复制文件**：使用`cp`命令。例如：`cp sourcefile destfile`将sourcefile复制为destfile。如果destfile是一个目录，则sourcefile会被复制到该目录下。复制目录需要使用`-r`（递归）选项，例如：`cp -r sourcedir destdir`复制整个目录及其内容。",
+        "tags": ["Linux基础", "文件操作", "目录管理"]
+      },
+      {
+        "id": 10,
+        "categoryId": "linux",
+        "title": "查看文件内容有哪些命令可以使用？",
+        "difficulty": "简单",
+        "viewCount": 1256,
+        "code": "查看文件内容的命令有`cat`、`more`、`less`、`head`、`tail`等。",
+        "md": "# 查看文件内容的命令\n\n在Linux中，有多种命令可以用来查看文件内容，不同的命令适用于不同的场景。\n\n- **cat命令**：用于连接文件并打印到标准输出（屏幕）。适用于查看较小的文件。例如：`cat filename`会将文件的全部内容输出到屏幕上。\n\n- **more命令**：用于分页显示文件内容。当文件内容较多时，`more`会一页一页地显示，按回车键可以向下翻一行，按空格键可以向下翻一页。例如：`more filename`。\n\n- **less命令**：与`more`类似，但功能更强大。可以向上和向下翻页。例如：`less filename`，按`k`键向上翻，按`j`键向下翻，按`q`键退出。\n\n- **head命令**：用于查看文件的开头部分，默认显示前10行。例如：`head filename`。可以通过`-n`参数指定显示的行数，如`head -n 5 filename`显示前5行。\n\n- **tail命令**：用于查看文件的末尾部分，默认显示最后10行。例如：`tail filename`。同样可以通过`-n`参数指定显示的行数，如`tail -n 5 filename`显示最后5行。`tail`还常用于实时查看日志文件的最新内容，例如：`tail -f logfile`会不断显示追加到logfile中的内容。",
+        "tags": ["Linux基础", "文件查看", "命令工具"]
+      },
+      {
+        "id": 11,
+        "categoryId": "linux",
+        "title": "随意写文件命令？怎么向屏幕输出带空格的字符串，比如“hello world”？",
+        "difficulty": "简单",
+        "viewCount": 1123,
+        "code": "写文件命令有`echo`、`printf`、文本编辑器等。向屏幕输出带空格的字符串可以用`echo \"hello world\"`或`printf \"hello world\\n\"`。",
+        "md": "# 写文件与输出字符串\n\n- **写文件命令**：\n\n  - `echo`：将数据输出到文件或屏幕。例如：`echo \"This is a test\" > file.txt`会将\"This is a test\"写入file.txt，覆盖原有内容。如果需要追加内容，可以使用`>>`，如`echo \"Another line\" >> file.txt`。\n\n  - `printf`：格式化输出。例如：`printf \"Name: %s\\nAge: %d\\n\" \"Alice\" 30 > info.txt`会将格式化后的字符串写入info.txt。\n\n  - 文本编辑器：如`vi`、`nano`等，可以直接打开文件进行编辑。\n\n- **向屏幕输出带空格的字符串**：\n\n  - 使用`echo`命令：`echo \"hello world\"`，双引号可以保留字符串中的空格。\n\n  - 使用`printf`命令：`printf \"hello world\\n\"`，同样需要使用双引号来包含整个字符串。\n\n  - 如果不使用引号，Shell会将多个单词视为单独的参数。例如：`echo hello world`也会输出\"hello world\"，因为`echo`会将多个参数用空格连接后输出。",
+        "tags": ["Linux基础", "文件操作", "字符串处理"]
+      },
+      {
+        "id": 12,
+        "categoryId": "linux",
+        "title": "终端是哪个文件夹下的哪个文件？黑洞文件是哪个文件夹下的哪个命令？",
+        "difficulty": "中等",
+        "viewCount": 1345,
+        "code": "终端设备文件通常位于`/dev/tty`或`/dev/ttyS0`等；黑洞文件是`/dev/null`。",
+        "md": "# 终端与黑洞文件的位置\n\n- **终端设备文件**：\n\n  - 在Linux中，终端设备通常对应的文件位于`/dev`目录下。例如，当前用户的终端可能是`/dev/tty`，而串行端口终端可能是`/dev/ttyS0`等。\n\n  - 这些设备文件允许程序与终端进行交互，例如读取用户输入、输出显示信息等。\n\n- **黑洞文件（`/dev/null`）**：\n\n  - `/dev/null`是一个特殊的设备文件，也被称为\"null设备\"或\"黑洞\"。写入到它的任何数据都会被丢弃，从它读取任何数据都会立即返回EOF（End Of File）。\n\n  - **应用场景**：\n\n    - 在执行命令时，如果不想看到输出结果，可以将输出重定向到`/dev/null`。例如：`command > /dev/null`会丢弃命令的输出。\n\n    - 测试程序的性能时，可以将不必要的输出重定向到`/dev/null`，以减少对测试结果的干扰。\n\n    - 在脚本中，用于清除文件内容。例如：`> filename`等价于`cat /dev/null > filename`，会清空文件内容。",
+        "tags": ["Linux设备", "特殊文件", "系统知识"]
+      },
+      {
+        "id": 13,
+        "categoryId": "linux",
+        "title": "移动文件用哪个命令？改名用哪个命令？",
+        "difficulty": "简单",
+        "viewCount": 1456,
+        "code": "移动文件和改名都用`mv`命令。",
+        "md": "# 移动与重命名文件\n\n`mv`命令用于移动文件或目录，也可以用于重命名文件或目录。\n\n- **移动文件**：\n\n  - 语法：`mv source destination`\n\n  - 示例：`mv document.txt /backup/`将document.txt移动到/backup目录下。\n\n- **重命名文件**：\n\n  - 语法：`mv oldname newname`\n\n  - 示例：`mv oldfile.txt newfile.txt`将oldfile.txt重命名为newfile.txt。\n\n- **注意事项**：\n\n  - 如果destination是一个存在的目录，source会被移动到该目录下，并保持原名。\n\n  - 如果destination是一个不存在的文件名，则视为重命名操作。\n\n  - 移动文件到其他文件系统（如不同分区）时，实际上会进行复制和删除操作，而不是简单的元数据修改，因此可能需要更多的时间和磁盘空间。",
+        "tags": ["Linux基础", "文件操作", "命令使用"]
+      },
+      {
+        "id": 14,
+        "categoryId": "linux",
+        "title": "复制文件用哪个命令？如果需要连同文件夹一块复制呢？如果需要有提示功能呢？",
+        "difficulty": "中等",
+        "viewCount": 1567,
+        "code": "复制文件用`cp`命令；复制目录用`cp -r`；有提示功能用`cp -i`。",
+        "md": "# 复制文件与目录\n\n`cp`命令用于复制文件或目录。\n\n- **复制文件**：\n\n  - 基本语法：`cp source dest`\n\n  - 示例：`cp file1.txt file2.txt`将file1.txt复制为file2.txt。\n\n- **复制目录**：\n\n  - 需要使用`-r`（递归）选项。语法：`cp -r sourcedir destdir`\n\n  - 示例：`cp -r mydir backupdir`将mydir目录及其内容复制到backupdir。\n\n- **有提示功能**：\n\n  - 使用`-i`选项，在覆盖目标文件前会提示用户确认。例如：`cp -i file1.txt file2.txt`，如果file2.txt已存在，会提示\"overwrite file2.txt? (y/n)\"。\n\n- **其他常用选项**：\n\n  - `-v`：详细模式，显示复制的详细过程。\n\n  - `-a`：归档模式，相当于`-dR --preserve=all`，用于复制文件和目录时保留所有属性，适用于备份和归档操作。",
+        "tags": ["Linux基础", "文件复制", "目录操作"]
+      },
+      {
+        "id": 15,
+        "categoryId": "linux",
+        "title": "删除文件用哪个命令？如果需要连目录及目录下文件一块删除呢？删除空文件夹用什么命令？",
+        "difficulty": "中等",
+        "viewCount": 1678,
+        "code": "删除文件用`rm`命令；删除目录及内容用`rm -r`；删除空目录用`rmdir`或`rm -d`。",
+        "md": "# 删除文件与目录\n\n`rm`命令用于删除文件或目录，`rmdir`用于删除空目录。\n\n- **删除文件**：\n\n  - 基本语法：`rm filename`\n\n  - 示例：`rm document.txt`删除名为document.txt的文件。\n\n- **删除目录及内容**：\n\n  - 需要使用`-r`（递归）选项。语法：`rm -r directoryname`\n\n  - 示例：`rm -r myfolder`删除myfolder目录及其包含的所有文件和子目录。\n\n- **删除空目录**：\n\n  - 使用`rmdir`命令。语法：`rmdir directoryname`\n\n  - 示例：`rmdir emptydir`删除名为emptydir的空目录。\n\n  - 也可以使用`rm -d`，它与`rmdir`功能相同，用于删除空目录。\n\n- **注意事项**：\n\n  - 删除操作不可逆，删除的文件通常无法恢复，因此在执行删除操作前要仔细确认。\n\n  - 使用`-f`选项可以强制删除，忽略不存在的文件和参数，不会提示错误。例如：`rm -f file.txt`即使file.txt不存在也不会报错。\n\n  - 对于重要的文件或目录，建议在删除前进行备份。",
+        "tags": ["Linux基础", "文件删除", "目录管理"]
+      },
+      {
+        "id": 16,
+        "categoryId": "linux",
+        "title": "Linux下命令有哪几种可使用的通配符？分别代表什么含义？",
+        "difficulty": "中等",
+        "viewCount": 1345,
+        "code": "Linux命令中常用的通配符有`*`（匹配任意数量字符）、`?`（匹配单个字符）、`[ ]`（匹配指定范围内的单个字符）、`{ }`（匹配多个模式）。",
+        "md": "# Linux通配符的种类与含义\n\n在Linux中，通配符（wildcards）也被称为元字符（metacharacters），用于模式匹配，特别是在文件名匹配中非常有用。\n\n- **`*`（星号）**：\n\n  - 匹配任意数量的字符（包括零个字符）。\n\n  - 示例：`ls *.txt`会列出当前目录下所有以\".txt\"结尾的文件。\n\n- **`?`（问号）**：\n\n  - 匹配任意单个字符。\n\n  - 示例：`ls file?.txt`会匹配file1.txt、file2.txt等，但不会匹配file10.txt（因为问号只匹配一个字符）。\n\n- **`[ ]`（方括号）**：\n\n  - 匹配指定范围内的任意单个字符。\n\n  - 可以是连续的字符范围，如`[a-z]`表示匹配小写字母，`[0-9]`表示匹配数字。\n\n  - 也可以是特定字符的集合，如`[abc]`表示匹配a、b或c。\n\n  - 示例：`ls file[1-3].txt`会匹配file1.txt、file2.txt、file3.txt。\n\n- **`{ }`（大括号）**：\n\n  - 用于匹配多个模式，可以看作是多个模式的集合。\n\n  - 示例：`ls file{1,2,3}.txt`等价于`ls file1.txt file2.txt file3.txt`。\n\n  - 也可以用于生成序列，如`file{a..z}.txt`会生成filea.txt到filez.txt的文件名模式。\n\n- **应用场景**：\n\n  - 在处理批量文件时，通配符可以大大提高效率。例如，删除所有临时文件`rm *.tmp`，备份所有配置文件`cp *.conf /backup/`等。\n\n  - 在编写脚本时，使用通配符可以灵活地处理不确定数量的文件。",
+        "tags": ["Linux基础", "文件匹配", "通配符"]
+      },
+      {
+        "id": 17,
+        "categoryId": "linux",
+        "title": "用什么命令对一个文件的内容进行统计？（行号、单词数、字节数）",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "使用`wc`命令，`wc -l`统计行数，`wc -w`统计单词数，`wc -c`统计字节数。",
+        "md": "# 文件内容统计命令\n\n`wc`命令用于统计文件的行数、单词数和字节数。\n\n- **统计行数**：`wc -l filename`。例如：`wc -l document.txt`会输出document.txt的行数。\n\n- **统计单词数**：`wc -w filename`。例如：`wc -w document.txt`会输出document.txt中的单词数量。\n\n- **统计字节数**：`wc -c filename`。例如：`wc -c document.txt`会输出document.txt的大小（以字节为单位）。\n\n- **同时统计所有信息**：`wc filename`会输出文件的行数、单词数和字节数，格式为\"lines words characters filename\"。\n\n- **应用场景**：\n\n  - 在处理文本数据时，`wc`可以帮助我们快速了解文件的大致规模。例如，在分析日志文件时，统计日志的行数可以了解日志的记录量。\n\n  - 在编写文档或代码时，使用`wc`可以统计代码行数、注释行数等，便于评估工作量或代码复杂度。",
+        "tags": ["Linux工具", "文件统计", "数据处理"]
+      },
+      {
+        "id": 18,
+        "categoryId": "linux",
+        "title": "Grep命令有什么用？如何忽略大小写？如何查找不含该串的行？",
+        "difficulty": "中等",
+        "viewCount": 1567,
+        "code": "Grep用于文本搜索；忽略大小写用`-i`；查找不含指定字符串的行用`-v`。",
+        "md": "# Grep命令的使用\n\n`grep`命令用于在文件中搜索与指定模式匹配的行，是Linux中非常强大的文本处理工具。\n\n- **基本使用**：\n\n  - 语法：`grep [options] pattern [file]`\n\n  - 示例：`grep 'error' logfile`会在logfile中查找包含\"error\"的行。\n\n- **忽略大小写**：\n\n  - 使用`-i`选项。例如：`grep -i 'error' logfile`会匹配\"Error\"、\"ERROR\"等不同大小写形式。\n\n- **查找不含指定字符串的行**：\n\n  - 使用`-v`选项。例如：`grep -v 'success' logfile`会输出logfile中不包含\"success\"的行。\n\n- **其他常用选项**：\n\n  - `-n`：在输出中显示匹配行的行号。\n\n  - `-c`：只输出匹配的行数，不显示具体内容。\n\n  - `-r`或`-R`：递归搜索目录中的文件。\n\n  - `-w`：只匹配整个单词，避免部分匹配。例如：`grep -w 'the'`只会匹配\"the\"这个完整单词，而不会匹配\"them\"、\"other\"等包含\"the\"的部分。\n\n- **应用场景**：\n\n  - 在日志分析中，`grep`可以帮助我们快速定位错误信息、警告信息等。\n\n  - 在代码审查中，使用`grep`可以查找特定函数的调用位置、特定变量的使用情况等。\n\n  - 在处理大量文本数据时，`grep`可以用于数据筛选和提取有用信息。",
+        "tags": ["Linux文本处理", "搜索命令", "数据筛选"]
+      },
+      {
+        "id": 19,
+        "categoryId": "linux",
+        "title": "Linux中进程有哪几种状态？在ps显示出来的信息中分别用什么符号表示的？",
+        "difficulty": "中等",
+        "viewCount": 1456,
+        "code": "Linux进程状态有：运行（R）、睡眠（S）、僵尸（Z）、停止（T）、等待（D）等。`ps`命令中用相应大写字母表示。",
+        "md": "# Linux进程状态与ps显示符号\n\n在Linux中，进程可以处于不同的状态，这些状态在`ps`命令的输出中有相应的表示符号。\n\n- **运行状态（Running）**：\n\n  - 符号：`R`\n\n  - 表示进程正在CPU上执行，或者已准备好执行，正在等待CPU资源。\n\n- **睡眠状态（Sleeping）**：\n\n  - 符号：`S`\n\n  - 表示进程正在等待某个事件的发生，例如等待I/O操作完成。睡眠状态又分为可中断睡眠（进程可以被信号唤醒）和不可中断睡眠（进程在等待硬件资源，如磁盘I/O，不能被信号唤醒）。\n\n- **僵尸状态（Zombie）**：\n\n  - 符号：`Z`\n\n  - 当一个进程退出后，其父进程还没有调用`wait`系列函数获取它的退出状态信息时，该进程就会处于僵尸状态。僵尸进程不占用CPU资源，但会占用进程表项，过多的僵尸进程可能导致系统无法创建新进程。\n\n- **停止状态（Stopped）**：\n\n  - 符号：`T`\n\n  - 进程停止执行，通常是因为收到了`SIGSTOP`、`SIGTSTP`等信号，或者在调试过程中被调试器暂停。\n\n- **等待状态（Uninterruptible Sleep）**：\n\n  - 符号：`D`\n\n  - 这是一种特殊的睡眠状态，进程等待的是不可中断的I/O操作。与普通睡眠状态不同，处于`D`状态的进程即使收到信号也不会被唤醒。\n\n- **`ps`命令的使用**：\n\n  - 查看进程状态可以使用`ps aux`命令，其中`STAT`列显示进程的状态符号。\n\n  - 例如，输出中`Ss`表示进程处于睡眠状态，且是一个会话 leader；`Sl`表示进程正在睡眠，并且被跟踪或用于其他目的（具体含义可能因系统而异）。\n\n- **应用场景**：\n\n  - 在系统监控和故障排查中，了解进程状态可以帮助我们判断系统是否正常运行。例如，过多的僵尸进程可能表明某些父进程没有正确处理子进程的退出状态，需要进一步调查和处理。",
+        "tags": ["Linux进程", "系统管理", "状态监控"]
+      },
+      {
+        "id": 20,
+        "categoryId": "linux",
+        "title": "怎么使一个命令在后台运行？",
+        "difficulty": "简单",
+        "viewCount": 1678,
+        "code": "在命令后添加`&`符号，如`command &`。",
+        "md": "# 命令后台运行\n\n在Linux中，可以在命令后面添加`&`符号，使命令在后台运行。\n\n- **基本用法**：\n\n  - 语法：`command &`\n\n  - 示例：`./myscript.sh &`会将脚本myscript.sh在后台执行。\n\n- **管理后台进程**：\n\n  - 使用`jobs`命令可以查看当前shell会话中的后台作业。\n\n  - 使用`fg`命令可以将后台作业移到前台继续运行。例如：`fg %1`将作业1移到前台。\n\n  - 使用`bg`命令可以将暂停的后台作业重新放到后台运行。例如：`bg %1`。\n\n- **应用场景**：\n\n  - 当运行一个耗时较长的任务时，将其放到后台可以释放终端，让我们可以继续执行其他命令。\n\n  - 在编写shell脚本时，后台运行命令可以用于并发执行多个任务，提高脚本的执行效率。\n\n  - 在服务器管理中，后台运行服务程序可以确保服务持续运行，不受终端连接状态的影响。",
+        "tags": ["Linux进程", "命令执行", "后台操作"]
+      }
+    ],
+    spring: [],
   }
 }

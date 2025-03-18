@@ -6,7 +6,7 @@ module.exports = {
       key: "mysql",
       description: "MySQL是一款开源关系型数据库，基于C/S架构，支持ACID事务（通过InnoDB引擎实现），采用MVCC机制与行级锁提升并发性能。数据以B+树索引组织，支持聚簇/非聚簇索引优化查询。存储引擎层可插拔（如InnoDB、MyISAM），事务日志（redo/undo）与binlog保障崩溃恢复及主从复制（异步/半同步）。提供SQL优化器、执行计划解析及慢查询分析，支持分区表、窗口函数。高可用方案涵盖主从集群、组复制（MGR）及InnoDB Cluster，通过XA协议实现分布式事务。工具链包含Performance Schema监控、EXPLAIN性能调优及在线DDL操作，适应高并发OLTP场景与云原生架构。",
       questionCount: 52,
-      icon: "/images/list/mysql.png",
+      icon: "https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250318155403105-1265083507.png",
       order: 1
     },
     {
@@ -33,7 +33,7 @@ module.exports = {
       key: "redis",
       description: "Redis是一款高性能内存数据库，支持持久化（RDB快照/AOF日志），以单线程事件驱动模型实现高吞吐（10万+ QPS）。核心提供String、Hash、List、Set、SortedSet等数据结构，支持原子操作、Lua脚本及弱事务（非ACID）。采用多路复用I/O降低延迟，通过主从复制、哨兵（Sentinel）及Cluster分片（16384槽）实现高可用与水平扩展。支持过期策略（惰性/定期删除）、内存淘汰机制（LRU等）及管道批处理。常用于缓存、会话存储、实时排行榜及分布式锁（SET NX），同时支持Stream实现消息队列。通过RDB与AOF混合模式平衡数据安全与性能，适应高并发低延迟场景。",
       questionCount: 30,
-      icon: "/images/list/redis.png",
+      icon: "https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250318155413811-533727752.png",
       order: 4
     },
     {
@@ -42,7 +42,7 @@ module.exports = {
       key: "python",
       description: "Python是一种动态类型、解释型的高级编程语言，以简洁语法和丰富生态著称。其核心采用引用计数与分代垃圾回收机制管理内存，支持多范式编程（面向对象/函数式/过程式）。通过CPython解释器执行字节码，GIL（全局解释器锁）限制多线程并发效率，但可通过multiprocessing或asyncio协程实现并行。内置装饰器、生成器、上下文管理器等高级特性，标准库涵盖网络通信(asyncio)、数据结构(collections)等模块。广泛应用于数据分析（Pandas/NumPy）、机器学习（PyTorch/TensorFlow）、Web开发（Django/Flask）及自动化运维。动态类型系统支持鸭子类型，配合mypy实现渐进式类型检查。通过C扩展(Cython)或JIT编译器(PyPy)提升性能，兼容性强的.pyc字节码便于部署。持续迭代的类型提示（Type Hints）和模式匹配（Python 3.10+）增强工程化能力，结合PyPI生态快速构建复杂系统。",
       questionCount: 21,
-      icon: "/images/list/python.png",
+      icon: "https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250318155411219-364423108.png",
       order: 5
     },
     {
@@ -89,6 +89,24 @@ module.exports = {
       questionCount: 30,
       icon: "/images/list/hadoop.png",
       order: 10
+    },
+    {
+      id: 11,
+      name: "Linux",
+      key: "linux",
+      description: "Linux是一款免费开源的类Unix操作系统，基于GNU通用公共许可证（GPL）发布，内核由林纳斯·托瓦兹于1991年创建。从技术层面看，Linux具有诸多优势。其采用多用户多任务的32/64位操作系统，内核空间与用户空间隔离，有效提升系统稳定性与安全性。同时，Linux支持多种文件系统，如ext2、ext3、ext4、xfs等，可按需选择与配置。此外，其拥有强大的网络功能，内置TCP/IP协议，能轻松设置代理服务器及防火墙，是互联网服务器的主流选择。Linux系统还提供丰富的开发工具，如gcc、g++、make等，为软件开发与编译提供便利。",
+      questionCount: 30,
+      icon: "https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250318154728868-948895600.png",
+      order: 10
+    },
+    {
+      id: 12,
+      name: "Spring",
+      key: "spring",
+      description: "Spring是一个开源的Java企业级应用开发框架，由Rod Johnson创建。从技术角度看，Spring框架的核心是控制反转（IoC）和面向切面（AOP）。IoC容器负责创建对象，管理对象间的依赖关系，实现了松耦合。AOP用于将横切关注点（如日志、事务）模块化，增强代码复用性和可维护性。Spring还提供了数据访问层的抽象，简化了JDBC、Hibernate等的使用。此外，Spring MVC是功能强大的Web框架，支持灵活的配置和多种视图技术。Spring Boot简化了Spring应用的初始搭建和开发过程，Spring Cloud则为微服务架构提供了工具集，方便构建分布式系统。",
+      questionCount: 0,
+      icon: "https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250318154738271-1587542254.png",
+      order: 3
     },
   ]
 }
