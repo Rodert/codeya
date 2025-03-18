@@ -5,7 +5,7 @@
   <view class="user-info-section">
     <view class="avatar-wrapper">
       <button wx:if="{{!hasUserInfo}}" class="avatar-button" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
-        <image src="/images/list/redis.png" class="avatar"></image>
+        <image src="/images/logo/codeya_logo2.jpg" class="avatar"></image>
       </button>
       <open-data wx:else type="userAvatarUrl" class="avatar"></open-data>
     </view>
@@ -58,7 +58,7 @@
 
   <!-- 小程序二维码 -->
   <view class="qrcode-container" bindtap="previewQrcode">
-    <image class="qrcode-image" src="/images/qrcode.jpg" mode="aspectFit"></image>
+    <image class="qrcode-image" src="https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250318155817547-965429273.jpg" mode="aspectFit"></image>
     <text class="qrcode-text">点击查看小程序码</text>
   </view>
 
