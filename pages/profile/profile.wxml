@@ -34,6 +34,15 @@
     </view>
   </view>
 
+  <!-- 主题切换开关 -->
+  <view class="theme-switch" bindtap="toggleTheme">
+    <view class="theme-switch-left">
+      <text class="theme-icon">{{isDarkMode ? '🌙' : '☀️'}}</text>
+      <text class="theme-switch-text">{{isDarkMode ? '夜间模式' : '日间模式'}}</text>
+    </view>
+    <switch checked="{{isDarkMode}}" color="#2ecc71" />
+  </view>
+
   <!-- 功能列表区域 -->
   <view class="function-list">
     <view class="function-item" 

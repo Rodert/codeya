@@ -1,4 +1,5 @@
 const db = require('../../data/db.js');
+const themeUtils = require('../../utils/theme.js');
 
 Page({
   data: {
@@ -10,6 +11,7 @@ Page({
     showAnswer: false,
     points: 0,
     hasEarnedPoints: false,
+    isDarkMode: false, // 是否为深色模式
     md: {} // md 内容，格式示例：
     // ## 渲染 code 方法
     //
@@ -36,6 +38,12 @@ Page({
     });
     
     this.loadQuestionData();
+    
+    // 同步主题模式
+    const isDarkMode = themeUtils.syncTheme();
+    this.setData({
+      isDarkMode: isDarkMode
+    });
   },
 
   onShow: function() {
@@ -44,6 +52,48 @@ Page({
     this.setData({
       showBanner: app.globalData.showBanner
     });
+    
+    // 同步主题模式
+    const isDarkMode = app.globalData.darkMode;
+    if (this.data.isDarkMode !== isDarkMode) {
+      this.setData({
+        isDarkMode: isDarkMode
+      });
+      themeUtils.applyThemeToPage(isDarkMode);
+      
+      // 如果已经加载了问题，更新 towxml 的主题
+      if (this.data.question && this.data.question.md) {
+        this.updateTowxmlTheme(isDarkMode);
+      }
+    }
+  },
+  
+  // 更新 towxml 的主题
+  updateTowxmlTheme: function(isDarkMode) {
+    const app = getApp();
+    const themeMode = isDarkMode ? 'dark' : 'light';
+    
+    try {
+      if (this.data.question && this.data.question.md && this.data.question.md.content) {
+        const mdContent = this.data.question.md.content;
+        
+        const newMd = app.towxml(mdContent, 'markdown', {
+          theme: themeMode,
+          events: {
+            tap: (e) => {
+              console.log('Tapped element:', e);
+            }
+          }
+        });
+        
+        // 更新问题的 md 内容
+        this.setData({
+          'question.md': newMd
+        });
+      }
+    } catch (error) {
+      console.error('Error updating towxml theme:', error);
+    }
   },
   
   // 处理横幅关闭事件
@@ -101,8 +151,11 @@ Page({
           ? currentQuestion.md 
           : JSON.stringify(currentQuestion.md);
         
+        // 根据当前主题模式选择 towxml 主题
+        const themeMode = this.data.isDarkMode ? 'dark' : 'light';
+        
         currentQuestion.md = app.towxml(mdContent, 'markdown', {
-          theme: 'light',
+          theme: themeMode,
           events: {
             tap: (e) => {
               // 处理点击事件
@@ -114,13 +167,15 @@ Page({
       } else {
         console.warn('No markdown content found for question:', this.data.questionId);
         // 设置一个默认的空markdown对象，避免渲染错误
-        currentQuestion.md = app.towxml('', 'markdown', { theme: 'light' });
+        const themeMode = this.data.isDarkMode ? 'dark' : 'light';
+        currentQuestion.md = app.towxml('', 'markdown', { theme: themeMode });
       }
     } catch (error) {
       console.error('Error converting markdown:', error);
       // 设置一个默认的空markdown对象，避免渲染错误
       if (currentQuestion) {
-        currentQuestion.md = app.towxml('*内容加载失败，请稍后再试*', 'markdown', { theme: 'light' });
+        const themeMode = this.data.isDarkMode ? 'dark' : 'light';
+        currentQuestion.md = app.towxml('*内容加载失败，请稍后再试*', 'markdown', { theme: themeMode });
       }
       
       wx.showToast({
@@ -132,11 +187,12 @@ Page({
 
     // 确保currentQuestion存在且有效
     if (!currentQuestion) {
+      const themeMode = this.data.isDarkMode ? 'dark' : 'light';
       currentQuestion = {
         title: '题目不存在或已被删除',
         difficulty: '简单',
         viewCount: 0,
-        md: app.towxml('*题目不存在或已被删除*', 'markdown', { theme: 'light' })
+        md: app.towxml('*题目不存在或已被删除*', 'markdown', { theme: themeMode })
       };
     }
 

@@ -1,7 +1,7 @@
 /* 整体容器 */
 .profile-container {
   min-height: 100vh;
-  background: #f5f6fa;
+  background: var(--bg-color);
 }
 
 /* 用户信息区域 */
@@ -11,6 +11,11 @@
   background: linear-gradient(to right, #1296db, #36b4e5);
   display: flex;
   align-items: center;
+}
+
+/* 深色模式下的用户信息区域 */
+page.dark-mode .user-info-section {
+  background: linear-gradient(to right, #0c6a9e, #1e8cb5);
 }
 
 .avatar-wrapper {
@@ -48,12 +53,12 @@
 /* 统计数据区域 */
 .statistics-section {
   margin: 20rpx;
-  background: #fff;
+  background: var(--card-bg-color);
   border-radius: 12rpx;
   padding: 30rpx;
   display: flex;
   justify-content: space-around;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 10rpx var(--shadow-color);
 }
 
 .stat-item {
@@ -62,7 +67,7 @@
 
 .stat-value {
   font-size: 36rpx;
-  color: #333;
+  color: var(--text-color);
   font-weight: 500;
   display: block;
   margin-bottom: 10rpx;
@@ -70,7 +75,7 @@
 
 .stat-label {
   font-size: 24rpx;
-  color: #666;
+  color: var(--text-color-secondary);
 }
 
 /* 分享按钮 */
@@ -98,6 +103,12 @@
   text-align: center;
 }
 
+/* 深色模式下的分享按钮 */
+page.dark-mode .share-button {
+  background: linear-gradient(135deg, #0c6a9e, #1e8cb5);
+  box-shadow: 0 4rpx 12rpx rgba(18, 150, 219, 0.15);
+}
+
 .share-button::after {
   border: none;
 }
@@ -105,17 +116,17 @@
 /* 功能列表区域 */
 .function-list {
   margin: 20rpx;
-  background: #fff;
+  background: var(--card-bg-color);
   border-radius: 12rpx;
   overflow: hidden;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 10rpx var(--shadow-color);
 }
 
 .function-item {
   display: flex;
   align-items: center;
   padding: 30rpx;
-  border-bottom: 1rpx solid #eee;
+  border-bottom: 1rpx solid var(--border-color);
 }
 
 .function-item:last-child {
@@ -136,7 +147,7 @@
 .function-name {
   flex: 1;
   font-size: 28rpx;
-  color: #333;
+  color: var(--text-color);
 }
 
 /* 清除数据按钮样式 */
@@ -145,9 +156,14 @@
   font-weight: 500;
 }
 
+/* 深色模式下的清除数据按钮 */
+page.dark-mode .function-item:last-child .function-name {
+  color: #ff6b6b;
+}
+
 .arrow {
   font-size: 24rpx;
-  color: #999;
+  color: var(--text-color-secondary);
   margin-left: 10rpx;
 }
 
@@ -156,7 +172,7 @@
   text-align: center;
   padding: 20rpx;
   font-size: 24rpx;
-  color: #999;
+  color: var(--text-color-secondary);
 }
 
 /* 二维码样式 */
@@ -172,13 +188,13 @@
   width: 200rpx;
   height: 200rpx;
   border-radius: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4rpx 16rpx var(--shadow-color);
 }
 
 .qrcode-text {
   margin-top: 16rpx;
   font-size: 24rpx;
-  color: #666;
+  color: var(--text-color-secondary);
 }
 
 /* 意见反馈相关样式 */
@@ -191,7 +207,7 @@
 
 .feedback-item text {
   font-size: 32rpx;
-  color: #333;
+  color: var(--text-color);
 }
 
 /* 客服按钮样式 */
@@ -210,4 +226,31 @@
 
 .contact-button::after {
   border: none;
+}
+
+/* 主题切换开关样式 */
+.theme-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 32rpx;
+  background-color: var(--card-bg-color);
+  border-radius: 12rpx;
+  margin: 20rpx;
+  box-shadow: 0 2rpx 10rpx var(--shadow-color);
+}
+
+.theme-switch-left {
+  display: flex;
+  align-items: center;
+}
+
+.theme-icon {
+  font-size: 36rpx;
+  margin-right: 16rpx;
+}
+
+.theme-switch-text {
+  font-size: 28rpx;
+  color: var(--text-color);
 }

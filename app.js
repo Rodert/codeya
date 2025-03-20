@@ -11,7 +11,8 @@ App({
   globalData: {
     userInfo: null,
     showBanner: true, // 控制横幅显示
-    version: 'v1.0.23' // 直接定义版本号
+    version: 'v1.0.23', // 直接定义版本号
+    darkMode: false // 控制深色模式
   },
   onLaunch() {
     // 展示本地存储能力
@@ -19,6 +20,11 @@ App({
       const logs = wx.getStorageSync('logs') || []
       logs.unshift(Date.now())
       wx.setStorageSync('logs', logs)
+      
+      // 初始化主题模式
+      const darkMode = wx.getStorageSync('darkMode') || false
+      this.globalData.darkMode = darkMode
+      this.updateTheme(darkMode)
     } catch (e) {
       console.error('Storage operation failed in app.js:', e)
       // 使用异步方法尝试存储
@@ -42,6 +48,20 @@ App({
             })
           }
         })
+        
+        // 异步获取主题模式
+        wx.getStorage({
+          key: 'darkMode',
+          success: (res) => {
+            this.globalData.darkMode = res.data
+            this.updateTheme(res.data)
+          },
+          fail: () => {
+            // 默认为浅色模式
+            this.globalData.darkMode = false
+            this.updateTheme(false)
+          }
+        })
       } catch (asyncError) {
         console.error('Async storage also failed:', asyncError)
       }
@@ -60,6 +80,64 @@ App({
   onShow() {
     // 每次显示小程序时设置全局变量，页面会根据这个变量决定是否显示横幅
     this.globalData.showBanner = true
+  },
+  
+  // 更新主题
+  updateTheme(darkMode) {
+    // 设置系统级别深色模式
+    if (wx.setWindowProperties) {
+      wx.setWindowProperties({
+        backgroundColor: darkMode ? '#222222' : '#f8f8f8',
+        backgroundColorTop: darkMode ? '#222222' : '#f8f8f8',
+        backgroundColorBottom: darkMode ? '#222222' : '#f8f8f8'
+      })
+    }
+    
+    // 更新系统导航栏颜色
+    if (wx.setNavigationBarColor) {
+      wx.setNavigationBarColor({
+        frontColor: darkMode ? '#ffffff' : '#000000',
+        backgroundColor: darkMode ? '#222222' : '#ffffff'
+      })
+    }
+    
+    // 尝试为当前页面添加深色模式类
+    try {
+      const pages = getCurrentPages()
+      if (pages && pages.length > 0) {
+        const currentPage = pages[pages.length - 1]
+        if (currentPage && currentPage.pageLifetimes) {
+          wx.nextTick(() => {
+            wx.createSelectorQuery()
+              .select('page')
+              .fields({
+                node: true,
+                size: true,
+              })
+              .exec((res) => {
+                if (res && res[0] && res[0].node) {
+                  if (darkMode) {
+                    res[0].node.className = 'dark-mode'
+                  } else {
+                    res[0].node.className = ''
+                  }
+                }
+              })
+          })
+        }
+      }
+    } catch (e) {
+      console.error('Failed to update page theme:', e)
+    }
+  },
+  
+  // 切换主题模式
+  toggleDarkMode() {
+    const newMode = !this.globalData.darkMode
+    this.globalData.darkMode = newMode
+    wx.setStorageSync('darkMode', newMode)
+    this.updateTheme(newMode)
+    return newMode
   },
 
   // towxml markdown 转换工具

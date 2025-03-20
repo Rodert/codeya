@@ -1,4 +1,5 @@
 const db = require('../../data/db.js');
+const themeUtils = require('../../utils/theme.js');
 
 // 励志语录数组
 const motivationalQuotes = [
@@ -55,6 +56,7 @@ Page({
     bannerText: '', // 横幅文本
     premiumQuestions: [], // 高级题目列表
     premiumUnlocked: false, // 是否解锁高级题目
+    isDarkMode: false, // 是否为深色模式
     
     // 鸭鸭冒险游戏相关数据
     showGamePopup: false, // 是否显示游戏弹窗
@@ -76,6 +78,12 @@ Page({
     this.loadCategories();
     this.loadUserPoints();
     
+    // 同步主题模式
+    const isDarkMode = themeUtils.syncTheme();
+    this.setData({
+      isDarkMode: isDarkMode
+    });
+    
     // 分享朋友圈设置
     wx.showShareMenu({
       withShareTicket: true,
@@ -92,6 +100,16 @@ Page({
     
     // 刷新积分数据
     this.loadUserPoints();
+    
+    // 同步主题模式
+    const app = getApp();
+    const isDarkMode = app.globalData.darkMode;
+    if (this.data.isDarkMode !== isDarkMode) {
+      this.setData({
+        isDarkMode: isDarkMode
+      });
+      themeUtils.applyThemeToPage(isDarkMode);
+    }
   },
 
   // 检查是否需要显示横幅

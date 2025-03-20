@@ -1,9 +1,82 @@
 /**app.wxss**/
 page {
-  background-color: #f8f8f8;
+  --banner-height: 44px; /* 定义横幅高度变量 */
+  
+  /* 浅色主题变量 */
+  --bg-color: #f8f8f8;
+  --card-bg-color: #fff;
+  --text-color: #333;
+  --text-color-secondary: #666;
+  --border-color: #eee;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --highlight-color: #1aad19;
+  
+  /* 列表相关变量 */
+  --list-bg-color: #fff;
+  --list-border-color: #eee;
+  --list-active-color: #f0f0f0;
+  
+  /* 题目相关变量 */
+  --question-bg-color: #fff;
+  --question-title-color: #333;
+  --question-content-color: #444;
+  --question-tag-bg: #f5f5f5;
+  --question-tag-color: #666;
+  --question-code-bg: #f7f8fa;
+  --question-code-color: #333;
+  
+  /* 导航相关变量 */
+  --nav-bg-color: #fff;
+  --nav-text-color: #333;
+  --nav-active-color: #1aad19;
+  
+  /* 按钮相关变量 */
+  --btn-primary-bg: #1aad19;
+  --btn-primary-color: #fff;
+  --btn-default-bg: #f8f8f8;
+  --btn-default-color: #333;
+  
+  /* 应用变量 */
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-size: 16px;
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
-  --banner-height: 44px; /* 定义横幅高度变量 */
+}
+
+/* 深色模式样式 */
+page.dark-mode {
+  --bg-color: #1a1a1a;
+  --card-bg-color: #2c2c2c;
+  --text-color: #f0f0f0;
+  --text-color-secondary: #b0b0b0;
+  --border-color: #3a3a3a;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --highlight-color: #2ecc71;
+  
+  /* 列表相关变量-深色 */
+  --list-bg-color: #2c2c2c;
+  --list-border-color: #3a3a3a;
+  --list-active-color: #383838;
+  
+  /* 题目相关变量-深色 */
+  --question-bg-color: #2c2c2c;
+  --question-title-color: #f0f0f0;
+  --question-content-color: #d0d0d0;
+  --question-tag-bg: #3a3a3a;
+  --question-tag-color: #b0b0b0;
+  --question-code-bg: #383838;
+  --question-code-color: #e0e0e0;
+  
+  /* 导航相关变量-深色 */
+  --nav-bg-color: #2c2c2c;
+  --nav-text-color: #f0f0f0;
+  --nav-active-color: #2ecc71;
+  
+  /* 按钮相关变量-深色 */
+  --btn-primary-bg: #2ecc71;
+  --btn-primary-color: #f0f0f0;
+  --btn-default-bg: #3a3a3a;
+  --btn-default-color: #f0f0f0;
 }
 
 /* 当横幅显示时，为页面内容添加顶部内边距 */
@@ -18,25 +91,104 @@ page {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  background-color: var(--bg-color);
 }
 
 .card {
-  background: #fff;
+  background: var(--card-bg-color);
   border-radius: 12rpx;
   margin: 20rpx;
   padding: 20rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 10rpx var(--shadow-color);
 }
 
 .title {
   font-size: 32rpx;
   font-weight: bold;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 16rpx;
 }
 
 .desc {
   font-size: 28rpx;
-  color: #666;
+  color: var(--text-color-secondary);
   line-height: 1.5;
+}
+
+/* 主题切换按钮样式 */
+.theme-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx;
+  background-color: var(--card-bg-color);
+  border-radius: 12rpx;
+  margin: 20rpx;
+}
+
+.theme-switch-text {
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+.theme-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+/* 列表通用样式 */
+.list-item {
+  background-color: var(--list-bg-color);
+  border-bottom: 1rpx solid var(--list-border-color);
+}
+
+.list-item:active {
+  background-color: var(--list-active-color);
+}
+
+/* 题目相关通用样式 */
+.question-container {
+  background-color: var(--question-bg-color);
+}
+
+.question-title {
+  color: var(--question-title-color);
+}
+
+.question-content {
+  color: var(--question-content-color);
+}
+
+.question-tag {
+  background-color: var(--question-tag-bg);
+  color: var(--question-tag-color);
+}
+
+.code-block {
+  background-color: var(--question-code-bg);
+  color: var(--question-code-color);
+}
+
+/* 按钮通用样式 */
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-color);
+}
+
+.btn-default {
+  background-color: var(--btn-default-bg);
+  color: var(--btn-default-color);
+}
+
+/* 导航栏通用样式 */
+.nav-bar {
+  background-color: var(--nav-bg-color);
+}
+
+.nav-item {
+  color: var(--nav-text-color);
+}
+
+.nav-item.active {
+  color: var(--nav-active-color);
 }

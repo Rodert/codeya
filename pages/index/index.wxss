@@ -31,6 +31,12 @@
   margin: 0;
 }
 
+/* 深色模式下的按钮 */
+page.dark-mode .share-button {
+  background: linear-gradient(135deg, #388E3C, #1B5E20);
+  box-shadow: 0 4rpx 12rpx rgba(46, 125, 50, 0.15);
+}
+
 .share-button::after {
   border: none;
 }
@@ -44,7 +50,7 @@
 /* Categories */
 .categories-section {
   margin: 20rpx 0;
-  background: #fff;
+  background: var(--card-bg-color);
 }
 
 .categories-list {
@@ -54,8 +60,8 @@
 .category-item {
   margin-bottom: 20rpx;
   border-radius: 12rpx;
-  background: #fff;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  background: var(--card-bg-color);
+  box-shadow: 0 2rpx 10rpx var(--shadow-color);
   overflow: hidden;
 }
 
@@ -76,37 +82,37 @@
   flex: 1;
   font-size: 32rpx;
   font-weight: bold;
-  color: #333;
+  color: var(--text-color);
 }
 
 .question-count {
   font-size: 24rpx;
-  color: #999;
+  color: var(--text-color-secondary);
   margin-right: 20rpx;
 }
 
 .expand-icon {
   font-size: 24rpx;
-  color: #999;
+  color: var(--text-color-secondary);
   transform: rotate(90deg);
 }
 
 .category-questions {
   padding: 0 24rpx 24rpx;
-  background: #f9f9f9;
+  background: var(--bg-color);
 }
 
 .question-item {
   padding: 20rpx;
   margin-bottom: 16rpx;
-  background: #fff;
+  background: var(--card-bg-color);
   border-radius: 8rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 8rpx var(--shadow-color);
 }
 
 .question-title {
   font-size: 28rpx;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 10rpx;
 }
 
@@ -122,6 +128,12 @@
   background: linear-gradient(135deg, #4fc3f7, #2196f3);
   border-radius: 16rpx;
   box-shadow: 0 6rpx 20rpx rgba(33, 150, 243, 0.2);
+}
+
+/* 深色模式下的游戏入口 */
+page.dark-mode .games-entry {
+  background: linear-gradient(135deg, #0c6a9e, #0d47a1);
+  box-shadow: 0 6rpx 20rpx rgba(13, 71, 161, 0.2);
 }
 
 .games-entry-content {
@@ -198,10 +210,10 @@
 .section-title {
   font-size: 36rpx;
   font-weight: bold;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 20rpx;
   padding-left: 20rpx;
-  border-left: 8rpx solid #4CAF50;
+  border-left: 8rpx solid var(--highlight-color);
 }
 
 .recent-list {
@@ -211,15 +223,15 @@
 }
 
 .recent-item {
-  background: #fff;
+  background: var(--card-bg-color);
   border-radius: 12rpx;
   padding: 24rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 10rpx var(--shadow-color);
 }
 
 .recent-title {
   font-size: 30rpx;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 12rpx;
   display: block;
 }
@@ -248,69 +260,85 @@
 
 .difficulty-hard {
   background: #fbe9e7;
-  color: #d32f2f;
+  color: #c41c00;
+}
+
+/* 深色模式下的难度标签 */
+page.dark-mode .difficulty-easy {
+  background: #0f3620;
+  color: #4cc870;
+}
+
+page.dark-mode .difficulty-medium {
+  background: #3d2800;
+  color: #ff9d42;
+}
+
+page.dark-mode .difficulty-hard {
+  background: #3a1d1a;
+  color: #ff6b6b;
 }
 
 .view-count {
   font-size: 24rpx;
-  color: #999;
+  color: var(--text-color-secondary);
 }
 
-/* 精选题目 */
+/* 精选题目样式 */
 .premium-questions {
-  margin: 30rpx 20rpx;
+  margin: 20rpx;
 }
 
 .section-header {
-  margin-bottom: 20rpx;
+  margin-bottom: 16rpx;
 }
 
 .section-subtitle {
   font-size: 24rpx;
-  color: #666;
-  margin-top: 6rpx;
-  display: block;
+  color: var(--text-color-secondary);
+  margin-left: 28rpx;
+  margin-top: 4rpx;
 }
 
 .premium-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16rpx;
+  margin-top: 16rpx;
 }
 
 .premium-item {
-  background: #fff;
+  background: var(--card-bg-color);
   border-radius: 12rpx;
   padding: 24rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
-  border-left: 6rpx solid #ff9800;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 10rpx var(--shadow-color);
+  position: relative;
 }
 
-.premium-item-content {
-  display: flex;
-  flex-direction: column;
+.premium-item:before {
+  content: '⭐';
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  font-size: 32rpx;
+  color: gold;
 }
 
 .premium-item-title {
   font-size: 30rpx;
-  color: #333;
+  font-weight: bold;
+  color: var(--text-color);
   margin-bottom: 12rpx;
 }
 
 .premium-item-meta {
   display: flex;
-  justify-content: space-between;
   font-size: 24rpx;
-  color: #666;
+  color: var(--text-color-secondary);
 }
 
 .premium-item-category {
-  background: #e3f2fd;
-  color: #1976d2;
-  padding: 4rpx 12rpx;
+  margin-right: 16rpx;
+  background-color: var(--question-tag-bg);
+  color: var(--question-tag-color);
+  padding: 4rpx 16rpx;
   border-radius: 20rpx;
-}
-
-.premium-item-difficulty {
-  color: #ff9800;
 }

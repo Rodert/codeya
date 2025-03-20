@@ -12,6 +12,7 @@ Page({
     showFeedbackSheet: false,
     showEncourageSheet: false,
     appVersion: '', // 应用版本号
+    isDarkMode: false, // 是否为深色模式
     statistics: {
       points: 0,
       studyDays: 0,
@@ -59,7 +60,8 @@ Page({
     // 设置应用版本号（从全局获取）
     const app = getApp();
     this.setData({
-      appVersion: app.globalData.version
+      appVersion: app.globalData.version,
+      isDarkMode: app.globalData.darkMode // 从全局获取深色模式状态
     });
     
     // 分享朋友圈设置
@@ -147,7 +149,8 @@ Page({
     // 从全局变量获取是否显示横幅
     const app = getApp();
     this.setData({
-      showBanner: app.globalData.showBanner
+      showBanner: app.globalData.showBanner,
+      isDarkMode: app.globalData.darkMode // 同步当前主题模式状态
     });
     
     // 如果横幅显示，设置5秒后自动关闭
@@ -453,5 +456,62 @@ Page({
         duration: 2000
       });
     }
+  },
+
+  // 切换主题模式
+  toggleTheme() {
+    const app = getApp();
+    const newMode = app.toggleDarkMode();
+    
+    // 更新页面数据
+    this.setData({
+      isDarkMode: newMode
+    });
+    
+    // 切换页面类名，应用深色样式
+    if (newMode) {
+      wx.pageScrollTo({
+        scrollTop: 0,
+        duration: 0
+      });
+      wx.nextTick(() => {
+        wx.createSelectorQuery()
+          .select('page')
+          .fields({
+            node: true,
+            size: true,
+          })
+          .exec((res) => {
+            if (res[0] && res[0].node) {
+              res[0].node.className = 'dark-mode';
+            }
+          });
+      });
+    } else {
+      wx.pageScrollTo({
+        scrollTop: 0,
+        duration: 0
+      });
+      wx.nextTick(() => {
+        wx.createSelectorQuery()
+          .select('page')
+          .fields({
+            node: true,
+            size: true,
+          })
+          .exec((res) => {
+            if (res[0] && res[0].node) {
+              res[0].node.className = '';
+            }
+          });
+      });
+    }
+    
+    // 显示切换提示
+    wx.showToast({
+      title: newMode ? '已切换为夜间模式' : '已切换为日间模式',
+      icon: 'none',
+      duration: 1500
+    });
   }
 });
