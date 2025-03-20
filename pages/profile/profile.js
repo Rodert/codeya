@@ -40,6 +40,11 @@ Page({
         name: '意见反馈'
       },
       {
+        id: 'resetTips',
+        name: '重置所有提示',
+        icon: '🔄'
+      },
+      {
         id: 'clearData',
         name: '清除所有数据',
         icon: '⚠️'
@@ -212,6 +217,24 @@ Page({
       case 'feedback':
         this.setData({
           showFeedbackSheet: true
+        });
+        break;
+      case 'resetTips':
+        wx.showModal({
+          title: '重置提示',
+          content: '确定要重置所有提示吗？这将使所有提示重新显示。',
+          success: (res) => {
+            if (res.confirm) {
+              // 清除所有提示的隐藏状态
+              wx.removeStorageSync('hideTopTip');
+              
+              wx.showToast({
+                title: '所有提示已重置',
+                icon: 'success',
+                duration: 2000
+              });
+            }
+          }
         });
         break;
       case 'clearData':

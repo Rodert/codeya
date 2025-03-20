@@ -15,7 +15,7 @@ module.exports = {
       key: "javabasics",
       description: "Java是一种静态类型、面向对象的跨平台语言，基于JVM实现\"Write Once, Run Anywhere\"。其核心技术包括：类加载机制、字节码执行、自动内存管理（分代GC算法）；JVM内存模型（堆/栈/Metaspace）；强类型系统与多态继承机制。支持并发编程（java.util.concurrent包）及NIO非阻塞IO。通过JIT编译器优化运行时性能。企业级开发常用Spring Boot微服务架构，配合Maven/Gradle构建工具。JDK 17+引入Records、Sealed Classes等特性，增强模式匹配和异步编程能力。长期支持版本（LTS）确保稳定性，适用于高并发分布式系统，结合JMX监控和Arthurs诊断工具实现深度调优。",
       questionCount: 20,
-      icon: "/images/list/java.png",
+      icon: "https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250320193014199-199767568.png",
       order: 2
     },
     {
@@ -69,7 +69,7 @@ module.exports = {
       key: "javaconcurrent",
       description: "Java并发是多线程程序设计，线程是执行单位，通过实现Runnable或继承Thread创建。共享数据需用锁（如synchronized）保证线程安全，避免竞态条件。Java并发包（java.util.concurrent）提供Executor线程池、Future结果获取、阻塞队列等工具，提升开发效率。",
       questionCount: 20,
-      icon: "/images/list/java3.png",
+      icon: "https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250320193157431-1325167186.png",
       order: 2
     },
     {
@@ -78,7 +78,7 @@ module.exports = {
       key: "javajvm",
       description: "Java虚拟机（JVM）是Java运行时环境的核心，负责执行Java字节码。它通过类加载器加载.class文件，使用执行引擎解释执行字节码指令。JVM具备自动内存管理功能，通过垃圾回收机制有效管理对象内存。其跨平台特性使Java程序能在不同操作系统上运行，底层由JVM实现。JVM的架构包括程序计数器、Java栈、本地方法栈、Java堆、方法区等，各部分协同工作，保障Java程序稳定运行。",
       questionCount: 20,
-      icon: "/images/list/java4.png",
+      icon: "https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250320193241262-1516538082.png",
       order: 2
     },
     {

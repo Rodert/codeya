@@ -1,5 +1,11 @@
 <banner wx:if="{{showBanner}}" text="{{bannerText}}" duration="0" bindclose="onBannerClose"></banner>
 
+<!-- 免费提示信息 -->
+<view class="free-tip">
+  <view class="info-icon">ⓘ</view>
+  <text class="free-text">完全免费 | 广告中收费服务与本小程序无关</text>
+</view>
+
 <view class="page {{showBanner ? 'has-banner' : ''}}">
   <!-- Categories List -->
   <view class="categories-list">
@@ -80,6 +86,16 @@
         </view>
       </view>
     </view>
+  </view>
+</view>
+
+<!-- 顶部浮动提示横幅 -->
+<view class="top-tip-banner" wx:if="{{showTopTip}}">
+  <view class="tip-content">
+    <text>收藏、添加、转发给朋友试试~</text>
+  </view>
+  <view class="tip-close" bindtap="closeTopTip">
+    <text>×</text>
   </view>
 </view>
 

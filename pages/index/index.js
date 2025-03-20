@@ -51,6 +51,7 @@ Page({
     expandedCategoryKey: null,
     categoryQuestions: [],
     showBanner: false, // 默认不显示横幅
+    showTopTip: true, // 默认显示顶部提示
     totalPoints: 0, // 用户总积分
     dailyQuestion: null, // 每日一题数据
     bannerText: '', // 横幅文本
@@ -77,6 +78,9 @@ Page({
   onLoad: function() {
     this.loadCategories();
     this.loadUserPoints();
+    
+    // 检查是否需要显示顶部提示
+    this.checkTopTipDisplay();
     
     // 同步主题模式
     const isDarkMode = themeUtils.syncTheme();
@@ -414,5 +418,34 @@ Page({
   // 显示广告奖励选项
   showAdRewardOptions: function() {
     // ... existing code ...
+  },
+
+  // 检查是否需要显示顶部提示
+  checkTopTipDisplay: function() {
+    const hideTopTip = wx.getStorageSync('hideTopTip');
+    
+    // 如果用户关闭过，就不再显示
+    if (hideTopTip) {
+      this.setData({
+        showTopTip: false
+      });
+    }
+  },
+  
+  // 关闭顶部提示
+  closeTopTip: function() {
+    // 记住用户关闭了提示，下次不再显示
+    wx.setStorageSync('hideTopTip', true);
+    
+    this.setData({
+      showTopTip: false
+    });
+    
+    // 显示一次性提示
+    wx.showToast({
+      title: '可在"我的"页面重新开启提示',
+      icon: 'none',
+      duration: 2000
+    });
   },
 });

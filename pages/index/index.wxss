@@ -342,3 +342,68 @@ page.dark-mode .difficulty-hard {
   padding: 4rpx 16rpx;
   border-radius: 20rpx;
 }
+
+/* 顶部提示横幅 */
+.top-tip-banner {
+  position: fixed;
+  top: 20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #f09b62, #e97c4c);
+  color: white;
+  padding: 16rpx 32rpx;
+  font-size: 28rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+}
+
+/* 深色模式下的横幅 */
+page.dark-mode .top-tip-banner {
+  background: linear-gradient(135deg, #9e5c32, #8f3618);
+}
+
+.tip-content {
+  flex: 1;
+  text-align: center;
+}
+
+.tip-close {
+  padding: 0 10rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+/* 免费提示信息 */
+.free-tip {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 32rpx;
+  background-color: var(--bg-color);
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.info-icon {
+  color: #ff6b00; 
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+.free-text {
+  font-size: 26rpx;
+  color: var(--text-color-secondary);
+}
+
+/* 移除页面内容下移的样式 */
+.has-top-tip {
+  /* 不再设置padding-top，让内容正常显示 */
+}
+
+/* 如果有banner，仍然需要下移，但不需要为顶部提示预留空间 */
+.has-banner.has-top-tip {
+  padding-top: var(--banner-height); /* 只为banner预留空间 */
+}
