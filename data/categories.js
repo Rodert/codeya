@@ -14,7 +14,7 @@ module.exports = {
       name: "Java基础",
       key: "javabasics",
       description: "Java是一种静态类型、面向对象的跨平台语言，基于JVM实现\"Write Once, Run Anywhere\"。其核心技术包括：类加载机制、字节码执行、自动内存管理（分代GC算法）；JVM内存模型（堆/栈/Metaspace）；强类型系统与多态继承机制。支持并发编程（java.util.concurrent包）及NIO非阻塞IO。通过JIT编译器优化运行时性能。企业级开发常用Spring Boot微服务架构，配合Maven/Gradle构建工具。JDK 17+引入Records、Sealed Classes等特性，增强模式匹配和异步编程能力。长期支持版本（LTS）确保稳定性，适用于高并发分布式系统，结合JMX监控和Arthurs诊断工具实现深度调优。",
-      questionCount: 20,
+      questionCount: 40,
       icon: "https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250320193014199-199767568.png",
       order: 2
     },
@@ -108,5 +108,15 @@ module.exports = {
       icon: "https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250318154738271-1587542254.png",
       order: 3
     },
+    {
+      id: 13,
+      name: "Kafka",
+      key: "kafka",
+      description: "Kafka是一种分布式流处理平台，由LinkedIn开发并开源。它具有高吞吐量、低延迟、可扩展性强等特点。主要用于处理大量实时数据，支持消息队列和流式数据处理。常用于日志收集、事件驱动架构、实时数据分析等场景，可帮助系统高效地传输和处理数据，广泛应用于互联网、金融、物联网等领域。",
+      questionCount: 20,
+      icon: "https://img2024.cnblogs.com/blog/1326459/202503/1326459-20250330120223028-80287795.png",
+      order: 3
+    },
+    
   ]
 }

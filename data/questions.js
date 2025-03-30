@@ -722,6 +722,206 @@ module.exports = {
         "code": "",
         "md": "# Java中的字符串类及其区别\n\nJava中用于操作字符串的类主要有String、StringBuilder和StringBuffer，它们之间的区别如下：\n\n1. **String**：\n   - 表示不可变的字符序列。\n   - 一旦创建，其值不能被修改。\n   - 多线程安全，因为不可变性使得多个线程可以安全地访问它。\n   - 性能较低，因为每次操作都会生成新的字符串对象。\n\n2. **StringBuffer**：\n   - 表示可变的字符序列，并且是线程安全的。\n   - 提供了append、insert、reverse等方法，可以高效地修改字符串内容。\n   - 内部通过同步机制保证线程安全，因此性能相对较低。\n\n3. **StringBuilder**：\n   - 表示可变的字符序列，但不是线程安全的。\n   - 提供了与StringBuffer类似的方法，但由于没有线程安全机制，性能更高。\n   - 适用于单线程环境下的字符串拼接和修改操作。\n\n总结来说，如果需要操作大量的字符串并且希望提高性能，单线程环境下应优先使用StringBuilder；如果需要线程安全，则使用StringBuffer；如果字符串内容不需要修改，则使用String。",
         "tags": ["字符串", "String", "StringBuilder", "StringBuffer"]
+      },
+      {
+        "id": 21,
+        "categoryId": "javabasics",
+        "title": "Java中有多少种基本数据类型？它们分别是哪些？",
+        "difficulty": "简单",
+        "viewCount": 1234,
+        "code": "Java有8种基本数据类型：byte, short, int, long, float, double, char, boolean。",
+        "md": "# Java基本数据类型\n\nJava中有8种基本数据类型，它们分别是：\n\n- `byte`：8位有符号整数，范围-128到127。\n- `short`：16位有符号整数，范围-32768到32767。\n- `int`：32位有符号整数，范围-2^31到2^31-1。\n- `long`：64位有符号整数，范围-2^63到2^63-1。\n- `float`：32位单精度浮点数。\n- `double`：64位双精度浮点数。\n- `char`：16位Unicode字符。\n- `boolean`：布尔类型，值为`true`或`false`。",
+        "tags": ["Java基础", "基本数据类型", "数据存储"]
+      },
+      {
+        "id": 22,
+        "categoryId": "javabasics",
+        "title": "什么是Java中的原始数据类型和引用数据类型？",
+        "difficulty": "中等",
+        "viewCount": 1567,
+        "code": "原始数据类型：int, float, char等。\n引用数据类型：String, ArrayList等。",
+        "md": "# 原始数据类型与引用数据类型\n\n- **原始数据类型**：直接存储值，分配内存空间固定，存储在栈内存中。\n- **引用数据类型**：存储对象的引用地址，实际对象存储在堆内存中。\n\n```java\nint a = 10; // 原始数据类型\nString s = \"Hello\"; // 引用数据类型\n```",
+        "tags": ["Java基础", "数据类型", "内存管理"]
+      },
+      {
+        "id": 23,
+        "categoryId": "javabasics",
+        "title": "Java中`int`和`double`数据类型的主要区别是什么？",
+        "difficulty": "简单",
+        "viewCount": 1320,
+        "code": "int是32位整数，double是64位浮点数。",
+        "md": "# int与double的区别\n\n- **`int`**：32位有符号整数，范围-2^31到2^31-1。\n- **`double`**：64位双精度浮点数，用于存储小数。\n\n```java\nint a = 10; // 整数\nint b = 10.5; // 错误，需要显式转换\n\ndouble c = 10.5; // 正确\n```",
+        "tags": ["Java基础", "数据类型", "数值存储"]
+      },
+      {
+        "id": 24,
+        "categoryId": "javabasics",
+        "title": "Java中`byte`数据类型的取值范围是多少？",
+        "difficulty": "简单",
+        "viewCount": 1120,
+        "code": "byte的取值范围是-128到127。",
+        "md": "# byte数据类型\n\n- `byte`是8位有符号整数，范围为-128到127。\n- 适用于存储小范围整数，节省内存。\n\n```java\nbyte b = 100; // 正确\nbyte c = -128; // 正确\nbyte d = 128; // 错误，超出范围\n```",
+        "tags": ["Java基础", "数据类型", "存储范围"]
+      },
+      {
+        "id": 25,
+        "categoryId": "javabasics",
+        "title": "Java中`char`数据类型如何表示字符？",
+        "difficulty": "简单",
+        "viewCount": 1450,
+        "code": "char c = 'A'; // 单引号表示字符",
+        "md": "# char数据类型\n\n- `char`是16位Unicode字符，用于存储单个字符。\n- 使用单引号`' '`表示字符。\n\n```java\nchar c1 = 'A'; // 大写字母A\nchar c2 = '中'; // 中文字符\nchar c3 = '\\u0041'; // Unicode表示法\n```",
+        "tags": ["Java基础", "字符存储", "Unicode"]
+      },
+      {
+        "id": 26,
+        "categoryId": "javabasics",
+        "title": "Java中`boolean`数据类型的默认值是什么？",
+        "difficulty": "简单",
+        "viewCount": 1280,
+        "code": "boolean的默认值是false。",
+        "md": "# boolean数据类型\n\n- `boolean`用于存储布尔值，值为`true`或`false`。\n- 默认值为`false`。\n\n```java\nboolean flag = true; // 显式赋值\nboolean result; // 默认值为false\n```",
+        "tags": ["Java基础", "布尔类型", "默认值"]
+      },
+      {
+        "id": 27,
+        "categoryId": "javabasics",
+        "title": "Java中如何声明一个常量变量？",
+        "difficulty": "中等",
+        "viewCount": 1650,
+        "code": "final int MAX_SPEED = 100;",
+        "md": "# 声明常量变量\n\n- 使用`final`关键字声明常量。\n- 常量在声明后不能修改。\n\n```java\nfinal int PI = 3.14; // 常量\nPI = 3.1416; // 错误，不能修改\n```",
+        "tags": ["Java基础", "常量", "final关键字"]
+      },
+      {
+        "id": 28,
+        "categoryId": "javabasics",
+        "title": "Java中`float`和`double`数据类型的主要区别是什么？",
+        "difficulty": "中等",
+        "viewCount": 1420,
+        "code": "float是32位单精度浮点数，double是64位双精度浮点数。",
+        "md": "# float与double的区别\n\n- **`float`**：32位单精度浮点数，精度较低。\n- **`double`**：64位双精度浮点数，精度较高。\n\n```java\nfloat f = 3.14f; // 需要后缀f\n\ndouble d = 3.14; // 默认为double\n```",
+        "tags": ["Java基础", "浮点数", "精度"]
+      },
+      {
+        "id": 29,
+        "categoryId": "javabasics",
+        "title": "Java中什么是自动类型提升？",
+        "difficulty": "中等",
+        "viewCount": 1380,
+        "code": "int a = 10; double b = a; // 自动提升到double",
+        "md": "# 自动类型提升\n\n- 当不同数据类型参与运算时，Java会自动将较小类型提升为较大类型。\n- 例如：`int`会自动提升为`long`、`float`或`double`。\n\n```java\nint a = 10;\ndouble b = a; // 自动提升\n```",
+        "tags": ["Java基础", "类型转换", "运算"]
+      },
+      {
+        "id": 30,
+        "categoryId": "javabasics",
+        "title": "Java中什么是显式类型转换？",
+        "difficulty": "中等",
+        "viewCount": 1520,
+        "code": "double d = 3.14; int a = (int) d; // 显式转换",
+        "md": "# 显式类型转换\n\n- 当需要将较大类型转换为较小类型时，必须使用显式转换。\n- 显式转换可能导致数据丢失。\n\n```java\ndouble d = 3.14;\nint a = (int) d; // 显式转换，结果为3\n```",
+        "tags": ["Java基础", "类型转换", "数据丢失"]
+      },
+      {
+        "id": 31,
+        "categoryId": "javabasics",
+        "title": "Java中如何初始化一个`double`类型的变量？",
+        "difficulty": "简单",
+        "viewCount": 1250,
+        "code": "double d = 3.14; // 默认类型为double",
+        "md": "# 初始化double变量\n\n- `double`是默认的浮点数类型。\n- 可以直接赋值或使用后缀`d`。\n\n```java\ndouble pi = 3.14; // 直接赋值\ndouble e = 2.71828d; // 使用后缀d\n```",
+        "tags": ["Java基础", "变量初始化", "浮点数"]
+      },
+      {
+        "id": 32,
+        "categoryId": "javabasics",
+        "title": "Java中`short`数据类型的存储范围是多少？",
+        "difficulty": "简单",
+        "viewCount": 1180,
+        "code": "short的取值范围是-32768到32767。",
+        "md": "# short数据类型\n\n- `short`是16位有符号整数，范围为-32768到32767。\n- 适用于存储较小范围的整数。\n\n```java\nshort s = 1000; // 正确\nshort t = -32768; // 正确\nshort u = 32768; // 错误，超出范围\n```",
+        "tags": ["Java基础", "数据类型", "存储范围"]
+      },
+      {
+        "id": 33,
+        "categoryId": "javabasics",
+        "title": "Java中如何声明一个字符数组？",
+        "difficulty": "简单",
+        "viewCount": 1350,
+        "code": "char[] chars = {'a', 'b', 'c'};",
+        "md": "# 声明字符数组\n\n- 使用`char[]`声明字符数组。\n- 可以在声明时直接初始化。\n\n```java\nchar[] letters = {'a', 'b', 'c'}; // 初始化字符数组\n\nchar[] numbers = new char[3];\nnumbers[0] = '1';\nnumbers[1] = '2';\nnumbers[2] = '3'; // 手动赋值\n```",
+        "tags": ["Java基础", "数组", "字符存储"]
+      },
+      {
+        "id": 34,
+        "categoryId": "javabasics",
+        "title": "Java中`long`数据类型的默认后缀是什么？",
+        "difficulty": "简单",
+        "viewCount": 1290,
+        "code": "long l = 100L; // 默认后缀为L",
+        "md": "# long数据类型的默认后缀\n\n- `long`类型的字面量需要后缀`L`或`l`。\n- 推荐使用大写`L`以避免与数字混淆。\n\n```java\nlong bigNumber = 1234567890L; // 使用L后缀\n```",
+        "tags": ["Java基础", "数据类型", "字面量"]
+      },
+      {
+        "id": 35,
+        "categoryId": "javabasics",
+        "title": "Java中`float`数据类型的默认后缀是什么？",
+        "difficulty": "简单",
+        "viewCount": 1310,
+        "code": "float f = 3.14f; // 默认后缀为f",
+        "md": "# float数据类型的默认后缀\n\n- `float`类型的字面量需要后缀`f`或`F`。\n- 如果不加后缀，默认为`double`类型。\n\n```java\nfloat pi = 3.14f; // 使用f后缀\n```",
+        "tags": ["Java基础", "数据类型", "字面量"]
+      },
+      {
+        "id": 36,
+        "categoryId": "javabasics",
+        "title": "Java中什么是变量的作用域？",
+        "difficulty": "中等",
+        "viewCount": 1480,
+        "code": "int a = 10; // 类变量或方法变量，取决于声明位置",
+        "md": "# 变量的作用域\n\n- **类变量**：在类中声明，属于整个类，用`static`修饰。\n- **实例变量**：在类中声明，属于对象实例。\n- **局部变量**：在方法或代码块中声明，只在该范围内有效。\n\n```java\npublic class Example {\n  int instanceVar; // 实例变量\n  static int classVar; // 类变量\n\n  void method() {\n    int localVar = 10; // 局部变量\n  }\n}\n```",
+        "tags": ["Java基础", "变量", "作用域"]
+      },
+      {
+        "id": 37,
+        "categoryId": "javabasics",
+        "title": "Java中`null`值可以赋给哪些数据类型？",
+        "difficulty": "中等",
+        "viewCount": 1530,
+        "code": "String s = null; Object o = null; // 引用类型可以赋null",
+        "md": "# null值的使用\n\n- `null`表示空引用，只能赋给引用数据类型。\n- 原始数据类型不能存储`null`。\n\n```java\nString s = null; // 正确\nObject o = null; // 正确\n\nint a = null; // 错误，原始类型不能存储null\n```",
+        "tags": ["Java基础", "引用类型", "null"]
+      },
+      {
+        "id": 38,
+        "categoryId": "javabasics",
+        "title": "Java中如何通过位运算实现数值的乘除？",
+        "difficulty": "困难",
+        "viewCount": 1680,
+        "code": "int multiply = a << 2; // 乘以4\nint divide = a >> 2; // 除以4",
+        "md": "# 位运算实现乘除\n\n- 左移`<<`相当于乘以2的幂。\n- 右移`>>`相当于除以2的幂。\n\n```java\nint a = 8;\nint multiply = a << 2; // 8 * 4 = 32\nint divide = a >> 2; // 8 / 4 = 2\n```",
+        "tags": ["Java基础", "位运算", "优化"]
+      },
+      {
+        "id": 39,
+        "categoryId": "javabasics",
+        "title": "Java中`this`关键字在变量中有什么作用？",
+        "difficulty": "中等",
+        "viewCount": 1590,
+        "code": "public class Example { int x; void method(int x) { this.x = x; } }",
+        "md": "# this关键字的作用\n\n- `this`用于区分实例变量和局部变量。\n- 常用于构造函数和方法中。\n\n```java\npublic class Person {\n  String name;\n\n  public Person(String name) {\n    this.name = name; // 区分实例变量和参数\n  }\n}\n```",
+        "tags": ["Java基础", "关键字", "变量"]
+      },
+      {
+        "id": 40,
+        "categoryId": "javabasics",
+        "title": "Java中`final`关键字在变量中有什么作用？",
+        "difficulty": "中等",
+        "viewCount": 1620,
+        "code": "final int CONSTANT = 100; // 常量",
+        "md": "# final关键字的作用\n\n- `final`用于声明常量，值一旦赋值不能修改。\n- 可以用于变量、方法和类。\n\n```java\nfinal double PI = 3.14; // 常量\n\npublic final void method() { ... } // 方法不可重写\n\npublic final class Utility { ... } // 类不可继承\n```",
+        "tags": ["Java基础", "关键字", "常量"]
       }
     ],
     ds: [
@@ -3004,5 +3204,207 @@ module.exports = {
       }
     ],
     spring: [],
+    kafka: [
+      {
+        "id": 1,
+        "categoryId": "kafka",
+        "title": "什么是Apache Kafka？",
+        "difficulty": "简单",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 什么是Apache Kafka？\n\nApache Kafka 是一个分布式事件流平台，主要用于构建实时数据管道和流式应用。它具有高吞吐量、低延迟、可扩展性和容错性等特点。Kafka 通常用于日志聚合、事件源、流处理、实时分析等场景。",
+        "tags": ["Kafka基础", "概念"]
+      },
+      {
+        "id": 2,
+        "categoryId": "kafka",
+        "title": "Kafka的主要用途是什么？",
+        "difficulty": "简单",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# Kafka的主要用途\n\n1. **日志聚合**：收集系统日志并集中存储。\n2. **事件源**：记录业务事件（如用户行为、交易记录）。\n3. **流处理**：实时处理数据流（如实时数据分析）。\n4. **消息队列**：作为异步通信的中间件。\n5. **实时分析**：支持实时数据处理和分析。",
+        "tags": ["Kafka基础", "应用场景"]
+      },
+      {
+        "id": 3,
+        "categoryId": "kafka",
+        "title": "解释Kafka中的Producer、Broker、Consumer以及Topic的概念？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# Kafka核心概念\n\n1. **Producer**：生产者，负责向Kafka发送消息。\n2. **Broker**：Kafka节点，负责存储和管理消息。\n3. **Consumer**：消费者，负责从Kafka中读取消息。\n4. **Topic**：消息的主题，用于对消息进行分类。\n\n### 示例代码\n```java\n// 生产者示例\nProperties props = new Properties();\nprops.put(\"bootstrap.servers\", \"localhost:9092\");\nprops.put(\"key.serializer\", \"org.apache.kafka.common.serialization.StringSerializer\");\nprops.put(\"value.serializer\", \"org.apache.kafka.common.serialization.StringSerializer\");\nProducer<String, String> producer = new KafkaProducer<>(props);\nProducerRecord<String, String> record = new ProducerRecord<>(\"topic-name\", \"key\", \"value\");\nproducer.send(record);\nproducer.close();\n\n// 消费者示例\nprops.put(\"group.id\", \"test-group\");\nprops.put(\"key.deserializer\", \"org.apache.kafka.common.serialization.StringDeserializer\");\nprops.put(\"value.deserializer\", \"org.apache.kafka.common.serialization.StringDeserializer\");\nKafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);\nconsumer.subscribe(Collections.singletonList(\"topic-name\"));\nwhile (true) {\n  ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));\n  for (ConsumerRecord<String, String> record : records)\n    System.out.printf(\"offset = %d, key = %s, value = %s%n\", record.offset(), record.key(), record.value());\n}\n```",
+        "tags": ["Kafka基础", "核心概念"]
+      },
+      {
+        "id": 4,
+        "categoryId": "kafka",
+        "title": "Kafka的消息是如何保证顺序性的？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 消息顺序性\n\nKafka通过分区（Partition）和偏移量（Offset）来保证消息的顺序性。每个分区内的消息是按顺序存储的，偏移量是消息在分区中的唯一标识。生产者可以指定分区键（Key），Kafka会根据键的哈希值将消息分配到特定分区，确保同一键的消息始终发送到同一分区，从而保证顺序性。\n\n### 示例代码\n```java\n// 生产者设置分区键\nProducerRecord<String, String> record = new ProducerRecord<>(\"topic-name\", \"key\", \"value\");\nproducer.send(record);\n```",
+        "tags": ["Kafka基础", "消息顺序"]
+      },
+      {
+        "id": 5,
+        "categoryId": "kafka",
+        "title": "Kafka中的消息是如何存储的？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 消息存储机制\n\nKafka将消息存储在磁盘上，每个分区对应一个逻辑日志（Log），日志由多个日志段（Log Segment）组成。每个日志段包含一定数量的消息，并且消息按顺序追加到日志段中。Kafka通过配置`log.retention.hours`或`log.retention.bytes`来控制消息的保留时间或大小。\n\n### 示例代码\n```java\n// 配置消息保留时间\nProperties props = new Properties();\nprops.put(\"log.retention.hours\", 168); // 保留7天\n```",
+        "tags": ["Kafka基础", "存储机制"]
+      },
+      {
+        "id": 6,
+        "categoryId": "kafka",
+        "title": "解释Kafka的高可用性和分区（Partitions）机制？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 高可用性和分区机制\n\n1. **分区（Partitions）**：将Topic划分为多个分区，每个分区是一个有序日志。\n2. **副本（Replicas）**：每个分区可以有多个副本，分布在不同的Broker上。\n3. **领导者（Leader）**：负责处理读写请求。\n4. **追随者（Follower）**：从领导者同步数据。\n\n### 示例代码\n```java\n// 查看分区和副本信息\nbin/kafka-topics.sh --describe --topic topic-name --bootstrap-server localhost:9092\n```",
+        "tags": ["Kafka基础", "高可用性"]
+      },
+      {
+        "id": 7,
+        "categoryId": "kafka",
+        "title": "Kafka集群是如何工作的？如何设计一个高可用的Kafka集群？",
+        "difficulty": "困难",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# Kafka集群工作原理\n\n1. **Zookeeper**：用于管理集群元数据和协调Broker。\n2. **Broker**：存储和管理消息。\n3. **分区和副本**：确保数据的高可用性和容错性。\n\n### 高可用设计\n- 至少3个Broker。\n- 每个分区有多个副本（通常3个）。\n- 配置`min.insync.replicas`确保写入一致性。\n\n### 示例代码\n```java\n// 配置副本数量\nbin/kafka-topics.sh --create --topic topic-name --partitions 3 --replication-factor 3 --bootstrap-server localhost:9092\n```",
+        "tags": ["Kafka基础", "集群设计"]
+      },
+      {
+        "id": 8,
+        "categoryId": "kafka",
+        "title": "Kafka中的副本（Replication）是如何实现的？它如何保证数据不丢失？",
+        "difficulty": "困难",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 副本机制\n\n1. **ISR（In-Sync Replicas）**：同步副本集，确保副本与领导者同步。\n2. **AR（Assigned Replicas）**：所有分配的副本。\n3. **写入保证**：通过配置`acks`参数确保消息写入多个副本。\n\n### 示例代码\n```java\n// 配置生产者写入保证\nProperties props = new Properties();\nprops.put(\"acks\", \"all\"); // 确保消息写入所有同步副本\n```",
+        "tags": ["Kafka基础", "数据一致性"]
+      },
+      {
+        "id": 9,
+        "categoryId": "kafka",
+        "title": "解释一下Kafka的ISR（In-Sync Replica）列表及其重要性？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# ISR列表\n\nISR（In-Sync Replica）是同步副本集，包含与领导者保持同步的副本。当领导者故障时，Kafka会从ISR中选择新的领导者，确保数据一致性。\n\n### 示例代码\n```java\n// 查看ISR信息\nbin/kafka-topics.sh --describe --topic topic-name --bootstrap-server localhost:9092\n```",
+        "tags": ["Kafka基础", "副本机制"]
+      },
+      {
+        "id": 10,
+        "categoryId": "kafka",
+        "title": "Kafka支持的几种消息传递语义有哪些？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 消息传递语义\n\n1. **At Most Once**：最多一次，消息可能丢失。\n2. **At Least Once**：至少一次，消息可能重复。\n3. **Exactly Once**：恰好一次，通过幂等性和事务实现。\n\n### 示例代码\n```java\n// 配置生产者为幂等性\nprops.put(\"enable.idempotence\", \"true\");\n```",
+        "tags": ["Kafka基础", "消息语义"]
+      },
+      {
+        "id": 11,
+        "categoryId": "kafka",
+        "title": "如何在Kafka中实现消息的持久化和缓存策略？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 持久化和缓存策略\n\n1. **消息持久化**：Kafka默认将消息写入磁盘。\n2. **缓存策略**：通过配置`buffer.memory`控制生产者内存缓冲区。\n3. **刷盘策略**：通过`flush`方法或配置`linger.ms`控制刷盘频率。\n\n### 示例代码\n```java\n// 配置生产者刷盘策略\nprops.put(\"linger.ms\", 100); // 每100ms刷盘一次\n```",
+        "tags": ["Kafka基础", "性能优化"]
+      },
+      {
+        "id": 12,
+        "categoryId": "kafka",
+        "title": "Kafka消费者如何消费消息？特别是谈论消费者组的概念及其作用？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 消费者组\n\n消费者组（Consumer Group）是一组消费者实例，共同消费一个Topic的分区。Kafka通过分区分配策略将分区分配给消费者组中的消费者，确保每个分区只被一个消费者消费。\n\n### 示例代码\n```java\n// 消费者组示例\nprops.put(\"group.id\", \"test-group\");\nKafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);\nconsumer.subscribe(Collections.singletonList(\"topic-name\"));\n```",
+        "tags": ["Kafka基础", "消费者"]
+      },
+      {
+        "id": 13,
+        "categoryId": "kafka",
+        "title": "如何在Kafka生产者中配置消息发送的可靠性保障？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 生产者可靠性配置\n\n1. **acks**：确保消息写入多个副本。\n2. **retries**：配置重试次数。\n3. **enable.idempotence**：启用幂等性。\n\n### 示例代码\n```java\nprops.put(\"acks\", \"all\");\nprops.put(\"retries\", Integer.MAX_VALUE);\nprops.put(\"enable.idempotence\", \"true\");\n```",
+        "tags": ["Kafka基础", "生产者"]
+      },
+      {
+        "id": 14,
+        "categoryId": "kafka",
+        "title": "Kafka消费者如何处理消息的偏移量（Offsets）管理？手动提交与自动提交的区别？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 偏移量管理\n\n1. **自动提交**：Kafka自动提交偏移量，默认每5秒提交一次。\n2. **手动提交**：消费者手动提交偏移量，确保消息处理成功后再提交。\n\n### 示例代码\n```java\n// 手动提交偏移量\nconsumer.commitSync();\n```",
+        "tags": ["Kafka基础", "消费者"]
+      },
+      {
+        "id": 15,
+        "categoryId": "kafka",
+        "title": "如何实现Kafka的Exactly-Once消息传递语义？",
+        "difficulty": "困难",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# Exactly-Once语义实现\n\n1. **幂等性**：确保消息重复写入不会影响结果。\n2. **事务**：通过事务确保消息生产和消费的原子性。\n\n### 示例代码\n```java\n// 配置生产者为事务模式\nprops.put(\"transactional.id\", \"tx-id\");\nproducer.initTransactions();\nproducer.beginTransaction();\nproducer.send(record);\nproducer.commitTransaction();\n```",
+        "tags": ["Kafka基础", "消息语义"]
+      },
+      {
+        "id": 16,
+        "categoryId": "kafka",
+        "title": "影响Kafka性能的因素有哪些？如何进行性能调优？",
+        "difficulty": "困难",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 性能影响因素\n\n1. **分区数量**：增加分区数量可以提高吞吐量。\n2. **副本数量**：减少副本数量可以提高写入性能。\n3. **消息大小**：大消息可以提高吞吐量，但增加延迟。\n4. **压缩**：启用压缩可以减少网络传输量。\n\n### 示例代码\n```java\n// 配置生产者压缩\nprops.put(\"compression.type\", \"snappy\");\n```",
+        "tags": ["Kafka基础", "性能优化"]
+      },
+      {
+        "id": 17,
+        "categoryId": "kafka",
+        "title": "解释Kafka的批处理机制及其对性能的影响？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 批处理机制\n\nKafka通过批处理将多个消息打包发送，减少网络请求次数，从而提高吞吐量。通过配置`batch.size`和`linger.ms`可以控制批处理的大小和延迟。\n\n### 示例代码\n```java\n// 配置批处理参数\nprops.put(\"batch.size\", 16384);\nprops.put(\"linger.ms\", 1);\n```",
+        "tags": ["Kafka基础", "性能优化"]
+      },
+      {
+        "id": 18,
+        "categoryId": "kafka",
+        "title": "Kafka如何处理大量消息积压的情况？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 消息积压处理\n\n1. **增加消费者数量**：通过扩展消费者组提高消费速率。\n2. **调整分区数量**：增加分区数量以提高并发度。\n3. **优化消费者逻辑**：减少处理时间。\n\n### 示例代码\n```java\n// 增加消费者数量\nfor (int i = 0; i < 5; i++) {\n  KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);\n  consumer.subscribe(Collections.singletonList(\"topic-name\"));\n  // 启动消费者线程\n}\n```",
+        "tags": ["Kafka基础", "性能优化"]
+      },
+      {
+        "id": 19,
+        "categoryId": "kafka",
+        "title": "谈谈Kafka的延时问题以及可能的解决方案？",
+        "difficulty": "中等",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# 延时问题及解决方案\n\n1. **生产者延时**：通过减少批处理时间和增加线程数解决。\n2. **消费者延时**：通过增加消费者数量和优化处理逻辑解决。\n3. **网络延时**：通过优化网络配置和使用压缩解决。\n\n### 示例代码\n```java\n// 优化生产者配置\nprops.put(\"linger.ms\", 1);\nprops.put(\"compression.type\", \"snappy\");\n```",
+        "tags": ["Kafka基础", "性能优化"]
+      },
+      {
+        "id": 20,
+        "categoryId": "kafka",
+        "title": "如果Kafka Broker宕机了，会有什么影响？如何恢复？",
+        "difficulty": "困难",
+        "viewCount": 1234,
+        "code": "无代码示例",
+        "md": "# Broker宕机影响及恢复\n\n1. **影响**：宕机Broker上的分区不可用，可能导致消息不可读写。\n2. **恢复**：重启Broker，Kafka会自动恢复分区状态。\n3. **预防**：配置高可用集群，确保每个分区有多个副本。\n\n### 示例代码\n```bash\n# 重启Broker\nsudo systemctl restart kafka\n```",
+        "tags": ["Kafka基础", "故障恢复"]
+      }
+    ],
   }
 }
