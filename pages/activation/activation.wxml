@@ -21,4 +21,8 @@
       <view class="copy-tip">点击复制</view>
     </view>
   </view>
+
+  <view class="hint">
+    <text>{{hint}}</text>
+  </view>
 </view>
