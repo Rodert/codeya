@@ -2,10 +2,10 @@ Page({
   data: {
     bannerList: [
       '/images/logo/codeya_logo1.jpg',
-      '/images/activation/ideajihuoma.jpg',
-      '/images/activation/intellij-480x300.jpg',
-      '/images/activation/phpstorm-480x300.jpg',
-      '/images/activation/pycharm-480x300.jpg',
+      'https://img2024.cnblogs.com/blog/1326459/202506/1326459-20250607193154000-1984162520.jpg',
+      'https://img2024.cnblogs.com/blog/1326459/202506/1326459-20250607193335606-1284610637.jpg',
+      'https://img2024.cnblogs.com/blog/1326459/202506/1326459-20250607193359104-1490723388.jpg',
+      'https://img2024.cnblogs.com/blog/1326459/202506/1326459-20250607193422017-383084589.jpg',
       '/images/activation/tongyong.jpg',
       '/images/activation/webstorm-480x300.jpg',
       '/images/logo/codeya_logo2.jpg',
@@ -23,7 +23,10 @@ Page({
     wx.showShareMenu({
       withShareTicket:true,
       menus:['shareAppMessage','shareTimeline']
-    })
+    });
+
+    // 初始化激励视频广告
+    this.initRewardedVideoAd();
   },
   
   onShow: function() {
@@ -57,5 +60,64 @@ Page({
         });
       }
     });
+  },
+
+  // 初始化激励视频广告
+  initRewardedVideoAd: function() {
+    if (wx.createRewardedVideoAd) {
+      this.videoAd = wx.createRewardedVideoAd({
+        adUnitId: 'adunit-49b33605e9adf471'
+      });
+
+      this.videoAd.onLoad(() => {
+        console.log('激励视频广告加载成功');
+      });
+
+      this.videoAd.onError((err) => {
+        console.error('激励视频广告加载失败', err);
+        wx.showModal({
+          title: '提示',
+          content: '广告加载失败，请稍后再试',
+          showCancel: false
+        });
+      });
+
+      this.videoAd.onClose((res) => {
+        if (res && res.isEnded) {
+          // 正常播放结束，可以下发游戏奖励
+          wx.showModal({
+            title: '提示',
+            content: '谢谢你看广告，现在可以联系客服更新了',
+            showCancel: false
+          });
+        } else {
+          // 播放中途退出
+          wx.showModal({
+            title: '提示',
+            content: '观看完整视频才能获得更新机会',
+            showCancel: false
+          });
+        }
+      });
+    }
+  },
+
+  // 显示广告
+  showAd: function() {
+    if (this.videoAd) {
+      this.videoAd.show().catch(() => {
+        // 失败重试
+        this.videoAd.load()
+          .then(() => this.videoAd.show())
+          .catch(err => {
+            console.error('激励视频广告显示失败', err);
+            wx.showModal({
+              title: '提示',
+              content: '广告显示失败，请稍后再试',
+              showCancel: false
+            });
+          });
+      });
+    }
   }
 })
