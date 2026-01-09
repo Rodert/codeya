@@ -1,0 +1,42 @@
+server:
+  host: "0.0.0.0"
+  port: 8080
+  mode: "debug" # debug/release/test
+
+database:
+  host: "mysql"
+  port: 3306
+  user: "codeya_user"
+  password: "codeya_pass_2024"
+  dbname: "codeya"
+  charset: "utf8mb4"
+  max_idle_conns: 10
+  max_open_conns: 100
+  conn_max_lifetime: 3600 # 秒
+
+redis:
+  addr: "redis:6379"
+  password: "codeya_redis_2024"
+  db: 0
+  pool_size: 10
+  min_idle_conns: 5
+
+wechat:
+  app_id: "wxfa3a374d6067d17d"
+  app_secret: "your_app_secret"
+
+jwt:
+  secret: "your_jwt_secret_key_change_in_production"
+  expires_in: 604800 # 7天（秒）
+
+id_generator:
+  user_id_prefix: "shiyu"
+  user_id_start_sequence: 10000
+  generator_type: "hybrid" # redis/database/hybrid
+
+log:
+  level: "info" # debug/info/warn/error
+  format: "json" # text/json
+  output: "stdout" # stdout/file
+  file_path: "logs/app.log"
+
