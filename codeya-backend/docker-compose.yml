@@ -1,0 +1,77 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: codeya-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: codeya_root_2024
+      MYSQL_DATABASE: codeya
+      MYSQL_USER: codeya_user
+      MYSQL_PASSWORD: codeya_pass_2024
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./scripts/migration:/docker-entrypoint-initdb.d:ro
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pcodeya_root_2024"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+  redis:
+    image: redis:7
+    container_name: codeya-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --requirepass codeya_redis_2024
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BASE_IMAGE: golang:1.21-alpine
+    container_name: codeya-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8080
+      - SERVER_MODE=debug
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+      - DATABASE_USER=codeya_user
+      - DATABASE_PASSWORD=codeya_pass_2024
+      - DATABASE_DBNAME=codeya
+      - DATABASE_CHARSET=utf8mb4
+      - REDIS_ADDR=redis:6379
+      - REDIS_PASSWORD=codeya_redis_2024
+      - REDIS_DB=0
+      - JWT_SECRET=${JWT_SECRET:-your_jwt_secret_key_change_in_production}
+      - WECHAT_APP_ID=${WECHAT_APP_ID:-wxfa3a374d6067d17d}
+      - WECHAT_APP_SECRET=${WECHAT_APP_SECRET:-your_wechat_app_secret}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./logs:/app/logs
+
+volumes:
+  mysql_data:
+  redis_data:
+
