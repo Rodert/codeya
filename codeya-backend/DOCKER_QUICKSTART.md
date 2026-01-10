@@ -45,10 +45,10 @@ docker-compose up -d
 
 ```bash
 # 使用阿里云镜像加速构建
-docker-compose build --build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.21-alpine backend
+docker-compose build --build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.23-alpine backend
 
 # 使用其他镜像源
-docker-compose build --build-arg BASE_IMAGE=your-registry/golang:1.21-alpine backend
+docker-compose build --build-arg BASE_IMAGE=your-registry/golang:1.23-alpine backend
 ```
 
 ## 📋 默认配置

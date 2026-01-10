@@ -18,7 +18,7 @@ codeya-backend 的 Docker 配置支持使用自定义基础镜像，这在以下
 docker-compose build backend
 ```
 
-这会使用默认的 `golang:1.21-alpine` 镜像。
+这会使用默认的 `golang:1.23-alpine` 镜像。
 
 ### 2. 使用阿里云镜像加速
 
@@ -26,7 +26,7 @@ docker-compose build backend
 
 ```bash
 docker-compose build \
-  --build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.21-alpine \
+  --build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.23-alpine \
   backend
 ```
 
@@ -35,17 +35,17 @@ docker-compose build \
 ```bash
 # 使用腾讯云镜像
 docker-compose build \
-  --build-arg BASE_IMAGE=ccr.ccs.tencentyun.com/library/golang:1.21-alpine \
+  --build-arg BASE_IMAGE=ccr.ccs.tencentyun.com/library/golang:1.23-alpine \
   backend
 
 # 使用华为云镜像
 docker-compose build \
-  --build-arg BASE_IMAGE=swr.cn-north-4.myhuaweicloud.com/library/golang:1.21-alpine \
+  --build-arg BASE_IMAGE=swr.cn-north-4.myhuaweicloud.com/library/golang:1.23-alpine \
   backend
 
 # 使用自定义镜像仓库
 docker-compose build \
-  --build-arg BASE_IMAGE=your-registry.com/golang:1.21-alpine \
+  --build-arg BASE_IMAGE=your-registry.com/golang:1.23-alpine \
   backend
 ```
 
@@ -61,14 +61,14 @@ services:
       dockerfile: Dockerfile
       args:
         # 修改这里的默认值
-        BASE_IMAGE: crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.21-alpine
+        BASE_IMAGE: crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.23-alpine
 ```
 
 或者修改 `Dockerfile` 的默认值：
 
 ```dockerfile
 # 修改第 4 行的默认值
-ARG BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.21-alpine
+ARG BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.23-alpine
 ```
 
 ## 🚀 多架构支持
@@ -111,7 +111,7 @@ docker buildx build \
 # 使用阿里云镜像构建
 docker-build-aliyun:
 	docker-compose build \
-	  --build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.21-alpine \
+	  --build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.23-alpine \
 	  backend
 
 # 构建多架构镜像
@@ -214,7 +214,7 @@ ARG BASE_IMAGE=golang:1.21.5-alpine3.19
 ### 镜像拉取失败
 ```bash
 # 检查镜像是否存在
-docker pull golang:1.21-alpine
+docker pull golang:1.23-alpine
 
 # 尝试使用代理
 export HTTP_PROXY=http://proxy.example.com:8080

@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 # 基础镜像参数，默认使用 Docker Hub 官方镜像，可在构建时通过 --build-arg BASE_IMAGE=xxx 覆盖
-# 如需使用阿里云镜像：--build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.21-alpine
-ARG BASE_IMAGE=golang:1.21-alpine
+# 如需使用阿里云镜像：--build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.23-alpine
+ARG BASE_IMAGE=golang:1.23-alpine
 FROM ${BASE_IMAGE} AS builder
 
 # 设置 Go 代理

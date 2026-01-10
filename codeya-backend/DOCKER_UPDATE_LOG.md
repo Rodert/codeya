@@ -19,7 +19,7 @@
 
 **配置示例：**
 ```dockerfile
-ARG BASE_IMAGE=golang:1.21-alpine
+ARG BASE_IMAGE=golang:1.23-alpine
 FROM ${BASE_IMAGE} AS builder
 
 ENV GOPROXY=https://goproxy.cn,direct
@@ -52,7 +52,7 @@ healthcheck:
 backend:
   build:
     args:
-      BASE_IMAGE: golang:1.21-alpine
+      BASE_IMAGE: golang:1.23-alpine
 ```
 
 #### 3. Makefile 增强
@@ -112,7 +112,7 @@ make docker-build-custom
 
 # 方法2：直接指定
 docker-compose build \
-  --build-arg BASE_IMAGE=your-registry/golang:1.21-alpine \
+  --build-arg BASE_IMAGE=your-registry/golang:1.23-alpine \
   backend
 ```
 

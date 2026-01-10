@@ -49,7 +49,7 @@ docker-build:
 # 使用阿里云镜像构建（参考 mini-study 配置）
 docker-build-aliyun:
 	docker-compose build \
-	  --build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.21-alpine \
+	  --build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.23-alpine \
 	  backend
 	@echo "✓ 使用阿里云镜像构建完成"
 

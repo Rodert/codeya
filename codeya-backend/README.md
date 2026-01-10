@@ -88,7 +88,7 @@ make docker-build-aliyun
 
 # 或直接使用 docker-compose
 docker-compose build \
-  --build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.21-alpine \
+  --build-arg BASE_IMAGE=crpi-4otucz63tm2q5dhq.cn-beijing.personal.cr.aliyuncs.com/library-shiyu/golang:1.23-alpine \
   backend
 ```
 

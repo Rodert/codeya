@@ -42,7 +42,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        BASE_IMAGE: golang:1.21-alpine
+        BASE_IMAGE: golang:1.23-alpine
     container_name: codeya-backend
     restart: unless-stopped
     ports:

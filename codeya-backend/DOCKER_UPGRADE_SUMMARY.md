@@ -272,7 +272,7 @@ make docker-up
 ```bash
 # 使用企业镜像仓库
 docker-compose build \
-  --build-arg BASE_IMAGE=your-registry.com/golang:1.21-alpine \
+  --build-arg BASE_IMAGE=your-registry.com/golang:1.23-alpine \
   backend
 
 # 或修改 docker-compose.yml 永久配置
